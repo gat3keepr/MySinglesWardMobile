@@ -31,6 +31,10 @@
 		BFEC55B315489EC500E3E988 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55B215489EC500E3E988 /* Default-Landscape@2x~ipad.png */; };
 		BFEC55B515489ECB00E3E988 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55B415489ECB00E3E988 /* Default-Portrait@2x~ipad.png */; };
 		BFEC55B715489ED200E3E988 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55B615489ED200E3E988 /* Default-Portrait~ipad.png */; };
+		BFEC55E91548A26700E3E988 /* iphone-background.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55E81548A26700E3E988 /* iphone-background.png */; };
+		BFEC55F41548B3DF00E3E988 /* MSWLoginTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEC55F31548B3DF00E3E988 /* MSWLoginTableViewController.m */; };
+		BFEC55FA1548B91E00E3E988 /* Mobile.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55F91548B91E00E3E988 /* Mobile.png */; };
+		BFEC56001548BA8100E3E988 /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55FF1548BA8100E3E988 /* Title.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,11 @@
 		BFEC55B215489EC500E3E988 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		BFEC55B415489ECB00E3E988 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		BFEC55B615489ED200E3E988 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		BFEC55E81548A26700E3E988 /* iphone-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-background.png"; sourceTree = "<group>"; };
+		BFEC55F21548B3DF00E3E988 /* MSWLoginTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWLoginTableViewController.h; sourceTree = "<group>"; };
+		BFEC55F31548B3DF00E3E988 /* MSWLoginTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWLoginTableViewController.m; sourceTree = "<group>"; };
+		BFEC55F91548B91E00E3E988 /* Mobile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mobile.png; sourceTree = "<group>"; };
+		BFEC55FF1548BA8100E3E988 /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Title.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +133,8 @@
 				BFEC556F15488A1500E3E988 /* MSWAppDelegate.h */,
 				BFEC557015488A1500E3E988 /* MSWAppDelegate.m */,
 				BFEC557215488A1500E3E988 /* MainStoryboard_iPhone.storyboard */,
+				BFEC55F21548B3DF00E3E988 /* MSWLoginTableViewController.h */,
+				BFEC55F31548B3DF00E3E988 /* MSWLoginTableViewController.m */,
 				BFEC557515488A1600E3E988 /* MainStoryboard_iPad.storyboard */,
 				BFEC557815488A1600E3E988 /* MSWFirstViewController.h */,
 				BFEC557915488A1600E3E988 /* MSWFirstViewController.m */,
@@ -152,6 +163,9 @@
 		BFEC558B154896FF00E3E988 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BFEC55FF1548BA8100E3E988 /* Title.png */,
+				BFEC55F91548B91E00E3E988 /* Mobile.png */,
+				BFEC55E81548A26700E3E988 /* iphone-background.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -224,6 +238,9 @@
 				BFEC55B315489EC500E3E988 /* Default-Landscape@2x~ipad.png in Resources */,
 				BFEC55B515489ECB00E3E988 /* Default-Portrait@2x~ipad.png in Resources */,
 				BFEC55B715489ED200E3E988 /* Default-Portrait~ipad.png in Resources */,
+				BFEC55E91548A26700E3E988 /* iphone-background.png in Resources */,
+				BFEC55FA1548B91E00E3E988 /* Mobile.png in Resources */,
+				BFEC56001548BA8100E3E988 /* Title.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +255,7 @@
 				BFEC557115488A1500E3E988 /* MSWAppDelegate.m in Sources */,
 				BFEC557A15488A1600E3E988 /* MSWFirstViewController.m in Sources */,
 				BFEC558115488A1600E3E988 /* MSWSecondViewController.m in Sources */,
+				BFEC55F41548B3DF00E3E988 /* MSWLoginTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +342,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MySinglesWard/MySinglesWard-Prefix.pch";
 				INFOPLIST_FILE = "MySinglesWard/MySinglesWard-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -335,6 +354,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MySinglesWard/MySinglesWard-Prefix.pch";
 				INFOPLIST_FILE = "MySinglesWard/MySinglesWard-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -359,6 +379,7 @@
 				BFEC558A15488A1600E3E988 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
