@@ -11,6 +11,7 @@
 		BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B4F154F37A000EDA34D /* JSONRequest.m */; };
 		BF169B54154F37C400EDA34D /* MSWUser+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B53154F37C400EDA34D /* MSWUser+Create.m */; };
 		BF169B57154F37EF00EDA34D /* MSWProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */; };
+		BF4EE582154F3A3E00EC5F1C /* MSWModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF4EE580154F3A3E00EC5F1C /* MSWModel.xcdatamodeld */; };
 		BF6D8538154B83E8009052EA /* MSWMemberRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D8537154B83E8009052EA /* MSWMemberRegistrationViewController.m */; };
 		BF6D853B154B8400009052EA /* MSWBishopricRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D853A154B8400009052EA /* MSWBishopricRegistrationViewController.m */; };
 		BF6D853E154B840F009052EA /* MSWRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D853D154B840F009052EA /* MSWRegistrationViewController.m */; };
@@ -49,6 +50,7 @@
 		BF169B53154F37C400EDA34D /* MSWUser+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSWUser+Create.m"; sourceTree = "<group>"; };
 		BF169B55154F37EF00EDA34D /* MSWProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWProfileTableViewController.h; sourceTree = "<group>"; };
 		BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWProfileTableViewController.m; sourceTree = "<group>"; };
+		BF4EE581154F3A3E00EC5F1C /* MSWModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MSWModel.xcdatamodel; sourceTree = "<group>"; };
 		BF6D8536154B83E8009052EA /* MSWMemberRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWMemberRegistrationViewController.h; sourceTree = "<group>"; };
 		BF6D8537154B83E8009052EA /* MSWMemberRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWMemberRegistrationViewController.m; sourceTree = "<group>"; };
 		BF6D8539154B8400009052EA /* MSWBishopricRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWBishopricRegistrationViewController.h; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				BFEC55F31548B3DF00E3E988 /* MSWLoginTableViewController.m */,
 				BFEC560D1549E4A100E3E988 /* MSWRequest.h */,
 				BFEC556715488A1500E3E988 /* Supporting Files */,
+				BF4EE580154F3A3E00EC5F1C /* MSWModel.xcdatamodeld */,
 			);
 			path = MySinglesWard;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */,
 				BF169B54154F37C400EDA34D /* MSWUser+Create.m in Sources */,
 				BF169B57154F37EF00EDA34D /* MSWProfileTableViewController.m in Sources */,
+				BF4EE582154F3A3E00EC5F1C /* MSWModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +426,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BF4EE580154F3A3E00EC5F1C /* MSWModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BF4EE581154F3A3E00EC5F1C /* MSWModel.xcdatamodel */,
+			);
+			currentVersion = BF4EE581154F3A3E00EC5F1C /* MSWModel.xcdatamodel */;
+			path = MSWModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BFEC555315488A1500E3E988 /* Project object */;
 }
