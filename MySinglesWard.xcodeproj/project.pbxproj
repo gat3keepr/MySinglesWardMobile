@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BF169B4C154F376D00EDA34D /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B4B154F376D00EDA34D /* CoreDataTableViewController.m */; };
 		BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B4F154F37A000EDA34D /* JSONRequest.m */; };
-		BF169B54154F37C400EDA34D /* MSWUser+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B53154F37C400EDA34D /* MSWUser+Create.m */; };
 		BF169B57154F37EF00EDA34D /* MSWProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */; };
 		BF4EE582154F3A3E00EC5F1C /* MSWModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF4EE580154F3A3E00EC5F1C /* MSWModel.xcdatamodeld */; };
 		BF6D8538154B83E8009052EA /* MSWMemberRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D8537154B83E8009052EA /* MSWMemberRegistrationViewController.m */; };
@@ -46,8 +45,6 @@
 		BF169B4B154F376D00EDA34D /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		BF169B4E154F37A000EDA34D /* JSONRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRequest.h; sourceTree = "<group>"; };
 		BF169B4F154F37A000EDA34D /* JSONRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONRequest.m; sourceTree = "<group>"; };
-		BF169B52154F37C400EDA34D /* MSWUser+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MSWUser+Create.h"; sourceTree = "<group>"; };
-		BF169B53154F37C400EDA34D /* MSWUser+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSWUser+Create.m"; sourceTree = "<group>"; };
 		BF169B55154F37EF00EDA34D /* MSWProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWProfileTableViewController.h; sourceTree = "<group>"; };
 		BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWProfileTableViewController.m; sourceTree = "<group>"; };
 		BF4EE581154F3A3E00EC5F1C /* MSWModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MSWModel.xcdatamodel; sourceTree = "<group>"; };
@@ -107,8 +104,6 @@
 		BF169B51154F37C400EDA34D /* ManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
-				BF169B52154F37C400EDA34D /* MSWUser+Create.h */,
-				BF169B53154F37C400EDA34D /* MSWUser+Create.m */,
 			);
 			path = ManagedObjects;
 			sourceTree = "<group>";
@@ -297,7 +292,6 @@
 				BF6D853E154B840F009052EA /* MSWRegistrationViewController.m in Sources */,
 				BF169B4C154F376D00EDA34D /* CoreDataTableViewController.m in Sources */,
 				BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */,
-				BF169B54154F37C400EDA34D /* MSWUser+Create.m in Sources */,
 				BF169B57154F37EF00EDA34D /* MSWProfileTableViewController.m in Sources */,
 				BF4EE582154F3A3E00EC5F1C /* MSWModel.xcdatamodeld in Sources */,
 			);

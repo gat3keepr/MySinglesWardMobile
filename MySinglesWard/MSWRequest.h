@@ -6,4 +6,4 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#define MSWRequestURL @"http://192.168.2.130/"
+#define MSWRequestURL @"http://192.168.1.130/"

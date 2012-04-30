@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="MSWModel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MemberSurvey" syncable="YES">
+        <attribute name="activities" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="callingPref" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cellphone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emergContract" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emergPhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="employed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endowed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="homeAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="homeBishop" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="homePhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="homeWardStake" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="interests" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="major" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="missionInformation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="schoolInfo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfDescription" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="NotificationPreference" syncable="YES"/>
+    <entity name="Photo" syncable="YES"/>
+    <entity name="User" syncable="YES"/>
+    <entity name="Ward" syncable="YES"/>
+    <elements>
+        <element name="User" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="Ward" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="Photo" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="NotificationPreference" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="MemberSurvey" positionX="160" positionY="192" width="128" height="330"/>
+    </elements>
 </model>
