@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF6D8535154B3448009052EA /* MSWProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D8534154B3448009052EA /* MSWProfileTableViewController.m */; };
+		BF169B4C154F376D00EDA34D /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B4B154F376D00EDA34D /* CoreDataTableViewController.m */; };
+		BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B4F154F37A000EDA34D /* JSONRequest.m */; };
+		BF169B54154F37C400EDA34D /* MSWUser+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B53154F37C400EDA34D /* MSWUser+Create.m */; };
+		BF169B57154F37EF00EDA34D /* MSWProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */; };
 		BF6D8538154B83E8009052EA /* MSWMemberRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D8537154B83E8009052EA /* MSWMemberRegistrationViewController.m */; };
 		BF6D853B154B8400009052EA /* MSWBishopricRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D853A154B8400009052EA /* MSWBishopricRegistrationViewController.m */; };
 		BF6D853E154B840F009052EA /* MSWRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D853D154B840F009052EA /* MSWRegistrationViewController.m */; };
+		BFDF9119154F387A004DB930 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDF9118154F387A004DB930 /* CoreData.framework */; };
 		BFEC556115488A1500E3E988 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEC556015488A1500E3E988 /* UIKit.framework */; };
 		BFEC556315488A1500E3E988 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEC556215488A1500E3E988 /* Foundation.framework */; };
 		BFEC556515488A1500E3E988 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEC556415488A1500E3E988 /* CoreGraphics.framework */; };
@@ -34,18 +38,24 @@
 		BFEC55FA1548B91E00E3E988 /* Mobile.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55F91548B91E00E3E988 /* Mobile.png */; };
 		BFEC56001548BA8100E3E988 /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55FF1548BA8100E3E988 /* Title.png */; };
 		BFEC56041548C68A00E3E988 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC56031548C68A00E3E988 /* button.png */; };
-		BFEC561E154A064000E3E988 /* JSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEC561D154A064000E3E988 /* JSONRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BF6D8533154B3448009052EA /* MSWProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWProfileTableViewController.h; sourceTree = "<group>"; };
-		BF6D8534154B3448009052EA /* MSWProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWProfileTableViewController.m; sourceTree = "<group>"; };
+		BF169B4A154F376D00EDA34D /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		BF169B4B154F376D00EDA34D /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		BF169B4E154F37A000EDA34D /* JSONRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRequest.h; sourceTree = "<group>"; };
+		BF169B4F154F37A000EDA34D /* JSONRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONRequest.m; sourceTree = "<group>"; };
+		BF169B52154F37C400EDA34D /* MSWUser+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MSWUser+Create.h"; sourceTree = "<group>"; };
+		BF169B53154F37C400EDA34D /* MSWUser+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSWUser+Create.m"; sourceTree = "<group>"; };
+		BF169B55154F37EF00EDA34D /* MSWProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWProfileTableViewController.h; sourceTree = "<group>"; };
+		BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWProfileTableViewController.m; sourceTree = "<group>"; };
 		BF6D8536154B83E8009052EA /* MSWMemberRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWMemberRegistrationViewController.h; sourceTree = "<group>"; };
 		BF6D8537154B83E8009052EA /* MSWMemberRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWMemberRegistrationViewController.m; sourceTree = "<group>"; };
 		BF6D8539154B8400009052EA /* MSWBishopricRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWBishopricRegistrationViewController.h; sourceTree = "<group>"; };
 		BF6D853A154B8400009052EA /* MSWBishopricRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWBishopricRegistrationViewController.m; sourceTree = "<group>"; };
 		BF6D853C154B840E009052EA /* MSWRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWRegistrationViewController.h; sourceTree = "<group>"; };
 		BF6D853D154B840F009052EA /* MSWRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWRegistrationViewController.m; sourceTree = "<group>"; };
+		BFDF9118154F387A004DB930 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BFEC555C15488A1500E3E988 /* MySinglesWard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySinglesWard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFEC556015488A1500E3E988 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFEC556215488A1500E3E988 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,8 +85,6 @@
 		BFEC55FF1548BA8100E3E988 /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Title.png; sourceTree = "<group>"; };
 		BFEC56031548C68A00E3E988 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		BFEC560D1549E4A100E3E988 /* MSWRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWRequest.h; sourceTree = "<group>"; };
-		BFEC561C154A064000E3E988 /* JSONRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRequest.h; sourceTree = "<group>"; };
-		BFEC561D154A064000E3E988 /* JSONRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDF9119154F387A004DB930 /* CoreData.framework in Frameworks */,
 				BFEC556115488A1500E3E988 /* UIKit.framework in Frameworks */,
 				BFEC556315488A1500E3E988 /* Foundation.framework in Frameworks */,
 				BFEC556515488A1500E3E988 /* CoreGraphics.framework in Frameworks */,
@@ -93,6 +102,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF169B51154F37C400EDA34D /* ManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				BF169B52154F37C400EDA34D /* MSWUser+Create.h */,
+				BF169B53154F37C400EDA34D /* MSWUser+Create.m */,
+			);
+			path = ManagedObjects;
+			sourceTree = "<group>";
+		};
 		BF6D853F154B8416009052EA /* Registration */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +127,7 @@
 		BFEC555115488A1500E3E988 = {
 			isa = PBXGroup;
 			children = (
+				BFDF9118154F387A004DB930 /* CoreData.framework */,
 				BFEC55B215489EC500E3E988 /* Default-Landscape@2x~ipad.png */,
 				BFEC55B015489EBF00E3E988 /* Default-Landscape~ipad.png */,
 				BFEC55B415489ECB00E3E988 /* Default-Portrait@2x~ipad.png */,
@@ -147,9 +166,14 @@
 		BFEC556615488A1500E3E988 /* MySinglesWard */ = {
 			isa = PBXGroup;
 			children = (
+				BF169B51154F37C400EDA34D /* ManagedObjects */,
+				BF169B55154F37EF00EDA34D /* MSWProfileTableViewController.h */,
+				BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */,
+				BF169B4E154F37A000EDA34D /* JSONRequest.h */,
+				BF169B4F154F37A000EDA34D /* JSONRequest.m */,
+				BF169B4A154F376D00EDA34D /* CoreDataTableViewController.h */,
+				BF169B4B154F376D00EDA34D /* CoreDataTableViewController.m */,
 				BF6D853F154B8416009052EA /* Registration */,
-				BFEC561C154A064000E3E988 /* JSONRequest.h */,
-				BFEC561D154A064000E3E988 /* JSONRequest.m */,
 				BFEC557515488A1600E3E988 /* MainStoryboard_iPad.storyboard */,
 				BFEC557215488A1500E3E988 /* MainStoryboard_iPhone.storyboard */,
 				BFEC556F15488A1500E3E988 /* MSWAppDelegate.h */,
@@ -158,8 +182,6 @@
 				BFEC55F31548B3DF00E3E988 /* MSWLoginTableViewController.m */,
 				BFEC560D1549E4A100E3E988 /* MSWRequest.h */,
 				BFEC556715488A1500E3E988 /* Supporting Files */,
-				BF6D8533154B3448009052EA /* MSWProfileTableViewController.h */,
-				BF6D8534154B3448009052EA /* MSWProfileTableViewController.m */,
 			);
 			path = MySinglesWard;
 			sourceTree = "<group>";
@@ -267,11 +289,13 @@
 				BFEC556D15488A1500E3E988 /* main.m in Sources */,
 				BFEC557115488A1500E3E988 /* MSWAppDelegate.m in Sources */,
 				BFEC55F41548B3DF00E3E988 /* MSWLoginTableViewController.m in Sources */,
-				BFEC561E154A064000E3E988 /* JSONRequest.m in Sources */,
-				BF6D8535154B3448009052EA /* MSWProfileTableViewController.m in Sources */,
 				BF6D8538154B83E8009052EA /* MSWMemberRegistrationViewController.m in Sources */,
 				BF6D853B154B8400009052EA /* MSWBishopricRegistrationViewController.m in Sources */,
 				BF6D853E154B840F009052EA /* MSWRegistrationViewController.m in Sources */,
+				BF169B4C154F376D00EDA34D /* CoreDataTableViewController.m in Sources */,
+				BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */,
+				BF169B54154F37C400EDA34D /* MSWUser+Create.m in Sources */,
+				BF169B57154F37EF00EDA34D /* MSWProfileTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

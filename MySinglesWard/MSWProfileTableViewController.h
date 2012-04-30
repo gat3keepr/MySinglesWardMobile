@@ -10,4 +10,6 @@
 
 @interface MSWProfileTableViewController : UITableViewController
 
+@property(nonatomic, strong) UIManagedDocument *mswDatabase;
+
 @end

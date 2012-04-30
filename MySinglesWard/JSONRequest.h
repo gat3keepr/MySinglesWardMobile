@@ -10,6 +10,6 @@
 
 @interface JSONRequest : NSObject
 
-+(NSDictionary*)makeWebRequestWithURL:(NSURL*)url;
++(NSDictionary*)makeWebRequestWithURL:(NSString *)url withJSONData:(NSData *)jsonData;
 
 @end

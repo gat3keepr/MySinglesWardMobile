@@ -10,9 +10,17 @@
 
 @implementation JSONRequest
 
-+(NSDictionary*)makeWebRequestWithURL:(NSURL*)url
++(NSDictionary*)makeWebRequestWithURL:(NSString *)url withJSONData:(NSData *)jsonData
 {    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    NSString* requestDataLengthString = [[NSString alloc] initWithFormat:@"%d", [jsonData length]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[[NSURL alloc] initWithString:url]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:jsonData];
+    [request setHTTPShouldHandleCookies:YES];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:requestDataLengthString forHTTPHeaderField:@"Content-Length"];
     
     NSError *errorReturned = nil;
     NSURLResponse *response = [[NSURLResponse alloc] init];

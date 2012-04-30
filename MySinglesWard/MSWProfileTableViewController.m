@@ -7,15 +7,28 @@
 //
 
 #import "MSWProfileTableViewController.h"
+#import "JSONRequest.h"
+#import "MSWRequest.h"
 
 @interface MSWProfileTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *TitleCell;
+-(void) useDatabase;
 
 @end
 
 @implementation MSWProfileTableViewController
 @synthesize TitleCell;
+@synthesize mswDatabase = _mswDatabase;
+
+-(void)setMswDatabase:(UIManagedDocument *)mswDatabase
+{
+    if(_mswDatabase != mswDatabase)
+    {
+        _mswDatabase = mswDatabase;
+        [self useDatabase];        
+    }
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,11 +39,39 @@
     return self;
 }
 
+-(void)useDatabase
+{
+    if(![[NSFileManager defaultManager] fileExistsAtPath:[self.mswDatabase.fileURL path]])
+    {
+        //Create the file
+    }
+    else if (self.mswDatabase.documentState == UIDocumentStateClosed) {
+        //Open the file
+    }
+    else if(self.mswDatabase.documentState == UIDocumentStateNormal)
+    {
+        
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.TitleCell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    //Get the information about the member from the server
+    //Create the URL for the web request to get all the customers
+    NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
+    NSLog(@"MEMBER DATA URL request: %@", url);
+    
+    dispatch_queue_t memberQueue = dispatch_queue_create("memberQueue", NULL);
+    dispatch_async(memberQueue, ^{
+        NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
+        NSLog(@"MEMBER DATA response: %@", memberData);        
+    });
+    
+    dispatch_release(memberQueue);
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
