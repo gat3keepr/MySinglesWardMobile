@@ -9,19 +9,27 @@
 #import "MSWProfileTableViewController.h"
 #import "JSONRequest.h"
 #import "MSWRequest.h"
-#import "Ward+Create.h"
+#import "Ward.h"
 #import "User+Create.h"
+#import "MemberSurvey.h"
+#import "Photo.h"
+#import <QuartzCore/QuartzCore.h>
+#import "MSWWardViewController.h"
 
 
 @interface MSWProfileTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *TitleCell;
 -(void) useDatabase;
+-(void)setMemberProfile;
 @end
 
 @implementation MSWProfileTableViewController
 @synthesize TitleCell;
 @synthesize mswDatabase = _mswDatabase;
+@synthesize memberName = _memberName;
+@synthesize memberPhoto = _memberPhoto;
+@synthesize wardName = _wardName;
 
 -(void)setMswDatabase:(UIManagedDocument *)mswDatabase
 {
@@ -59,7 +67,7 @@
     }
     else if(self.mswDatabase.documentState == UIDocumentStateNormal)
     {
-        //Use the file
+        
     }
 }
 
@@ -68,6 +76,17 @@
     [super viewDidLoad];
 
     self.TitleCell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     //Open the database
     if(!self.mswDatabase)
@@ -77,43 +96,156 @@
         self.mswDatabase = [[UIManagedDocument alloc] initWithFileURL:databaseURL];
     }
     
-    //Get the information about the member from the server
+    //Check to see if the member is in the database, if not, go and get it from the server
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
     
-    //Create the URL for the web request to get all the customers
-    NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
-    NSLog(@"MEMBER DATA URL request: %@", url);
-    
-    dispatch_queue_t memberQueue = dispatch_queue_create("memberQueue", NULL);
-    dispatch_async(memberQueue, ^{
-        NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
-        NSLog(@"MEMBER DATA response: %@", memberData);
+    if([pref objectForKey:MEMBERID] && [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:self.mswDatabase.managedObjectContext])
+    {
+        [self setMemberProfile];
+    }
+    else 
+    {
+        //Create the URL for the web request to get all the customers
+        NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
+        NSLog(@"MEMBER DATA URL request: %@", url);
         
-        //Save ward into database
-        [Ward wardWithJSON:[memberData objectForKey:@"ward"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+        dispatch_queue_t memberQueue = dispatch_queue_create("memberQueue", NULL);
+        dispatch_async(memberQueue, ^{
+            //load Ward List
+            NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
+            NSLog(@"MEMBER DATA response: %@", memberData);
+            
+            //Save ward into database
+            [Ward wardWithJSON:[memberData objectForKey:@"ward"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+            
+            //Save user to coredata and userdefaults
+            User *user = [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
+            
+            [pref setObject:user.memberID forKey:@"memberID"];
+            [pref synchronize];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setMemberProfile];
+            });
+        });
         
-        //Save user
-        User *user = [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
+        dispatch_release(memberQueue);
         
+        dispatch_queue_t listQueue = dispatch_queue_create("listQueue", NULL);
+        dispatch_async(listQueue, ^{
+            //load Ward List
+            [self loadWardList];
+        });
         
+        dispatch_release(listQueue);
         
-        
-        
-    });
-    
-    dispatch_release(memberQueue);
+        [self.mswDatabase saveToURL:self.mswDatabase.fileURL
+                   forSaveOperation:UIDocumentSaveForOverwriting
+                  completionHandler:^(BOOL success) {
+                      if (!success) NSLog(@"failed to save document %@", self.mswDatabase.localizedName);
+                  }];
+    }
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)setMemberProfile
+{
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    User *user = [User userWithID:[pref objectForKey:@"memberID"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+    
+    self.memberName.text = [NSString stringWithFormat:@"%@ %@", user.prefname, user.lastname];
+    
+    self.wardName.text = [NSString stringWithFormat:@"%@ %@ Ward", user.ward.location, user.ward.ward];
+    
+    //picture List
+    
+    
+    if(user.photo.photoData)
+    {        
+        self.memberPhoto.layer.cornerRadius = 5.0;
+        self.memberPhoto.layer.masksToBounds = YES;
+        
+        self.memberPhoto.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.memberPhoto.layer.borderWidth = 1.0;
+        [self.memberPhoto setImage:[UIImage imageWithData:user.photo.photoData]];
+    }
+    else 
+    {
+        dispatch_queue_t photoQueue = dispatch_queue_create("photoQueue", NULL);
+        dispatch_async(photoQueue, ^{       
+            NSData *photoData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", MSWPhotoURL,user.photo.filename]]];
+        
+            [self.mswDatabase.managedObjectContext performBlock:^{
+                user.photo.photoData = photoData;  
+            }];
+            
+            //Set Photo
+            dispatch_async(dispatch_get_main_queue(), ^{                
+                self.memberPhoto.layer.cornerRadius = 5.0;
+                self.memberPhoto.layer.masksToBounds = YES;
+                
+                self.memberPhoto.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                self.memberPhoto.layer.borderWidth = 1.0;
+                [self.memberPhoto setImage:[UIImage imageWithData:photoData]];
+            });
+            
+        });
+        dispatch_release(photoQueue);          
+    }      
+}
+
+-(void)loadWardList
+{
+    //Create the URL for the web request to get all the customers
+    NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/list", MSWRequestURL];
+    NSLog(@"WARD LIST DATA URL request: %@", url);
+    
+    
+    //load Ward List
+    NSDictionary *wardListData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
+    NSLog(@"WARD LIST DATA response: %@", wardListData);
+        
+    for(NSNumber *memberID in [wardListData objectForKey:@"members"])
+    {
+        if(![User userWithID:memberID inManagedObjectContext:self.mswDatabase.managedObjectContext])
+        {
+            //Create the URL for the web request to get all the customers
+            NSString *memberURL = [[NSString alloc] initWithFormat:@"%@api/member/get/%@", MSWRequestURL,memberID];
+            NSLog(@"MEMBER DATA URL request: %@", memberURL);
+            
+            NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:memberURL withJSONData:nil];
+            NSLog(@"MEMBER DATA response: %@", memberData);
+            
+            //Save User
+            [self.mswDatabase.managedObjectContext performBlock:^{
+                [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
+            }];
+        }
+    }
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    
+    NSError *error = nil;
+    NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
+    
+    for(User *user in members)
+    {
+        if(![[wardListData objectForKey:@"members"] containsObject:user.memberID])
+        {
+            [self.mswDatabase.managedObjectContext performBlock:^{
+                [self.mswDatabase.managedObjectContext deleteObject:user];
+            }];
+        }                
+    }
+}
 
 
 - (void)viewDidUnload
 {
     [self setTitleCell:nil];
+    [self setMemberName:nil];
+    [self setMemberPhoto:nil];
+    [self setWardName:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -124,6 +256,26 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(UIManagedDocument *)getMSWDatabase
+{
+    return self.mswDatabase;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    User *user = [User userWithID:[pref objectForKey:@"memberID"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+    
+    if([segue.destinationViewController respondsToSelector:@selector(setDatabaseDelegate:)])
+    {
+        [segue.destinationViewController setDatabaseDelegate:self];
+    }
+    
+    if([segue.destinationViewController respondsToSelector:@selector(setCurrentWard:)])
+    {
+        [segue.destinationViewController setCurrentWard:user.ward];
+    }
+}
 #pragma mark - Table view data source
 
 /*

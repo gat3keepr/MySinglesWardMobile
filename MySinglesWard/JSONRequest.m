@@ -29,11 +29,20 @@
     if(errorReturned)
     {
         //Check to see if there was an error
-        NSLog(@"%@",[errorReturned localizedDescription]);
+        NSLog(@"JSON ERROR: %@",[errorReturned localizedDescription]);
+        return nil;
     }
     
     NSError *jsonError = nil;
-    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+    
+    if(jsonError)
+    {
+        NSLog(@"JSON ERROR: %@", [jsonError localizedDescription]);
+        return nil;
+    }
+    
+    return json;
 }
 
 @end

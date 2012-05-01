@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#define MEMBERID @"memberID"
 
 @interface User (Create)
 

@@ -35,7 +35,10 @@
         
         notificationPref.memberID = [data objectForKey:@"MemberID"];
         notificationPref.activities = [data objectForKey:@"activities"];
-        notificationPref.carrier = [data objectForKey:@"carrier"];
+        
+        if(![[data objectForKey:@"carrier"] isKindOfClass:[NSNull class]])
+            notificationPref.carrier = [data objectForKey:@"carrier"];
+        
         notificationPref.elders = [data objectForKey:@"elders"];
         notificationPref.email = [data objectForKey:@"email"];
         notificationPref.fhe = [data objectForKey:@"fhe"];

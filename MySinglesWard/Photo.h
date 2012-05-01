@@ -2,7 +2,7 @@
 //  Photo.h
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 4/30/12.
+//  Created by Porter Hoskins on 5/1/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -13,8 +13,9 @@
 
 @interface Photo : NSManagedObject
 
-@property (nonatomic, retain) NSString * filename;
+@property (nonatomic, retain) NSData * filename;
 @property (nonatomic, retain) NSNumber * memberID;
+@property (nonatomic, retain) NSData *photoData;
 @property (nonatomic, retain) User *member;
 
 @end

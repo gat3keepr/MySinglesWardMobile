@@ -16,7 +16,7 @@
 
 #define USER @"User"
 
-+(User *) userWithJSON:(NSDictionary *) data inManagedObjectContext:(NSManagedObjectContext *)context
++(User *) userWithJSON:(NSDictionary *)data inManagedObjectContext:(NSManagedObjectContext *)context
 {
     User *user = nil;
     
@@ -42,7 +42,10 @@
         user.memberID = [data objectForKey:@"MemberID"];
         user.username = [data objectForKey:@"UserName"];
         user.wardID = [data objectForKey:@"WardStakeID"];
-        user.isBishopric = [data objectForKey:@"IsBishopric"];
+        user.isBishopric = [data objectForKey:@"IsBishopric"];        
+        user.prefname = [data objectForKey:@"PrefName"];        
+        user.cellphone = [data objectForKey:@"CellPhone"];        
+        user.residence = [data objectForKey:@"Residence"];
         
         user.ward = [Ward wardWithID:user.wardID inManagedObjectContext:context];
     }

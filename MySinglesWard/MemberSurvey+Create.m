@@ -36,7 +36,6 @@
         survey.activities = [data objectForKey:@"activities"];
         survey.birthday = [data objectForKey:@"birthday"];
         survey.callingPref = [data objectForKey:@"callingPref"];
-        survey.cellphone = [data objectForKey:@"cellPhone"];
         survey.selfDescription = [data objectForKey:@"description"];
         survey.emergContract = [data objectForKey:@"emergContact"];
         survey.emergPhone = [data objectForKey:@"emergPhone"];
@@ -50,19 +49,20 @@
         survey.interests = [data objectForKey:@"interests"];
         survey.major = [data objectForKey:@"major"];
         survey.memberID = memberID;
-        survey.missionInformation = [data objectForKey:@"missionInformation"];
+        
+        if(![[data objectForKey:@"missionInformation"] isKindOfClass:[NSNull class]])
+            survey.missionInformation = [data objectForKey:@"missionInformation"];
+        
         survey.musicSkill = [NSNumber numberWithInt:[[data objectForKey:@"musicSkill"] intValue]];
         survey.musicTalent = [data objectForKey:@"musicTalent"];
         survey.occupation = [data objectForKey:@"occupation"];
         survey.pastCallings = [data objectForKey:@"pastCallings"];
         survey.patriarchalBlessings = [data objectForKey:@"patriarchalBlessing"];
-        survey.prefName = [data objectForKey:@"prefName"];
         survey.prevBishops = [data objectForKey:@"prevBishops"];
         survey.priesthood = [data objectForKey:@"priesthood"];
         survey.publishCell = [data objectForKey:@"publishCell"];
         survey.publishEmail = [data objectForKey:@"publishEmail"];
         survey.religionClass = [data objectForKey:@"religionClass"];
-        survey.residence = [data objectForKey:@"residence"];
         survey.schoolInfo = [data objectForKey:@"schoolInfo"];
         survey.teachDesire = [NSNumber numberWithInt:[[data objectForKey:@"teachDesire"] intValue]];
         survey.teachSkill = [NSNumber numberWithInt:[[data objectForKey:@"teachSkill"] intValue]];
