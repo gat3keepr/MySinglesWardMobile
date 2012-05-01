@@ -9,12 +9,14 @@
 #import "MSWProfileTableViewController.h"
 #import "JSONRequest.h"
 #import "MSWRequest.h"
+#import "Ward+Create.h"
+#import "User+Create.h"
+
 
 @interface MSWProfileTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *TitleCell;
 -(void) useDatabase;
-
 @end
 
 @implementation MSWProfileTableViewController
@@ -44,13 +46,20 @@
     if(![[NSFileManager defaultManager] fileExistsAtPath:[self.mswDatabase.fileURL path]])
     {
         //Create the file
+        [self.mswDatabase saveToURL:self.mswDatabase.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
+            
+            
+        }];
     }
     else if (self.mswDatabase.documentState == UIDocumentStateClosed) {
         //Open the file
+        [self.mswDatabase openWithCompletionHandler:^(BOOL success){
+            
+        }];
     }
     else if(self.mswDatabase.documentState == UIDocumentStateNormal)
     {
-        
+        //Use the file
     }
 }
 
@@ -60,7 +69,16 @@
 
     self.TitleCell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    //Open the database
+    if(!self.mswDatabase)
+    {
+        NSURL *databaseURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        databaseURL = [databaseURL URLByAppendingPathComponent:@"MSW Database"];
+        self.mswDatabase = [[UIManagedDocument alloc] initWithFileURL:databaseURL];
+    }
+    
     //Get the information about the member from the server
+    
     //Create the URL for the web request to get all the customers
     NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
     NSLog(@"MEMBER DATA URL request: %@", url);
@@ -68,7 +86,18 @@
     dispatch_queue_t memberQueue = dispatch_queue_create("memberQueue", NULL);
     dispatch_async(memberQueue, ^{
         NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
-        NSLog(@"MEMBER DATA response: %@", memberData);        
+        NSLog(@"MEMBER DATA response: %@", memberData);
+        
+        //Save ward into database
+        [Ward wardWithJSON:[memberData objectForKey:@"ward"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+        
+        //Save user
+        User *user = [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
+        
+        
+        
+        
+        
     });
     
     dispatch_release(memberQueue);
@@ -79,6 +108,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
 
 - (void)viewDidUnload
 {

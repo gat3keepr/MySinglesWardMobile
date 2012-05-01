@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="MemberSurvey" syncable="YES">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D2001" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MemberSurvey" representedClassName="MemberSurvey" syncable="YES">
         <attribute name="activities" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="callingPref" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cellphone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="emergContract" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,20 +16,75 @@
         <attribute name="homeWardStake" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="interests" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="major" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES" isSyncIdentityProperty="YES"/>
         <attribute name="missionInformation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="musicSkill" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="musicTalent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="occupation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pastCallings" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="patriarchalBlessings" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prefName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prevBishops" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="priesthood" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publishCell" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="publishEmail" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="religionClass" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="residence" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="schoolInfo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selfDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teachDesire" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="teachSkill" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="templeExpDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="templeRecommend" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="templeWorker" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeInWard" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="member" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="survey" inverseEntity="User" syncable="YES"/>
     </entity>
-    <entity name="NotificationPreference" syncable="YES"/>
-    <entity name="Photo" syncable="YES"/>
-    <entity name="User" syncable="YES"/>
-    <entity name="Ward" syncable="YES"/>
+    <entity name="NotificationPreference" representedClassName="NotificationPreference" syncable="YES">
+        <attribute name="activities" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="carrier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="elders" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="fhe" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="reliefsociety" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="stake" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="txt" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="ward" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="member" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="notificationPreference" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES" isSyncIdentityProperty="YES"/>
+        <relationship name="member" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="photo" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isBishopric" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES" isSyncIdentityProperty="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wardID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="notificationPreference" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="NotificationPreference" inverseName="member" inverseEntity="NotificationPreference" syncable="YES"/>
+        <relationship name="photo" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Photo" inverseName="member" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="survey" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MemberSurvey" inverseName="member" inverseEntity="MemberSurvey" syncable="YES"/>
+        <relationship name="ward" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Ward" inverseName="members" inverseEntity="Ward" syncable="YES"/>
+    </entity>
+    <entity name="Ward" representedClassName="Ward" syncable="YES">
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stake" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stakeID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="ward" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wardID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES" isSyncIdentityProperty="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ward" inverseEntity="User" syncable="YES"/>
+    </entity>
     <elements>
+        <element name="MemberSurvey" positionX="160" positionY="192" width="128" height="615"/>
+        <element name="NotificationPreference" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="Photo" positionX="160" positionY="192" width="128" height="45"/>
         <element name="User" positionX="160" positionY="192" width="128" height="45"/>
         <element name="Ward" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="Photo" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="NotificationPreference" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="MemberSurvey" positionX="160" positionY="192" width="128" height="330"/>
     </elements>
 </model>

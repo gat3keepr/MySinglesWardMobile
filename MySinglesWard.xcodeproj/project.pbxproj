@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF0E98A2154F8D80004E71A8 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98A1154F8D80004E71A8 /* Photo.m */; };
+		BF0E98A5154F8D81004E71A8 /* NotificationPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98A4154F8D81004E71A8 /* NotificationPreference.m */; };
+		BF0E98A8154F8D81004E71A8 /* Ward.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98A7154F8D81004E71A8 /* Ward.m */; };
+		BF0E98AC154F9171004E71A8 /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98AB154F9171004E71A8 /* User+Create.m */; };
+		BF0E98AF154F96D1004E71A8 /* Photo+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98AE154F96D1004E71A8 /* Photo+Create.m */; };
+		BF0E98B5154F9832004E71A8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98B4154F9832004E71A8 /* User.m */; };
+		BF0E98B8154F9EC7004E71A8 /* Ward+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98B7154F9EC7004E71A8 /* Ward+Create.m */; };
+		BF0E98BB154FA272004E71A8 /* NotificationPreference+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98BA154FA272004E71A8 /* NotificationPreference+Create.m */; };
+		BF0E98BE154FAB2A004E71A8 /* MemberSurvey+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98BD154FAB2A004E71A8 /* MemberSurvey+Create.m */; };
+		BF0E98C4154FB7CB004E71A8 /* MemberSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98C3154FB7CB004E71A8 /* MemberSurvey.m */; };
 		BF169B4C154F376D00EDA34D /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B4B154F376D00EDA34D /* CoreDataTableViewController.m */; };
 		BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B4F154F37A000EDA34D /* JSONRequest.m */; };
 		BF169B57154F37EF00EDA34D /* MSWProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */; };
@@ -41,6 +51,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF0E98A0154F8D80004E71A8 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		BF0E98A1154F8D80004E71A8 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		BF0E98A3154F8D81004E71A8 /* NotificationPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationPreference.h; sourceTree = "<group>"; };
+		BF0E98A4154F8D81004E71A8 /* NotificationPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationPreference.m; sourceTree = "<group>"; };
+		BF0E98A6154F8D81004E71A8 /* Ward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ward.h; sourceTree = "<group>"; };
+		BF0E98A7154F8D81004E71A8 /* Ward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ward.m; sourceTree = "<group>"; };
+		BF0E98AA154F9171004E71A8 /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
+		BF0E98AB154F9171004E71A8 /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
+		BF0E98AD154F96D1004E71A8 /* Photo+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Create.h"; sourceTree = "<group>"; };
+		BF0E98AE154F96D1004E71A8 /* Photo+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Create.m"; sourceTree = "<group>"; };
+		BF0E98B3154F9832004E71A8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		BF0E98B4154F9832004E71A8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		BF0E98B6154F9EC7004E71A8 /* Ward+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ward+Create.h"; sourceTree = "<group>"; };
+		BF0E98B7154F9EC7004E71A8 /* Ward+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Ward+Create.m"; sourceTree = "<group>"; };
+		BF0E98B9154FA272004E71A8 /* NotificationPreference+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotificationPreference+Create.h"; sourceTree = "<group>"; };
+		BF0E98BA154FA272004E71A8 /* NotificationPreference+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NotificationPreference+Create.m"; sourceTree = "<group>"; };
+		BF0E98BC154FAB2A004E71A8 /* MemberSurvey+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MemberSurvey+Create.h"; sourceTree = "<group>"; };
+		BF0E98BD154FAB2A004E71A8 /* MemberSurvey+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MemberSurvey+Create.m"; sourceTree = "<group>"; };
+		BF0E98C2154FB7CB004E71A8 /* MemberSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberSurvey.h; sourceTree = "<group>"; };
+		BF0E98C3154FB7CB004E71A8 /* MemberSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberSurvey.m; sourceTree = "<group>"; };
 		BF169B4A154F376D00EDA34D /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		BF169B4B154F376D00EDA34D /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		BF169B4E154F37A000EDA34D /* JSONRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRequest.h; sourceTree = "<group>"; };
@@ -101,11 +131,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BF169B51154F37C400EDA34D /* ManagedObjects */ = {
+		BF0E98A9154F8DB9004E71A8 /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
+				BF0E98C2154FB7CB004E71A8 /* MemberSurvey.h */,
+				BF0E98C3154FB7CB004E71A8 /* MemberSurvey.m */,
+				BF0E98B3154F9832004E71A8 /* User.h */,
+				BF0E98B4154F9832004E71A8 /* User.m */,
+				BF0E98A6154F8D81004E71A8 /* Ward.h */,
+				BF0E98A7154F8D81004E71A8 /* Ward.m */,
+				BF0E98A3154F8D81004E71A8 /* NotificationPreference.h */,
+				BF0E98A4154F8D81004E71A8 /* NotificationPreference.m */,
+				BF0E98A0154F8D80004E71A8 /* Photo.h */,
+				BF0E98A1154F8D80004E71A8 /* Photo.m */,
+				BF0E98AA154F9171004E71A8 /* User+Create.h */,
+				BF0E98AB154F9171004E71A8 /* User+Create.m */,
+				BF0E98AD154F96D1004E71A8 /* Photo+Create.h */,
+				BF0E98AE154F96D1004E71A8 /* Photo+Create.m */,
+				BF0E98B6154F9EC7004E71A8 /* Ward+Create.h */,
+				BF0E98B7154F9EC7004E71A8 /* Ward+Create.m */,
+				BF0E98B9154FA272004E71A8 /* NotificationPreference+Create.h */,
+				BF0E98BA154FA272004E71A8 /* NotificationPreference+Create.m */,
+				BF0E98BC154FAB2A004E71A8 /* MemberSurvey+Create.h */,
+				BF0E98BD154FAB2A004E71A8 /* MemberSurvey+Create.m */,
 			);
-			path = ManagedObjects;
+			name = "Managed Objects";
 			sourceTree = "<group>";
 		};
 		BF6D853F154B8416009052EA /* Registration */ = {
@@ -163,7 +213,7 @@
 		BFEC556615488A1500E3E988 /* MySinglesWard */ = {
 			isa = PBXGroup;
 			children = (
-				BF169B51154F37C400EDA34D /* ManagedObjects */,
+				BF0E98A9154F8DB9004E71A8 /* Managed Objects */,
 				BF169B55154F37EF00EDA34D /* MSWProfileTableViewController.h */,
 				BF169B56154F37EF00EDA34D /* MSWProfileTableViewController.m */,
 				BF169B4E154F37A000EDA34D /* JSONRequest.h */,
@@ -294,6 +344,16 @@
 				BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */,
 				BF169B57154F37EF00EDA34D /* MSWProfileTableViewController.m in Sources */,
 				BF4EE582154F3A3E00EC5F1C /* MSWModel.xcdatamodeld in Sources */,
+				BF0E98A2154F8D80004E71A8 /* Photo.m in Sources */,
+				BF0E98A5154F8D81004E71A8 /* NotificationPreference.m in Sources */,
+				BF0E98A8154F8D81004E71A8 /* Ward.m in Sources */,
+				BF0E98AC154F9171004E71A8 /* User+Create.m in Sources */,
+				BF0E98AF154F96D1004E71A8 /* Photo+Create.m in Sources */,
+				BF0E98B5154F9832004E71A8 /* User.m in Sources */,
+				BF0E98B8154F9EC7004E71A8 /* Ward+Create.m in Sources */,
+				BF0E98BB154FA272004E71A8 /* NotificationPreference+Create.m in Sources */,
+				BF0E98BE154FAB2A004E71A8 /* MemberSurvey+Create.m in Sources */,
+				BF0E98C4154FB7CB004E71A8 /* MemberSurvey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
