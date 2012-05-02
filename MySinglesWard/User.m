@@ -2,11 +2,13 @@
 //  User.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/1/12.
+//  Created by Porter Hoskins on 5/2/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "User.h"
+#import "BishopricData.h"
+#import "Calling.h"
 #import "MemberSurvey.h"
 #import "NotificationPreference.h"
 #import "Photo.h"
@@ -25,9 +27,11 @@
 @dynamic residence;
 @dynamic username;
 @dynamic wardID;
+@dynamic calling;
 @dynamic notificationPreference;
 @dynamic photo;
 @dynamic survey;
 @dynamic ward;
+@dynamic bishopricData;
 
 @end

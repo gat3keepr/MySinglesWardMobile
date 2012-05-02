@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D2001" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BFw-WN-YIQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BFw-WN-YIQ">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -728,17 +728,17 @@
             </objects>
             <point key="canvasLocation" x="1826" y="630"/>
         </scene>
-        <!--Table View Controller - Bishopric-->
+        <!--Bishopric List View Controller - Bishopric-->
         <scene sceneID="hfE-p7-f9i">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrc-J8-DT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="mXC-ct-nya" sceneMemberID="viewController">
+                <tableViewController id="mXC-ct-nya" customClass="MSWBishopricListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1Us-aS-Mya">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Btk-pP-Net">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Bishopric Member" id="Btk-pP-Net">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1119,6 +1119,9 @@ Additionally, we guarantee none of your personal information will be sold, distr
         <class className="CoreDataTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
         </class>
+        <class className="MSWBishopricListViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWBishopricListViewController.h"/>
+        </class>
         <class className="MSWBishopricRegistrationViewController" superclassName="MSWRegistrationViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWBishopricRegistrationViewController.h"/>
         </class>
@@ -1170,6 +1173,6 @@ Additionally, we guarantee none of your personal information will be sold, distr
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Q9x-dX-QEn"/>
-        <segue reference="uvx-ih-70h"/>
+        <segue reference="LRL-Pl-xl0"/>
     </inferredMetricsTieBreakers>
 </document>

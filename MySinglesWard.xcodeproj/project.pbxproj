@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF0E98A5154F8D81004E71A8 /* NotificationPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98A4154F8D81004E71A8 /* NotificationPreference.m */; };
-		BF0E98A8154F8D81004E71A8 /* Ward.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98A7154F8D81004E71A8 /* Ward.m */; };
 		BF0E98AC154F9171004E71A8 /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98AB154F9171004E71A8 /* User+Create.m */; };
 		BF0E98AF154F96D1004E71A8 /* Photo+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98AE154F96D1004E71A8 /* Photo+Create.m */; };
 		BF0E98B8154F9EC7004E71A8 /* Ward+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98B7154F9EC7004E71A8 /* Ward+Create.m */; };
@@ -18,13 +16,20 @@
 		BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BF169B4F154F37A000EDA34D /* JSONRequest.m */; };
 		BF3E2FD315503A560027293D /* MSWProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3E2FD215503A560027293D /* MSWProfileTableViewController.m */; };
 		BF3E2FE2155054E10027293D /* MSWWardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3E2FE1155054E10027293D /* MSWWardViewController.m */; };
-		BF3E2FEB155086100027293D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3E2FEA155086100027293D /* Photo.m */; };
-		BF3E2FFA15509F660027293D /* MemberSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3E2FF915509F650027293D /* MemberSurvey.m */; };
 		BF4EE582154F3A3E00EC5F1C /* MSWModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF4EE580154F3A3E00EC5F1C /* MSWModel.xcdatamodeld */; };
 		BF6D8538154B83E8009052EA /* MSWMemberRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D8537154B83E8009052EA /* MSWMemberRegistrationViewController.m */; };
 		BF6D853B154B8400009052EA /* MSWBishopricRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D853A154B8400009052EA /* MSWBishopricRegistrationViewController.m */; };
 		BF6D853E154B840F009052EA /* MSWRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D853D154B840F009052EA /* MSWRegistrationViewController.m */; };
-		BFBE1F551550BBC5001ECDB5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE1F541550BBC5001ECDB5 /* User.m */; };
+		BF7EEC1F1551D9B600479B2E /* MSWBishopricListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC1E1551D9B600479B2E /* MSWBishopricListViewController.m */; };
+		BF7EEC3B1551DD9B00479B2E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC3A1551DD9B00479B2E /* User.m */; };
+		BF7EEC3E1551DD9B00479B2E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC3D1551DD9B00479B2E /* Photo.m */; };
+		BF7EEC411551DD9B00479B2E /* MemberSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC401551DD9B00479B2E /* MemberSurvey.m */; };
+		BF7EEC441551DD9C00479B2E /* NotificationPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC431551DD9C00479B2E /* NotificationPreference.m */; };
+		BF7EEC471551DD9C00479B2E /* Ward.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC461551DD9C00479B2E /* Ward.m */; };
+		BF7EEC4A1551DD9C00479B2E /* Calling.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC491551DD9C00479B2E /* Calling.m */; };
+		BF7EEC4D1551DDBE00479B2E /* BishopricData+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC4C1551DDBE00479B2E /* BishopricData+Create.m */; };
+		BF7EEC501551DF5E00479B2E /* BishopricData.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC4F1551DF5E00479B2E /* BishopricData.m */; };
+		BF7EEC531551E28000479B2E /* Calling+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC521551E28000479B2E /* Calling+Create.m */; };
 		BFBE1F631550E413001ECDB5 /* MSWMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE1F621550E413001ECDB5 /* MSWMemberViewController.m */; };
 		BFBE1F691550F1DE001ECDB5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBE1F681550F1DE001ECDB5 /* MessageUI.framework */; };
 		BFBE1F721550FAC2001ECDB5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE1F711550FAC1001ECDB5 /* MBProgressHUD.m */; };
@@ -55,10 +60,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BF0E98A3154F8D81004E71A8 /* NotificationPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationPreference.h; sourceTree = "<group>"; };
-		BF0E98A4154F8D81004E71A8 /* NotificationPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationPreference.m; sourceTree = "<group>"; };
-		BF0E98A6154F8D81004E71A8 /* Ward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ward.h; sourceTree = "<group>"; };
-		BF0E98A7154F8D81004E71A8 /* Ward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ward.m; sourceTree = "<group>"; };
 		BF0E98AA154F9171004E71A8 /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		BF0E98AB154F9171004E71A8 /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		BF0E98AD154F96D1004E71A8 /* Photo+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Create.h"; sourceTree = "<group>"; };
@@ -77,10 +78,6 @@
 		BF3E2FD215503A560027293D /* MSWProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWProfileTableViewController.m; sourceTree = "<group>"; };
 		BF3E2FE0155054E10027293D /* MSWWardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWWardViewController.h; sourceTree = "<group>"; };
 		BF3E2FE1155054E10027293D /* MSWWardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWWardViewController.m; sourceTree = "<group>"; };
-		BF3E2FE9155086100027293D /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		BF3E2FEA155086100027293D /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		BF3E2FF815509F650027293D /* MemberSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberSurvey.h; sourceTree = "<group>"; };
-		BF3E2FF915509F650027293D /* MemberSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberSurvey.m; sourceTree = "<group>"; };
 		BF4EE581154F3A3E00EC5F1C /* MSWModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MSWModel.xcdatamodel; sourceTree = "<group>"; };
 		BF6D8536154B83E8009052EA /* MSWMemberRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWMemberRegistrationViewController.h; sourceTree = "<group>"; };
 		BF6D8537154B83E8009052EA /* MSWMemberRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWMemberRegistrationViewController.m; sourceTree = "<group>"; };
@@ -88,8 +85,26 @@
 		BF6D853A154B8400009052EA /* MSWBishopricRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWBishopricRegistrationViewController.m; sourceTree = "<group>"; };
 		BF6D853C154B840E009052EA /* MSWRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWRegistrationViewController.h; sourceTree = "<group>"; };
 		BF6D853D154B840F009052EA /* MSWRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWRegistrationViewController.m; sourceTree = "<group>"; };
-		BFBE1F531550BBC5001ECDB5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		BFBE1F541550BBC5001ECDB5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		BF7EEC1D1551D9B600479B2E /* MSWBishopricListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWBishopricListViewController.h; sourceTree = "<group>"; };
+		BF7EEC1E1551D9B600479B2E /* MSWBishopricListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWBishopricListViewController.m; sourceTree = "<group>"; };
+		BF7EEC391551DD9B00479B2E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		BF7EEC3A1551DD9B00479B2E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		BF7EEC3C1551DD9B00479B2E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		BF7EEC3D1551DD9B00479B2E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		BF7EEC3F1551DD9B00479B2E /* MemberSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberSurvey.h; sourceTree = "<group>"; };
+		BF7EEC401551DD9B00479B2E /* MemberSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberSurvey.m; sourceTree = "<group>"; };
+		BF7EEC421551DD9C00479B2E /* NotificationPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationPreference.h; sourceTree = "<group>"; };
+		BF7EEC431551DD9C00479B2E /* NotificationPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationPreference.m; sourceTree = "<group>"; };
+		BF7EEC451551DD9C00479B2E /* Ward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ward.h; sourceTree = "<group>"; };
+		BF7EEC461551DD9C00479B2E /* Ward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ward.m; sourceTree = "<group>"; };
+		BF7EEC481551DD9C00479B2E /* Calling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calling.h; sourceTree = "<group>"; };
+		BF7EEC491551DD9C00479B2E /* Calling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calling.m; sourceTree = "<group>"; };
+		BF7EEC4B1551DDBE00479B2E /* BishopricData+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BishopricData+Create.h"; sourceTree = "<group>"; };
+		BF7EEC4C1551DDBE00479B2E /* BishopricData+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BishopricData+Create.m"; sourceTree = "<group>"; };
+		BF7EEC4E1551DF5E00479B2E /* BishopricData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BishopricData.h; sourceTree = "<group>"; };
+		BF7EEC4F1551DF5E00479B2E /* BishopricData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BishopricData.m; sourceTree = "<group>"; };
+		BF7EEC511551E28000479B2E /* Calling+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Calling+Create.h"; sourceTree = "<group>"; };
+		BF7EEC521551E28000479B2E /* Calling+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Calling+Create.m"; sourceTree = "<group>"; };
 		BFBE1F611550E413001ECDB5 /* MSWMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWMemberViewController.h; sourceTree = "<group>"; };
 		BFBE1F621550E413001ECDB5 /* MSWMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWMemberViewController.m; sourceTree = "<group>"; };
 		BFBE1F681550F1DE001ECDB5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -146,18 +161,26 @@
 		BF0E98A9154F8DB9004E71A8 /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
-				BFBE1F531550BBC5001ECDB5 /* User.h */,
-				BFBE1F541550BBC5001ECDB5 /* User.m */,
-				BF3E2FF815509F650027293D /* MemberSurvey.h */,
-				BF3E2FF915509F650027293D /* MemberSurvey.m */,
-				BF3E2FE9155086100027293D /* Photo.h */,
-				BF3E2FEA155086100027293D /* Photo.m */,
-				BF0E98A6154F8D81004E71A8 /* Ward.h */,
-				BF0E98A7154F8D81004E71A8 /* Ward.m */,
-				BF0E98A3154F8D81004E71A8 /* NotificationPreference.h */,
-				BF0E98A4154F8D81004E71A8 /* NotificationPreference.m */,
+				BF7EEC4E1551DF5E00479B2E /* BishopricData.h */,
+				BF7EEC4F1551DF5E00479B2E /* BishopricData.m */,
+				BF7EEC481551DD9C00479B2E /* Calling.h */,
+				BF7EEC491551DD9C00479B2E /* Calling.m */,
+				BF7EEC451551DD9C00479B2E /* Ward.h */,
+				BF7EEC461551DD9C00479B2E /* Ward.m */,
+				BF7EEC421551DD9C00479B2E /* NotificationPreference.h */,
+				BF7EEC431551DD9C00479B2E /* NotificationPreference.m */,
+				BF7EEC3F1551DD9B00479B2E /* MemberSurvey.h */,
+				BF7EEC401551DD9B00479B2E /* MemberSurvey.m */,
+				BF7EEC3C1551DD9B00479B2E /* Photo.h */,
+				BF7EEC3D1551DD9B00479B2E /* Photo.m */,
+				BF7EEC391551DD9B00479B2E /* User.h */,
+				BF7EEC3A1551DD9B00479B2E /* User.m */,
 				BF0E98AA154F9171004E71A8 /* User+Create.h */,
 				BF0E98AB154F9171004E71A8 /* User+Create.m */,
+				BF7EEC511551E28000479B2E /* Calling+Create.h */,
+				BF7EEC521551E28000479B2E /* Calling+Create.m */,
+				BF7EEC4B1551DDBE00479B2E /* BishopricData+Create.h */,
+				BF7EEC4C1551DDBE00479B2E /* BishopricData+Create.m */,
 				BF0E98AD154F96D1004E71A8 /* Photo+Create.h */,
 				BF0E98AE154F96D1004E71A8 /* Photo+Create.m */,
 				BF0E98B6154F9EC7004E71A8 /* Ward+Create.h */,
@@ -249,6 +272,8 @@
 				BFEC556715488A1500E3E988 /* Supporting Files */,
 				BFBE1F611550E413001ECDB5 /* MSWMemberViewController.h */,
 				BFBE1F621550E413001ECDB5 /* MSWMemberViewController.m */,
+				BF7EEC1D1551D9B600479B2E /* MSWBishopricListViewController.h */,
+				BF7EEC1E1551D9B600479B2E /* MSWBishopricListViewController.m */,
 			);
 			path = MySinglesWard;
 			sourceTree = "<group>";
@@ -362,8 +387,6 @@
 				BF169B4C154F376D00EDA34D /* CoreDataTableViewController.m in Sources */,
 				BF169B50154F37A000EDA34D /* JSONRequest.m in Sources */,
 				BF4EE582154F3A3E00EC5F1C /* MSWModel.xcdatamodeld in Sources */,
-				BF0E98A5154F8D81004E71A8 /* NotificationPreference.m in Sources */,
-				BF0E98A8154F8D81004E71A8 /* Ward.m in Sources */,
 				BF0E98AC154F9171004E71A8 /* User+Create.m in Sources */,
 				BF0E98AF154F96D1004E71A8 /* Photo+Create.m in Sources */,
 				BF0E98B8154F9EC7004E71A8 /* Ward+Create.m in Sources */,
@@ -371,11 +394,18 @@
 				BF0E98BE154FAB2A004E71A8 /* MemberSurvey+Create.m in Sources */,
 				BF3E2FD315503A560027293D /* MSWProfileTableViewController.m in Sources */,
 				BF3E2FE2155054E10027293D /* MSWWardViewController.m in Sources */,
-				BF3E2FEB155086100027293D /* Photo.m in Sources */,
-				BF3E2FFA15509F660027293D /* MemberSurvey.m in Sources */,
-				BFBE1F551550BBC5001ECDB5 /* User.m in Sources */,
 				BFBE1F631550E413001ECDB5 /* MSWMemberViewController.m in Sources */,
 				BFBE1F721550FAC2001ECDB5 /* MBProgressHUD.m in Sources */,
+				BF7EEC1F1551D9B600479B2E /* MSWBishopricListViewController.m in Sources */,
+				BF7EEC3B1551DD9B00479B2E /* User.m in Sources */,
+				BF7EEC3E1551DD9B00479B2E /* Photo.m in Sources */,
+				BF7EEC411551DD9B00479B2E /* MemberSurvey.m in Sources */,
+				BF7EEC441551DD9C00479B2E /* NotificationPreference.m in Sources */,
+				BF7EEC471551DD9C00479B2E /* Ward.m in Sources */,
+				BF7EEC4A1551DD9C00479B2E /* Calling.m in Sources */,
+				BF7EEC4D1551DDBE00479B2E /* BishopricData+Create.m in Sources */,
+				BF7EEC501551DF5E00479B2E /* BishopricData.m in Sources */,
+				BF7EEC531551E28000479B2E /* Calling+Create.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

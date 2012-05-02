@@ -1,20 +1,20 @@
 //
-//  Photo.m
+//  Calling.m
 //  MySinglesWard
 //
 //  Created by Porter Hoskins on 5/2/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Photo.h"
+#import "Calling.h"
 #import "User.h"
 
 
-@implementation Photo
+@implementation Calling
 
-@dynamic filename;
+@dynamic callingID;
 @dynamic memberID;
-@dynamic photoData;
+@dynamic title;
 @dynamic member;
 
 @end

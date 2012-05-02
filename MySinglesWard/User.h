@@ -2,14 +2,14 @@
 //  User.h
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/1/12.
+//  Created by Porter Hoskins on 5/2/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MemberSurvey, NotificationPreference, Photo, Ward;
+@class BishopricData, Calling, MemberSurvey, NotificationPreference, Photo, Ward;
 
 @interface User : NSManagedObject
 
@@ -23,9 +23,11 @@
 @property (nonatomic, retain) NSString * residence;
 @property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSNumber * wardID;
+@property (nonatomic, retain) Calling *calling;
 @property (nonatomic, retain) NotificationPreference *notificationPreference;
 @property (nonatomic, retain) Photo *photo;
 @property (nonatomic, retain) MemberSurvey *survey;
 @property (nonatomic, retain) Ward *ward;
+@property (nonatomic, retain) BishopricData *bishopricData;
 
 @end

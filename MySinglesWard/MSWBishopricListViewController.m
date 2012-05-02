@@ -1,26 +1,25 @@
 //
-//  MSWWardViewController.m
+//  MSWBishopricListViewController.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/1/12.
+//  Created by Porter Hoskins on 5/2/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MSWWardViewController.h"
+#import "MSWBishopricListViewController.h"
+#import "Ward.h"
 #import "User+Create.h"
-#import "MemberSurvey.h"
-#import "MSWRequest.h"
-#import "Photo.h"
-#import "JSONRequest.h"
-#import "MSWMemberViewController.h"
 #import "MBProgressHUD.h"
+#import "Photo.h"
+#import "MSWMemberViewController.h"
 
-@interface MSWWardViewController ()
+@interface MSWBishopricListViewController ()
 -(void)setupFetchedResultsController;
--(void)getWardList;
+-(void)getBishopricList;
 @end
 
-@implementation MSWWardViewController
+@implementation MSWBishopricListViewController
+
 @synthesize currentWard = _currentWard;
 @synthesize databaseDelegate = _databaseDelegate;
 
@@ -37,17 +36,17 @@
 -(void)setupFetchedResultsController
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    request.predicate = [NSPredicate predicateWithFormat:@"(ward = %@) AND (isBishopric = 0)", self.currentWard];
-    request.sortDescriptors = [NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"lastname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], [NSSortDescriptor sortDescriptorWithKey:@"prefname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil];
+    request.predicate = [NSPredicate predicateWithFormat:@"(ward = %@) AND (isBishopric = 1)", self.currentWard];
+    request.sortDescriptors = [NSArray arrayWithObjects: [NSSortDescriptor sortDescriptorWithKey:@"prefname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil];
     
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self.databaseDelegate getMSWDatabase].managedObjectContext sectionNameKeyPath:@"userLastNameInitial" cacheName:nil];
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self.databaseDelegate getMSWDatabase].managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }
 
 - (IBAction)refreshWardList:(id)sender {
-    [self getWardList];
+    [self getBishopricList];
 }
 
--(void)getWardList
+-(void)getBishopricList
 {
     //Create the URL for the web request to get all the customers
     self.title = @"Loading...";
@@ -62,11 +61,11 @@
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
-        [self.databaseDelegate loadWardListWithSender:self.tableView];
+        [self.databaseDelegate loadBishopricListWithSender:self.tableView];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             self.navigationItem.rightBarButtonItem = orgButton;
-            self.title = @"Ward List";
+            self.title = @"Bishopric";
         });
     });
 }
@@ -84,19 +83,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self getWardList];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
--(void)viewWillAppear:(BOOL)animated    
-{
-    [super viewWillAppear:animated];
-    
+    [self getBishopricList];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -106,13 +93,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Ward Member";
+    static NSString *CellIdentifier = @"Bishopric Member";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     User *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
     UILabel *memberName = (UILabel *)[cell viewWithTag:1];
-    memberName.text = [NSString stringWithFormat:@"%@, %@", user.lastname, user.prefname];
+    memberName.text = [NSString stringWithFormat:@"%@", user.prefname, user.prefname];
     
     UIImageView *photo = (UIImageView *)[cell viewWithTag:2];
     [photo setImage:[UIImage imageWithData:user.photo.photoData]];

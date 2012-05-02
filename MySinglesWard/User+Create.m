@@ -10,6 +10,7 @@
 #import "Ward+Create.h"
 #import "NotificationPreference+Create.h"
 #import "Photo+Create.h"
+#import "BishopricData+Create.h"
 #import "MemberSurvey+Create.h"
 
 @implementation User (Create)
@@ -94,6 +95,11 @@
     if ([memberData objectForKey:@"notificationPreference"]) 
     {
         [NotificationPreference notificationPreferenceWithJSON:[memberData objectForKey:@"notificationPreference"] inManagedObjectContext:context];
+    }
+    
+    if([user.isBishopric boolValue])
+    {
+        [BishopricData dataWithJSON:[memberData objectForKey:@"bishopric"] inManagedObjectContext:context];
     }
     
     return user;

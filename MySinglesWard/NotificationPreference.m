@@ -2,7 +2,7 @@
 //  NotificationPreference.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 4/30/12.
+//  Created by Porter Hoskins on 5/2/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -12,12 +12,12 @@
 
 @implementation NotificationPreference
 
-@dynamic memberID;
 @dynamic activities;
 @dynamic carrier;
 @dynamic elders;
 @dynamic email;
 @dynamic fhe;
+@dynamic memberID;
 @dynamic reliefsociety;
 @dynamic stake;
 @dynamic txt;

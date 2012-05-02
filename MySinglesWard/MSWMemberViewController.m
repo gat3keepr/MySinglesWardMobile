@@ -80,6 +80,9 @@
     self.memberPhoto.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.memberPhoto.layer.borderWidth = 1.0;
     
+    if([self.user.isBishopric boolValue])
+        self.memberName.text = [NSString stringWithFormat:@"%@", self.user.prefname];
+    
     self.memberName.text = [NSString stringWithFormat:@"%@ %@", self.user.prefname, self.user.lastname];
     self.memberPhone.text = self.user.cellphone;
     self.memberEmail.text = self.user.email;
@@ -106,7 +109,7 @@
         
         mailer.mailComposeDelegate = self;
         
-        [mailer setSubject:@"MySinglesWard Message"];
+        [mailer setSubject:@""];
         
         NSArray *toRecipients = [NSArray arrayWithObjects:self.memberEmail.text, nil];
         [mailer setToRecipients:toRecipients];

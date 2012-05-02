@@ -195,7 +195,7 @@
     }      
 }
 
--(void)loadWardListWithSender:(UIViewController *)sender
+-(void)loadWardListWithSender:(UIView *)sender
 {
     //Create the URL for the web request to get all the customers
     NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/list", MSWRequestURL];
@@ -249,7 +249,56 @@
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:sender.view animated:YES];
+            [MBProgressHUD hideHUDForView:sender animated:YES];
+        });
+    }];
+    
+}
+
+-(void)loadBishopricListWithSender:(UIView *)sender
+{
+    //Create the URL for the web request to get all the customers
+    NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/bishopric", MSWRequestURL];
+    NSLog(@"BISHOPRIC LIST DATA URL request: %@", url);
+    
+    //load Ward List
+    NSDictionary *wardListData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
+    NSLog(@"BISHOPRIC LIST DATA response: %@", wardListData);
+    
+    [self.mswDatabase.managedObjectContext performBlock:^{
+        
+        //Create an array to record current bishopric users
+        NSMutableArray *currentBishopric = [[NSMutableArray alloc] init];
+        
+        for(NSDictionary *bishopricmember in wardListData)
+        {
+            NSLog(@"BISHOPRIC DATA response: %@", bishopricmember); 
+            User *user = [User userWithAllMemberData:bishopricmember inManagedObjectContext:self.mswDatabase.managedObjectContext];
+            
+            [currentBishopric addObject:user];
+        }
+        
+        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+        User *user = [User userWithID:[pref objectForKey:@"memberID"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+        
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+        request.predicate = [NSPredicate predicateWithFormat:@"(ward = %@) AND (isBishopric = 1)", user.wardID];
+        
+        NSError *error = nil;
+        NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
+        
+        for(User *bUser in members)
+        {
+            if(![currentBishopric containsObject:user.memberID])
+            {
+                [self.mswDatabase.managedObjectContext performBlock:^{
+                    [self.mswDatabase.managedObjectContext deleteObject:bUser];
+                }];
+            }                
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:sender animated:YES];
         });
     }];
     
