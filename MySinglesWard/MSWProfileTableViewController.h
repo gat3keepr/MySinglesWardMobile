@@ -11,11 +11,13 @@
 @protocol MSWDatabaseDelegate <NSObject>
 
 -(UIManagedDocument *)getMSWDatabase;
--(void)loadWardList;
+-(void)loadWardListWithSender:(UIViewController *)sender;
 
 @end
 
 @interface MSWProfileTableViewController : UITableViewController <MSWDatabaseDelegate>
+
+-(void)loadWardList;
 
 @property(nonatomic, strong) UIManagedDocument *mswDatabase;
 @property (weak, nonatomic) IBOutlet UILabel *memberName;

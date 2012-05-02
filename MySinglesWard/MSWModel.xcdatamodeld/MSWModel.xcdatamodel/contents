@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D2001" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Calling" syncable="YES">
+        <attribute name="callingID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="member" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="calling" inverseEntity="User" syncable="YES"/>
+    </entity>
     <entity name="MemberSurvey" representedClassName="MemberSurvey" syncable="YES">
         <attribute name="activities" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
@@ -67,6 +73,7 @@
         <attribute name="residence" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wardID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="calling" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Calling" inverseName="member" inverseEntity="Calling" syncable="YES"/>
         <relationship name="notificationPreference" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="NotificationPreference" inverseName="member" inverseEntity="NotificationPreference" syncable="YES"/>
         <relationship name="photo" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Photo" inverseName="member" inverseEntity="Photo" syncable="YES"/>
         <relationship name="survey" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MemberSurvey" inverseName="member" inverseEntity="MemberSurvey" syncable="YES"/>
@@ -83,9 +90,10 @@
     </entity>
     <elements>
         <element name="MemberSurvey" positionX="160" positionY="192" width="128" height="570"/>
-        <element name="NotificationPreference" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="Photo" positionX="160" positionY="192" width="128" height="45"/>
-        <element name="User" positionX="160" positionY="192" width="128" height="255"/>
-        <element name="Ward" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="NotificationPreference" positionX="-369" positionY="648" width="128" height="210"/>
+        <element name="Photo" positionX="-317" positionY="432" width="128" height="105"/>
+        <element name="User" positionX="-74" positionY="378" width="128" height="270"/>
+        <element name="Ward" positionX="-63" positionY="189" width="128" height="150"/>
+        <element name="Calling" positionX="-261" positionY="216" width="128" height="105"/>
     </elements>
 </model>

@@ -37,17 +37,15 @@
         photo.memberID = [data objectForKey:@"MemberID"];
         photo.member = [User userWithID:memberID inManagedObjectContext:context];
         
-        dispatch_queue_t photoDataGetter = dispatch_queue_create("photoDataGetter", NULL);
-        dispatch_async(photoDataGetter, ^{
+        /*dispatch_queue_t photoDataGetter = dispatch_queue_create("photoDataGetter", NULL);
+        dispatch_async(photoDataGetter, ^{*/
 
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", MSWPhotoURL, photo.filename]]];
             
-            [context performBlock:^{
                 photo.photoData = data; 
-            }];
-        });
+        /*});
         
-        dispatch_release(photoDataGetter);
+        dispatch_release(photoDataGetter);*/
     }
     else 
     {

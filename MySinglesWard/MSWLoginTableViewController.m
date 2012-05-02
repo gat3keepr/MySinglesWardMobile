@@ -9,6 +9,7 @@
 #import "MSWLoginTableViewController.h"
 #import "MSWRequest.h"
 #import "JSONRequest.h"
+#import "MSWProfileTableViewController.h"
 
 @interface MSWLoginTableViewController ()
 
@@ -117,6 +118,14 @@
         return NO; // ignore the touch
     }
     return YES; // handle the touch
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController respondsToSelector:@selector(loadWardList:)])
+    {
+        
+    }
 }
 
 - (void)viewDidLoad

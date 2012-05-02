@@ -94,7 +94,11 @@
     {
         NSURL *databaseURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
         databaseURL = [databaseURL URLByAppendingPathComponent:@"MSW Database"];
-        self.mswDatabase = [[UIManagedDocument alloc] initWithFileURL:databaseURL];
+        
+        dispatch_queue_t CDQueue = dispatch_queue_create("coredataQueue", NULL);
+        dispatch_async(CDQueue, ^{    
+            self.mswDatabase = [[UIManagedDocument alloc] initWithFileURL:databaseURL];
+        });
     }
     
     //Check to see if the member is in the database, if not, go and get it from the server
@@ -131,9 +135,9 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self setMemberProfile];
             });
-
-            [self loadWardList];
             
+            //[self loadWardListWithSender:self];
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
             });
@@ -191,7 +195,7 @@
     }      
 }
 
--(void)loadWardList
+-(void)loadWardListWithSender:(UIViewController *)sender
 {
     //Create the URL for the web request to get all the customers
     NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/list", MSWRequestURL];
@@ -208,8 +212,8 @@
         {
                 if(![User userWithID:memberID inManagedObjectContext:self.mswDatabase.managedObjectContext])
                 {
-                    dispatch_queue_t requestQueue = dispatch_queue_create("requestQueue", NULL);
-                    dispatch_async(requestQueue, ^{ 
+                    /*dispatch_queue_t requestQueue = dispatch_queue_create("requestQueue", NULL);
+                    dispatch_async(requestQueue, ^{ */
                         //Create the URL for the web request to get all the customers
                         NSString *memberURL = [[NSString alloc] initWithFormat:@"%@api/member/get/%@", MSWRequestURL,memberID];
                         NSLog(@"MEMBER DATA URL request: %@", memberURL);
@@ -221,16 +225,14 @@
                         [self.mswDatabase.managedObjectContext performBlock:^{
                             [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
                         }];
-                    });
-                    dispatch_release(requestQueue); 
+                    /*});
+                    dispatch_release(requestQueue); */
                 }
-           
-            
-            
-            
         }
+        
+        
      }];
-    /*[self.mswDatabase.managedObjectContext performBlock:^{
+    [self.mswDatabase.managedObjectContext performBlock:^{
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
         
         NSError *error = nil;
@@ -245,7 +247,12 @@
                 }];
             }                
         }
-    }];*/
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:sender.view animated:YES];
+        });
+    }];
+    
 }
 
 
