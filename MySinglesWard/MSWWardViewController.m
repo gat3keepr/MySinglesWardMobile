@@ -12,6 +12,8 @@
 #import "MSWRequest.h"
 #import "Photo.h"
 #import "JSONRequest.h"
+#import "MSWMemberViewController.h"
+#import "MBProgressHUD.h"
 
 @interface MSWWardViewController ()
 -(void)setupFetchedResultsController;
@@ -38,7 +40,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"ward = %@", self.currentWard];
     request.sortDescriptors = [NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"lastname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], [NSSortDescriptor sortDescriptorWithKey:@"prefname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil];
     
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self.databaseDelegate getMSWDatabase].managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self.databaseDelegate getMSWDatabase].managedObjectContext sectionNameKeyPath:@"userLastNameInitial" cacheName:nil];
 }
 
 -(void)getWardList
@@ -51,19 +53,19 @@
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    dispatch_queue_t wardListQueue = dispatch_queue_create("wardListQueue", NULL);
-    dispatch_async(wardListQueue, ^{
+    
+    //Set Loading Modal
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         [self.databaseDelegate loadWardList];
         
-        dispatch_async(dispatch_get_main_queue(), ^{            
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             self.navigationItem.rightBarButtonItem = orgButton;
             self.title = @"Ward List";
-        });        
-        
+        });
     });
-    
-    dispatch_release(wardListQueue);
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -106,6 +108,17 @@
     [photo setImage:[UIImage imageWithData:user.photo.photoData]];
     
     return cell;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *path = [self.tableView indexPathForCell:sender];
+    User *user = [self.fetchedResultsController objectAtIndexPath:path];
+    
+    if([segue.destinationViewController respondsToSelector:@selector(setUser:)])
+    {
+        [segue.destinationViewController setUser:user];
+    }
 }
 
 @end

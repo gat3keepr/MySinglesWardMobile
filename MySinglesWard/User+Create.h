@@ -15,4 +15,5 @@
 +(User *) userWithID:(NSNumber *)memberID inManagedObjectContext:(NSManagedObjectContext *)context;
 +(User *) userWithAllMemberData:(NSDictionary *)memberData inManagedObjectContext:(NSManagedObjectContext *)context;
 
+@property (nonatomic, strong) NSString* userLastNameInitial;
 @end

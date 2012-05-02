@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BFw-WN-YIQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D2001" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BFw-WN-YIQ">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -467,11 +467,11 @@
             </objects>
             <point key="canvasLocation" x="1826" y="-182"/>
         </scene>
-        <!--Table View Controller - Member-->
+        <!--Member View Controller - Member-->
         <scene sceneID="AXc-Ly-WI8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4O-Dy-fat" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="IkJ-Fs-A3M" sceneMemberID="viewController">
+                <tableViewController id="IkJ-Fs-A3M" customClass="MSWMemberViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Jpb-wb-HSf">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -479,7 +479,7 @@
                         <sections>
                             <tableViewSection id="1vg-Vj-hcV">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="89" id="Qk0-3x-JVh">
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="89" id="Qk0-3x-JVh">
                                         <rect key="frame" x="0.0" y="10" width="320" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -504,10 +504,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="6P0-to-u3h">
+                            <tableViewSection headerTitle="Personal Information" id="6P0-to-u3h">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="VXp-qp-f5m" detailTextLabel="lur-PM-Nou" style="IBUITableViewCellStyleValue2" id="7RI-lW-Jme">
-                                        <rect key="frame" x="0.0" y="121" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="147" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -532,7 +532,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3ic-P6-t8Y" detailTextLabel="046-Wc-1aP" style="IBUITableViewCellStyleValue2" id="75y-8t-Yag">
-                                        <rect key="frame" x="0.0" y="166" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="192" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -556,8 +556,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="4rB-rt-hHW" detailTextLabel="ULq-56-Phk" style="IBUITableViewCellStyleValue2" id="gbW-UH-FWo">
-                                        <rect key="frame" x="0.0" y="210" width="320" height="45"/>
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="4rB-rt-hHW" detailTextLabel="ULq-56-Phk" style="IBUITableViewCellStyleValue2" id="gbW-UH-FWo">
+                                        <rect key="frame" x="0.0" y="236" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -584,32 +584,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="nVP-ep-kOM">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sSh-kG-1in">
-                                        <rect key="frame" x="0.0" y="275" width="320" height="46"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MyG-aH-Hxu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" title="Add to Contacts">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                </cells>
+                                <cells/>
                             </tableViewSection>
                         </sections>
                         <connections>
@@ -618,6 +593,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Member" id="Lsw-jp-FaL"/>
+                    <connections>
+                        <outlet property="memberEmail" destination="046-Wc-1aP" id="GcY-zP-q4o"/>
+                        <outlet property="memberName" destination="mud-vc-eEe" id="RuE-F5-B9x"/>
+                        <outlet property="memberPhone" destination="lur-PM-Nou" id="dzM-jF-bGL"/>
+                        <outlet property="memberPhoto" destination="IcD-Jj-RZP" id="vko-mF-hXU"/>
+                        <outlet property="memberResidence" destination="ULq-56-Phk" id="vVj-gv-y1o"/>
+                        <outlet property="titleCell" destination="Qk0-3x-JVh" id="pxQ-U2-FHY"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="2356" y="-179"/>
@@ -1026,42 +1009,6 @@ Additionally, we guarantee none of your personal information will be sold, distr
         <image name="button.png" width="357" height="87"/>
         <image name="first" width="16" height="16"/>
     </resources>
-    <classes>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="MSWBishopricRegistrationViewController" superclassName="MSWRegistrationViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWBishopricRegistrationViewController.h"/>
-        </class>
-        <class className="MSWLoginTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWLoginTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="emailAddressField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MSWMemberRegistrationViewController" superclassName="MSWRegistrationViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWMemberRegistrationViewController.h"/>
-        </class>
-        <class className="MSWProfileTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWProfileTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="TitleCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="memberName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="memberPhoto" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="wardName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MSWRegistrationViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWRegistrationViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelPressed:"/>
-            </relationships>
-        </class>
-        <class className="MSWWardViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWWardViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

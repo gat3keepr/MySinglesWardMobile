@@ -15,6 +15,7 @@
 #import "Photo.h"
 #import <QuartzCore/QuartzCore.h>
 #import "MSWWardViewController.h"
+#import "MBProgressHUD.h"
 
 
 @interface MSWProfileTableViewController ()
@@ -109,9 +110,10 @@
         NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
         NSLog(@"MEMBER DATA URL request: %@", url);
         
-        dispatch_queue_t memberQueue = dispatch_queue_create("memberQueue", NULL);
-        dispatch_async(memberQueue, ^{
-            //load Ward List
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            //load Member
             NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
             NSLog(@"MEMBER DATA response: %@", memberData);
             
@@ -119,25 +121,23 @@
             [Ward wardWithJSON:[memberData objectForKey:@"ward"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
             
             //Save user to coredata and userdefaults
-            User *user = [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
-            
-            [pref setObject:user.memberID forKey:@"memberID"];
-            [pref synchronize];
+            [self.mswDatabase.managedObjectContext performBlock:^{
+                User *user = [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
+                
+                [pref setObject:user.memberID forKey:@"memberID"];
+                [pref synchronize];
+            }];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self setMemberProfile];
             });
-        });
-        
-        dispatch_release(memberQueue);
-        
-        dispatch_queue_t listQueue = dispatch_queue_create("listQueue", NULL);
-        dispatch_async(listQueue, ^{
-            //load Ward List
+
             [self loadWardList];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            });
         });
-        
-        dispatch_release(listQueue);
         
         [self.mswDatabase saveToURL:self.mswDatabase.fileURL
                    forSaveOperation:UIDocumentSaveForOverwriting
@@ -156,9 +156,6 @@
     self.memberName.text = [NSString stringWithFormat:@"%@ %@", user.prefname, user.lastname];
     
     self.wardName.text = [NSString stringWithFormat:@"%@ %@ Ward", user.ward.location, user.ward.ward];
-    
-    //picture List
-    
     
     if(user.photo.photoData)
     {        
@@ -205,39 +202,52 @@
     NSDictionary *wardListData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
     NSLog(@"WARD LIST DATA response: %@", wardListData);
         
-    for(NSNumber *memberID in [wardListData objectForKey:@"members"])
-    {
-        if(![User userWithID:memberID inManagedObjectContext:self.mswDatabase.managedObjectContext])
+    [self.mswDatabase.managedObjectContext performBlock:^{
+        
+        for(NSNumber *memberID in [wardListData objectForKey:@"members"])
         {
-            //Create the URL for the web request to get all the customers
-            NSString *memberURL = [[NSString alloc] initWithFormat:@"%@api/member/get/%@", MSWRequestURL,memberID];
-            NSLog(@"MEMBER DATA URL request: %@", memberURL);
+                if(![User userWithID:memberID inManagedObjectContext:self.mswDatabase.managedObjectContext])
+                {
+                    dispatch_queue_t requestQueue = dispatch_queue_create("requestQueue", NULL);
+                    dispatch_async(requestQueue, ^{ 
+                        //Create the URL for the web request to get all the customers
+                        NSString *memberURL = [[NSString alloc] initWithFormat:@"%@api/member/get/%@", MSWRequestURL,memberID];
+                        NSLog(@"MEMBER DATA URL request: %@", memberURL);
+                        
+                        NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:memberURL withJSONData:nil];
+                        NSLog(@"MEMBER DATA response: %@", memberData);
+                        
+                        //Save User
+                        [self.mswDatabase.managedObjectContext performBlock:^{
+                            [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
+                        }];
+                    });
+                    dispatch_release(requestQueue); 
+                }
+           
             
-            NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:memberURL withJSONData:nil];
-            NSLog(@"MEMBER DATA response: %@", memberData);
             
-            //Save User
-            [self.mswDatabase.managedObjectContext performBlock:^{
-                [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
-            }];
+            
         }
-    }
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    
-    NSError *error = nil;
-    NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
-    
-    for(User *user in members)
-    {
-        if(![[wardListData objectForKey:@"members"] containsObject:user.memberID])
+     }];
+    /*[self.mswDatabase.managedObjectContext performBlock:^{
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+        
+        NSError *error = nil;
+        NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
+        
+        for(User *user in members)
         {
-            [self.mswDatabase.managedObjectContext performBlock:^{
-                [self.mswDatabase.managedObjectContext deleteObject:user];
-            }];
-        }                
-    }
+            if(![[wardListData objectForKey:@"members"] containsObject:user.memberID])
+            {
+                [self.mswDatabase.managedObjectContext performBlock:^{
+                    [self.mswDatabase.managedObjectContext deleteObject:user];
+                }];
+            }                
+        }
+    }];*/
 }
+
 
 
 - (void)viewDidUnload

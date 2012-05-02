@@ -71,33 +71,40 @@
         {
             NSLog(@"LOG IN ERROR: %@", errorReturned);
         }
-        else {            
+        else 
+        {            
             NSError *jsonError = nil;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-            
-            NSLog(@"%@", json);
-            
-            NSArray *loggedInStatus = [json objectForKey:@"authentication"];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if([loggedInStatus containsObject:NEEDS_NOTHING])
-                {
-                    [self performSegueWithIdentifier:@"LoggedIn" sender:self];
-                }
-                else if([loggedInStatus containsObject:NEEDS_PHOTO])
-                {
-                    
-                }
-                else if([loggedInStatus containsObject:NEEDS_SURVEY])
-                {
-                    
-                }
-                else
-                {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid login" message:@"The username/password was incorrect." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [alert show];                
-                }
-            });
+            @try {
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+                
+                NSLog(@"%@", json);
+                
+                NSArray *loggedInStatus = [json objectForKey:@"authentication"];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if([loggedInStatus containsObject:NEEDS_NOTHING])
+                    {
+                        [self performSegueWithIdentifier:@"LoggedIn" sender:self];
+                    }
+                    else if([loggedInStatus containsObject:NEEDS_PHOTO])
+                    {
+                        
+                    }
+                    else if([loggedInStatus containsObject:NEEDS_SURVEY])
+                    {
+                        
+                    }
+                    else
+                    {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid login" message:@"The username/password was incorrect." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                        [alert show];                
+                    }
+                });
+            }
+            @catch (NSException *exception) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please connect to the internet." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show]; 
+            }
         }
         
     });

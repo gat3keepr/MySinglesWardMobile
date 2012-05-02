@@ -15,16 +15,16 @@
 
 @implementation User
 
+@dynamic cellphone;
 @dynamic email;
 @dynamic firstname;
 @dynamic isBishopric;
 @dynamic lastname;
 @dynamic memberID;
-@dynamic username;
-@dynamic wardID;
 @dynamic prefname;
 @dynamic residence;
-@dynamic cellphone;
+@dynamic username;
+@dynamic wardID;
 @dynamic notificationPreference;
 @dynamic photo;
 @dynamic survey;

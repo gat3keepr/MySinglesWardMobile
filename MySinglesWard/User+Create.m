@@ -99,4 +99,14 @@
     return user;
 }
 
+- (NSString *) userLastNameInitial {
+    NSString * initial = [[self lastname] substringToIndex:1];
+    return initial;
+}
+
+-(void)setUserLastNameInitial:(NSString *)userLastNameInitial
+{
+    //Do nothing
+}
+
 @end

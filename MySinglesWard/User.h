@@ -13,16 +13,16 @@
 
 @interface User : NSManagedObject
 
+@property (nonatomic, retain) NSString * cellphone;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * firstname;
 @property (nonatomic, retain) NSNumber * isBishopric;
 @property (nonatomic, retain) NSString * lastname;
 @property (nonatomic, retain) NSNumber * memberID;
-@property (nonatomic, retain) NSString * username;
-@property (nonatomic, retain) NSNumber * wardID;
 @property (nonatomic, retain) NSString * prefname;
 @property (nonatomic, retain) NSString * residence;
-@property (nonatomic, retain) NSString * cellphone;
+@property (nonatomic, retain) NSString * username;
+@property (nonatomic, retain) NSNumber * wardID;
 @property (nonatomic, retain) NotificationPreference *notificationPreference;
 @property (nonatomic, retain) Photo *photo;
 @property (nonatomic, retain) MemberSurvey *survey;
