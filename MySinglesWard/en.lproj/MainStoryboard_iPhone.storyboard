@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BFw-WN-YIQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D2001" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BFw-WN-YIQ">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -11,79 +11,42 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N09-SL-UeT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="BFw-WN-YIQ" customClass="MSWLoginTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="GBt-Xm-qcn">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="GBt-Xm-qcn">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.35686275360000003" green="0.52156865600000002" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
                         <gestureRecognizers/>
-                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Title.png" id="KiM-VD-TCX">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
-                            <color key="backgroundColor" red="0.35686275360000003" green="0.52156865600000002" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
-                        </imageView>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="tvN-8e-2tH">
-                            <rect key="frame" x="0.0" y="216" width="320" height="248"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dSr-s2-Qtl">
-                                    <rect key="frame" x="20" y="20" width="280" height="37"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="Login" backgroundImage="button.png">
-                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="login:" destination="BFw-WN-YIQ" eventType="touchUpInside" id="lUM-pu-cPY"/>
-                                    </connections>
-                                </button>
-                                <button hidden="YES" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9nS-Vb-sTC">
-                                    <rect key="frame" x="42" y="86" width="236" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="Member Registration" backgroundImage="button.png">
-                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <segue destination="J4P-0g-H2C" kind="modal" identifier="Member Registration" id="HZd-O3-1QI"/>
-                                    </connections>
-                                </button>
-                                <button hidden="YES" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="M7t-ul-ptK">
-                                    <rect key="frame" x="42" y="133" width="236" height="33"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="Bishopric Registration" backgroundImage="button.png">
-                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <segue destination="Vzd-Gx-Kqt" kind="modal" identifier="Bishopric Registration" id="3ZK-Re-SHr"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" red="0.35686275360000003" green="0.52156865600000002" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
-                            <gestureRecognizers/>
-                        </view>
                         <sections>
                             <tableViewSection id="bf4-KC-UBR">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7H3-aZ-gXW">
-                                        <rect key="frame" x="0.0" y="116" width="320" height="45"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="129" id="7H3-aZ-gXW">
+                                        <rect key="frame" x="0.0" y="10" width="320" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="mobile-Logo.png" id="wdI-6p-qoO">
+                                                    <rect key="frame" x="-13" y="0.0" width="323" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="aMd-Ad-Ee4">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lq3-KN-gcb">
+                                        <rect key="frame" x="0.0" y="160" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hoskinsp" placeholder="Email Address" minimumFontSize="17" clearButtonMode="always" id="tdY-xb-hSs">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hoskinsp" placeholder="Email Address" minimumFontSize="17" clearButtonMode="always" id="OdZ-4x-9E5">
                                                     <rect key="frame" x="20" y="6" width="260" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -93,14 +56,14 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="b6R-Fw-21m">
-                                        <rect key="frame" x="0.0" y="161" width="320" height="45"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7cb-vg-jPi">
+                                        <rect key="frame" x="0.0" y="205" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="p00per2!" placeholder="Password" minimumFontSize="17" clearButtonMode="unlessEditing" id="sSA-FS-nLd">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="p00per2!" placeholder="Password" minimumFontSize="17" clearButtonMode="unlessEditing" id="KAW-yd-QCI">
                                                     <rect key="frame" x="20" y="6" width="260" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -109,6 +72,89 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="xMa-Wf-5Ua">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="srK-gf-E6B">
+                                        <rect key="frame" x="0.0" y="269" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dSr-s2-Qtl">
+                                                    <rect key="frame" x="10" y="3" width="280" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Login" backgroundImage="button.png">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="login:" destination="BFw-WN-YIQ" eventType="touchUpInside" id="lUM-pu-cPY"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="l9R-aC-j9b">
+                                        <rect key="frame" x="0.0" y="314" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button hidden="YES" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9nS-Vb-sTC">
+                                                    <rect key="frame" x="32" y="5" width="236" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Registration" backgroundImage="button.png">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="ONp-Nl-mtM">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YVq-9k-uRp">
+                                        <rect key="frame" x="0.0" y="378" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <progressView opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" progress="0.5" id="hVO-Oz-MVm">
+                                                    <rect key="frame" x="20" y="26" width="260" height="11"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </progressView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Downloading Ward Data..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="da8-RB-0Ew">
+                                                    <rect key="frame" x="20" y="2" width="200" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -121,15 +167,24 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="FfN-CI-afO"/>
                     <connections>
-                        <outlet property="emailAddressField" destination="tdY-xb-hSs" id="u1Y-s5-D09"/>
-                        <outlet property="passwordField" destination="sSA-FS-nLd" id="Eq9-qS-TXV"/>
+                        <outlet property="downloadLabel" destination="da8-RB-0Ew" id="CV1-B0-bXL"/>
+                        <outlet property="downloadProgress" destination="hVO-Oz-MVm" id="gT9-fu-gWX"/>
+                        <outlet property="emailAddressField" destination="OdZ-4x-9E5" id="EWu-iH-rlv"/>
+                        <outlet property="logoCell1" destination="7H3-aZ-gXW" id="QVs-ay-tGh"/>
+                        <outlet property="logoCell3" destination="srK-gf-E6B" id="amn-oi-1yj"/>
+                        <outlet property="logoCell4" destination="l9R-aC-j9b" id="JxN-qu-V19"/>
+                        <outlet property="logoCell6" destination="YVq-9k-uRp" id="vQC-za-Ref"/>
+                        <outlet property="passwordField" destination="KAW-yd-QCI" id="TGn-Nd-n1D"/>
+                        <outlet property="tableView" destination="GBt-Xm-qcn" id="W9U-GK-SKz"/>
                         <outlet property="view" destination="GBt-Xm-qcn" id="Zf1-hE-5ic"/>
                         <segue destination="hnn-Cr-WIP" kind="modal" identifier="LoggedIn" modalTransitionStyle="flipHorizontal" id="lSA-yY-wyb"/>
+                        <segue destination="J4P-0g-H2C" kind="push" id="56g-Gn-fcq"/>
+                        <segue destination="Vzd-Gx-Kqt" kind="push" id="RAw-Me-tMd"/>
                     </connections>
                 </tableViewController>
                 <tapGestureRecognizer id="uJr-OY-j5L">
                     <connections>
-                        <action selector="tapOut:" destination="BFw-WN-YIQ" id="gB8-9k-Dx2"/>
+                        <action selector="tapOut:" destination="BFw-WN-YIQ" id="TLK-WY-0yA"/>
                         <outlet property="delegate" destination="BFw-WN-YIQ" id="SaV-9T-kwB"/>
                     </connections>
                 </tapGestureRecognizer>
@@ -782,6 +837,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1DH-LO-0L4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="J4P-0g-H2C" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="ISu-kE-Hxs"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="4bA-pF-M6D">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -800,6 +856,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKg-nB-u2N" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Vzd-Gx-Kqt" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="YF0-yE-aQy"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="s01-Qe-jG9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1111,9 +1168,9 @@ Additionally, we guarantee none of your personal information will be sold, distr
         </scene>
     </scenes>
     <resources>
-        <image name="Title.png" width="655" height="88"/>
         <image name="button.png" width="357" height="87"/>
         <image name="first" width="16" height="16"/>
+        <image name="mobile-Logo.png" width="640" height="296"/>
     </resources>
     <classes>
         <class className="CoreDataTableViewController" superclassName="UITableViewController">
@@ -1128,8 +1185,17 @@ Additionally, we guarantee none of your personal information will be sold, distr
         <class className="MSWLoginTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MSWLoginTableViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="downloadLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="downloadProgress" candidateClass="UIProgressView"/>
                 <relationship kind="outlet" name="emailAddressField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="logoCell1" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="logoCell2" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="logoCell3" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="logoCell4" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="logoCell5" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="logoCell6" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="MSWMemberRegistrationViewController" superclassName="MSWRegistrationViewController">

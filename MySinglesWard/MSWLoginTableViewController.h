@@ -10,6 +10,7 @@
 
 @interface MSWLoginTableViewController : UITableViewController
 
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddressField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @end

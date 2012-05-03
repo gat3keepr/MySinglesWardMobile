@@ -12,10 +12,26 @@
 #import "MSWProfileTableViewController.h"
 
 @interface MSWLoginTableViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *downloadLabel;
+@property (weak, nonatomic) IBOutlet UIProgressView *downloadProgress;
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoCell1;
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoCell2;
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoCell3;
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoCell4;
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoCell5;
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoCell6;
 @end
 
 @implementation MSWLoginTableViewController
+@synthesize downloadLabel;
+@synthesize downloadProgress;
+@synthesize logoCell1;
+@synthesize logoCell2;
+@synthesize logoCell3;
+@synthesize logoCell4;
+@synthesize logoCell5;
+@synthesize logoCell6;
+@synthesize tableView;
 @synthesize emailAddressField;
 @synthesize passwordField;
 
@@ -131,6 +147,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.logoCell1.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.logoCell2.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.logoCell3.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.logoCell4.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.logoCell5.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.logoCell6.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iphone-background.png"]];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -143,6 +166,15 @@
 {
     [self setEmailAddressField:nil];
     [self setPasswordField:nil];
+    [self setLogoCell1:nil];
+    [self setLogoCell2:nil];
+    [self setLogoCell3:nil];
+    [self setLogoCell4:nil];
+    [self setLogoCell5:nil];
+    [self setLogoCell6:nil];
+    [self setTableView:nil];
+    [self setDownloadProgress:nil];
+    [self setDownloadLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -150,7 +182,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
