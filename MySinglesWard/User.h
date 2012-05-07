@@ -2,7 +2,7 @@
 //  User.h
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/2/12.
+//  Created by Porter Hoskins on 5/4/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -23,11 +23,11 @@
 @property (nonatomic, retain) NSString * residence;
 @property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSNumber * wardID;
+@property (nonatomic, retain) BishopricData *bishopricData;
 @property (nonatomic, retain) Calling *calling;
 @property (nonatomic, retain) NotificationPreference *notificationPreference;
 @property (nonatomic, retain) Photo *photo;
 @property (nonatomic, retain) MemberSurvey *survey;
 @property (nonatomic, retain) Ward *ward;
-@property (nonatomic, retain) BishopricData *bishopricData;
 
 @end

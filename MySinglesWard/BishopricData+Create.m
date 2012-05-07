@@ -8,6 +8,7 @@
 
 #import "BishopricData+Create.h"
 #import "User+Create.h"
+#import "Calling.h"
 
 @implementation BishopricData (Create)
 
@@ -39,6 +40,11 @@
         bData.sortID = [data objectForKey:@"SortID"];
         
         bData.member = [User userWithID:bData.memberID inManagedObjectContext:context];
+        
+        if([[data objectForKey:@"BishopricCalling"] isKindOfClass:[NSNull class]])
+            bData.member.calling.title = @"Not Available";
+        else
+            bData.member.calling.title = [data objectForKey:@"BishopricCalling"];
     }
     else {
         bData = [member lastObject];

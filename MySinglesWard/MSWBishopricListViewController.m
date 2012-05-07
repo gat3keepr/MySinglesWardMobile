@@ -28,8 +28,6 @@
     if(_currentWard != currentWard)
     {
         _currentWard = currentWard;
-        
-        [self setupFetchedResultsController];
     }
 }
 
@@ -37,7 +35,7 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
     request.predicate = [NSPredicate predicateWithFormat:@"(ward = %@) AND (isBishopric = 1)", self.currentWard];
-    request.sortDescriptors = [NSArray arrayWithObjects: [NSSortDescriptor sortDescriptorWithKey:@"prefname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil];
+    request.sortDescriptors = [NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"bishopricData.sortID" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self.databaseDelegate getMSWDatabase].managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }
@@ -66,6 +64,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.navigationItem.rightBarButtonItem = orgButton;
             self.title = @"Bishopric";
+            [MBProgressHUD hideHUDForView:self.tableView animated:YES];
         });
     });
 }
@@ -83,7 +82,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self getBishopricList];
+    
+    [self setupFetchedResultsController];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @protocol MSWDatabaseDelegate <NSObject>
 
@@ -19,8 +20,12 @@
 @interface MSWProfileTableViewController : UITableViewController <MSWDatabaseDelegate>
 
 @property(nonatomic, strong) UIManagedDocument *mswDatabase;
+
 @property (weak, nonatomic) IBOutlet UILabel *memberName;
 @property (weak, nonatomic) IBOutlet UIImageView *memberPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *wardName;
+@property (strong, nonatomic) NSManagedObjectContext *backgroundContext;
+
+-(void)contextChanged:(NSNotification *)notification;
 
 @end

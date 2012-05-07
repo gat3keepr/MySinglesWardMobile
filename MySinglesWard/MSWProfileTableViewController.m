@@ -16,13 +16,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MSWWardViewController.h"
 #import "MBProgressHUD.h"
+#import "MSWPreferencesViewController.h"
 
 
 @interface MSWProfileTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *TitleCell;
--(void) useDatabase;
 -(void)setMemberProfile;
+@property (strong, nonatomic) User *currentUser;
 @end
 
 @implementation MSWProfileTableViewController
@@ -31,13 +32,14 @@
 @synthesize memberName = _memberName;
 @synthesize memberPhoto = _memberPhoto;
 @synthesize wardName = _wardName;
+@synthesize currentUser = _currentUser;
+@synthesize backgroundContext = _backgroundContext;
 
 -(void)setMswDatabase:(UIManagedDocument *)mswDatabase
 {
     if(_mswDatabase != mswDatabase)
     {
         _mswDatabase = mswDatabase;
-        [self useDatabase];        
     }
 }
 
@@ -50,44 +52,11 @@
     return self;
 }
 
--(void)useDatabase
-{
-    if(![[NSFileManager defaultManager] fileExistsAtPath:[self.mswDatabase.fileURL path]])
-    {
-        //Create the file
-        [self.mswDatabase saveToURL:self.mswDatabase.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
-            
-            
-        }];
-    }
-    else if (self.mswDatabase.documentState == UIDocumentStateClosed) {
-        //Open the file
-        [self.mswDatabase openWithCompletionHandler:^(BOOL success){
-            
-        }];
-    }
-    else if(self.mswDatabase.documentState == UIDocumentStateNormal)
-    {
-        
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.TitleCell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     //Open the database
     if(!self.mswDatabase)
@@ -101,162 +70,117 @@
         });
     }
     
-    //Check to see if the member is in the database, if not, go and get it from the server
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    self.currentUser = [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:self.mswDatabase.managedObjectContext];
     
-    if([pref objectForKey:MEMBERID] && [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:self.mswDatabase.managedObjectContext])
-    {
-        [self setMemberProfile];
-    }
-    else 
-    {
-        //Create the URL for the web request to get all the customers
-        NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
-        NSLog(@"MEMBER DATA URL request: %@", url);
-        
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            
-            //load Member
-            NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
-            NSLog(@"MEMBER DATA response: %@", memberData);
-            
-            //Save ward into database
-            [Ward wardWithJSON:[memberData objectForKey:@"ward"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
-            
-            //Save user to coredata and userdefaults
-            [self.mswDatabase.managedObjectContext performBlock:^{
-                User *user = [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
-                
-                [pref setObject:user.memberID forKey:@"memberID"];
-                [pref synchronize];
-            }];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self setMemberProfile];
-            });
-            
-            //[self loadWardListWithSender:self];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
 
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-            });
-        });
-        
-        [self.mswDatabase saveToURL:self.mswDatabase.fileURL
-                   forSaveOperation:UIDocumentSaveForOverwriting
-                  completionHandler:^(BOOL success) {
-                      if (!success) NSLog(@"failed to save document %@", self.mswDatabase.localizedName);
-                  }];
-    }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //Check to see if the member is in the database, if not, go and get it from the server
+    [self setMemberProfile];
+    
 }
 
 -(void)setMemberProfile
 {
-    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-    User *user = [User userWithID:[pref objectForKey:@"memberID"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+    if(![self.currentUser.isBishopric boolValue])
+        self.memberName.text = [NSString stringWithFormat:@"%@ %@", self.currentUser.prefname, self.currentUser.lastname];
+    else
+        self.memberName.text = [NSString stringWithFormat:@"%@", self.currentUser.prefname];
     
-    self.memberName.text = [NSString stringWithFormat:@"%@ %@", user.prefname, user.lastname];
+    self.wardName.text = [NSString stringWithFormat:@"%@ %@ Ward", self.currentUser.ward.location, self.currentUser.ward.ward];
     
-    self.wardName.text = [NSString stringWithFormat:@"%@ %@ Ward", user.ward.location, user.ward.ward];
     
-    if(user.photo.photoData)
-    {        
-        self.memberPhoto.layer.cornerRadius = 5.0;
-        self.memberPhoto.layer.masksToBounds = YES;
-        
-        self.memberPhoto.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        self.memberPhoto.layer.borderWidth = 1.0;
-        [self.memberPhoto setImage:[UIImage imageWithData:user.photo.photoData]];
-    }
-    else 
-    {
-        dispatch_queue_t photoQueue = dispatch_queue_create("photoQueue", NULL);
-        dispatch_async(photoQueue, ^{       
-            NSData *photoData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", MSWPhotoURL,user.photo.filename]]];
-        
-            [self.mswDatabase.managedObjectContext performBlock:^{
-                user.photo.photoData = photoData;  
-            }];
-            
-            //Set Photo
-            dispatch_async(dispatch_get_main_queue(), ^{                
-                self.memberPhoto.layer.cornerRadius = 5.0;
-                self.memberPhoto.layer.masksToBounds = YES;
-                
-                self.memberPhoto.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                self.memberPhoto.layer.borderWidth = 1.0;
-                [self.memberPhoto setImage:[UIImage imageWithData:photoData]];
-            });
-            
-        });
-        dispatch_release(photoQueue);          
-    }      
+    self.memberPhoto.layer.cornerRadius = 5.0;
+    self.memberPhoto.layer.masksToBounds = YES;
+    
+    self.memberPhoto.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.memberPhoto.layer.borderWidth = 1.0;
+    [self.memberPhoto setImage:[UIImage imageWithData:self.currentUser.photo.photoData]];
 }
 
 -(void)loadWardListWithSender:(UIView *)sender
 {
+    self.backgroundContext = [[NSManagedObjectContext alloc] init];
+    self.backgroundContext.persistentStoreCoordinator = [self.mswDatabase.managedObjectContext persistentStoreCoordinator];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contextChanged:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:self.backgroundContext];
+    
     //Create the URL for the web request to get all the customers
     NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/list", MSWRequestURL];
     NSLog(@"WARD LIST DATA URL request: %@", url);
     
-    
     //load Ward List
     NSDictionary *wardListData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
     NSLog(@"WARD LIST DATA response: %@", wardListData);
-        
-    [self.mswDatabase.managedObjectContext performBlock:^{
-        
-        for(NSNumber *memberID in [wardListData objectForKey:@"members"])
-        {
-                if(![User userWithID:memberID inManagedObjectContext:self.mswDatabase.managedObjectContext])
-                {
-                    /*dispatch_queue_t requestQueue = dispatch_queue_create("requestQueue", NULL);
-                    dispatch_async(requestQueue, ^{ */
-                        //Create the URL for the web request to get all the customers
-                        NSString *memberURL = [[NSString alloc] initWithFormat:@"%@api/member/get/%@", MSWRequestURL,memberID];
-                        NSLog(@"MEMBER DATA URL request: %@", memberURL);
-                        
-                        NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:memberURL withJSONData:nil];
-                        NSLog(@"MEMBER DATA response: %@", memberData);
-                        
-                        //Save User
-                        [self.mswDatabase.managedObjectContext performBlock:^{
-                            [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
-                        }];
-                    /*});
-                    dispatch_release(requestQueue); */
-                }
-        }
-        
-        
-     }];
-    [self.mswDatabase.managedObjectContext performBlock:^{
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-        
-        NSError *error = nil;
-        NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
-        
-        for(User *user in members)
-        {
-            if(![[wardListData objectForKey:@"members"] containsObject:user.memberID])
-            {
-                [self.mswDatabase.managedObjectContext performBlock:^{
-                    [self.mswDatabase.managedObjectContext deleteObject:user];
-                }];
-            }                
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:sender animated:YES];
-        });
-    }];
     
+    //Check to see if the request could not be made
+    if(!wardListData)
+    {
+        return;
+    }
+    
+    //Create an array to record current ward members
+    NSMutableArray *currentWard = [[NSMutableArray alloc] init];
+        
+    for(NSNumber *memberID in [wardListData objectForKey:@"members"])
+    {
+        if(![User userWithID:memberID inManagedObjectContext:self.backgroundContext])
+        {
+            //Create the URL for the web request to get all the customers
+            NSString *memberURL = [[NSString alloc] initWithFormat:@"%@api/member/get/%@", MSWRequestURL,memberID];
+            NSLog(@"MEMBER DATA URL request: %@", memberURL);
+            
+            NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:memberURL withJSONData:nil];
+            NSLog(@"MEMBER DATA response: %@", memberData);
+            
+            //Save User
+            [self.mswDatabase.managedObjectContext performBlock:^{
+                [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
+            }];
+        }
+        
+        [currentWard addObject:memberID];
+    }
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    request.predicate = [NSPredicate predicateWithFormat:@"(ward = %@) AND (isBishopric = 0)", self.currentUser.ward];
+    
+    NSError *error = nil;
+    NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
+    
+    for(User *user in members)
+    {
+        if(![currentWard containsObject:user.memberID])
+        {
+            [self.mswDatabase.managedObjectContext performBlock:^{
+                [self.mswDatabase.managedObjectContext deleteObject:user];
+            }];
+        }                
+    }
 }
 
 -(void)loadBishopricListWithSender:(UIView *)sender
 {
+    self.backgroundContext = [[NSManagedObjectContext alloc] init];
+    self.backgroundContext.persistentStoreCoordinator = [self.mswDatabase.managedObjectContext persistentStoreCoordinator];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                    selector:@selector(contextChanged:)
+                        name:NSManagedObjectContextDidSaveNotification
+                      object:self.backgroundContext];
+    
     //Create the URL for the web request to get all the customers
     NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/bishopric", MSWRequestURL];
     NSLog(@"BISHOPRIC LIST DATA URL request: %@", url);
@@ -265,46 +189,49 @@
     NSDictionary *wardListData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
     NSLog(@"BISHOPRIC LIST DATA response: %@", wardListData);
     
-    [self.mswDatabase.managedObjectContext performBlock:^{
-        
-        //Create an array to record current bishopric users
-        NSMutableArray *currentBishopric = [[NSMutableArray alloc] init];
-        
-        for(NSDictionary *bishopricmember in wardListData)
-        {
-            NSLog(@"BISHOPRIC DATA response: %@", bishopricmember); 
-            User *user = [User userWithAllMemberData:bishopricmember inManagedObjectContext:self.mswDatabase.managedObjectContext];
-            
-            [currentBishopric addObject:user];
-        }
-        
-        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-        User *user = [User userWithID:[pref objectForKey:@"memberID"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
-        
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-        request.predicate = [NSPredicate predicateWithFormat:@"(ward = %@) AND (isBishopric = 1)", user.wardID];
-        
-        NSError *error = nil;
-        NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
-        
-        for(User *bUser in members)
-        {
-            if(![currentBishopric containsObject:user.memberID])
-            {
-                [self.mswDatabase.managedObjectContext performBlock:^{
-                    [self.mswDatabase.managedObjectContext deleteObject:bUser];
-                }];
-            }                
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:sender animated:YES];
-        });
-    }];
+    //Check to see if the request could not be made
+    if(!wardListData)
+    {
+        return;
+    }
     
+    //Create an array to record current bishopric users
+    NSMutableArray *currentBishopric = [[NSMutableArray alloc] init];
+    
+    for(NSDictionary *bishopricmember in wardListData)
+    {
+        NSLog(@"BISHOPRIC DATA response: %@", bishopricmember); 
+        [self.mswDatabase.managedObjectContext performBlock:^{
+            [User userWithAllMemberData:bishopricmember inManagedObjectContext:self.mswDatabase.managedObjectContext];
+        }];
+        [currentBishopric addObject:[[bishopricmember objectForKey:@"user"] objectForKey:@"MemberID"]];
+    }
+    
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    User *user = [User userWithID:[pref objectForKey:@"memberID"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    request.predicate = [NSPredicate predicateWithFormat:@"(wardID = %@) AND (isBishopric = 1)", user.wardID];
+    
+    NSError *error = nil;
+    NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
+    
+    [self.backgroundContext save:&error];
+    for(User *bUser in members)
+    {
+        if(![currentBishopric containsObject:bUser.memberID])
+        {
+            [self.mswDatabase.managedObjectContext performBlock:^{
+                [self.mswDatabase.managedObjectContext deleteObject:bUser];
+            }];
+        }                
+    }
 }
 
-
+-(void)contextChanged:(NSNotification *)notification
+{
+    [self.mswDatabase.managedObjectContext mergeChangesFromContextDidSaveNotification:notification]; 
+}
 
 - (void)viewDidUnload
 {
@@ -315,6 +242,11 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -329,9 +261,6 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-    User *user = [User userWithID:[pref objectForKey:@"memberID"] inManagedObjectContext:self.mswDatabase.managedObjectContext];
-    
     if([segue.destinationViewController respondsToSelector:@selector(setDatabaseDelegate:)])
     {
         [segue.destinationViewController setDatabaseDelegate:self];
@@ -339,7 +268,14 @@
     
     if([segue.destinationViewController respondsToSelector:@selector(setCurrentWard:)])
     {
-        [segue.destinationViewController setCurrentWard:user.ward];
+        [segue.destinationViewController setCurrentWard:self.currentUser.ward];
+    }
+    else
+    {
+        if([segue.destinationViewController respondsToSelector:@selector(setDelegate:)])
+        {
+            [segue.destinationViewController setDelegate:self];
+        }
     }
 }
 #pragma mark - Table view data source

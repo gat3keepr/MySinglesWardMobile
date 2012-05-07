@@ -9,6 +9,7 @@
 #import "MSWMemberViewController.h"
 #import "Photo.h"
 #import "User.h"
+#import "Calling.h"
 #import <QuartzCore/QuartzCore.h>
 #import <MessageUI/MessageUI.h>
 
@@ -25,6 +26,7 @@
 @synthesize memberEmail;
 @synthesize memberResidence;
 @synthesize titleCell;
+@synthesize memberCalling;
 @synthesize user = _user;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -59,6 +61,7 @@
     [self setMemberResidence:nil];
     [self setTitleCell:nil];
     [self setButtonCell:nil];
+    [self setMemberCalling:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -87,6 +90,7 @@
     self.memberPhone.text = self.user.cellphone;
     self.memberEmail.text = self.user.email;
     self.memberResidence.text = self.user.residence;
+    self.memberCalling.text = self.user.calling.title;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,7 +102,7 @@
         NSString *phoneNumber = [@"tel://" stringByAppendingString:self.memberPhone.text];
         NSString *cleanedString = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
         NSString *escapedPhoneNumber = [cleanedString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", escapedPhoneNumber]];
+        NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", escapedPhoneNumber]];
         [[UIApplication sharedApplication] openURL:telURL];
     }
     
@@ -145,46 +149,5 @@
     // Remove the mail view
     [self dismissModalViewControllerAnimated:YES];
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
 
 @end

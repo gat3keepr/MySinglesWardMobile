@@ -29,8 +29,6 @@
     if(_currentWard != currentWard)
     {
         _currentWard = currentWard;
-        
-        [self setupFetchedResultsController];
     }
 }
 
@@ -67,6 +65,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.navigationItem.rightBarButtonItem = orgButton;
             self.title = @"Ward List";
+            [MBProgressHUD hideHUDForView:self.tableView animated:YES];
         });
     });
 }
@@ -84,7 +83,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self getWardList];
+    [self setupFetchedResultsController];
 }
 
 - (void)viewDidUnload
@@ -96,7 +95,7 @@
 -(void)viewWillAppear:(BOOL)animated    
 {
     [super viewWillAppear:animated];
-    
+    [self.tableView reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

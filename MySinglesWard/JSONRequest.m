@@ -30,7 +30,7 @@
         if(errorReturned)
         {
             //Check to see if there was an error
-            NSLog(@"JSON ERROR: %@",[errorReturned localizedDescription]);
+            NSLog(@"REQUEST ERROR: %@",[errorReturned localizedDescription]);
             return nil;
         }
         

@@ -12,6 +12,7 @@
 #import "Photo+Create.h"
 #import "BishopricData+Create.h"
 #import "MemberSurvey+Create.h"
+#import "Calling+Create.h"
 
 @implementation User (Create)
 
@@ -97,10 +98,16 @@
         [NotificationPreference notificationPreferenceWithJSON:[memberData objectForKey:@"notificationPreference"] inManagedObjectContext:context];
     }
     
+    if ([memberData objectForKey:@"calling"]) 
+    {
+        [Calling callingWithJSON:[memberData objectForKey:@"calling"] inManagedObjectContext:context];
+    }
+    
     if([user.isBishopric boolValue])
     {
         [BishopricData dataWithJSON:[memberData objectForKey:@"bishopric"] inManagedObjectContext:context];
     }
+    
     
     return user;
 }

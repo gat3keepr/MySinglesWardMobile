@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF01CC051554788E0045E09F /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC041554788E0045E09F /* Photo.m */; };
+		BF01CC091554788F0045E09F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC081554788E0045E09F /* User.m */; };
+		BF01CC0C1554788F0045E09F /* BishopricData.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC0B1554788F0045E09F /* BishopricData.m */; };
+		BF01CC0F1554788F0045E09F /* MemberSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC0E1554788F0045E09F /* MemberSurvey.m */; };
+		BF01CC121554788F0045E09F /* Calling.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC111554788F0045E09F /* Calling.m */; };
+		BF01CC151554788F0045E09F /* NotificationPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC141554788F0045E09F /* NotificationPreference.m */; };
+		BF01CC181554788F0045E09F /* Ward.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC171554788F0045E09F /* Ward.m */; };
+		BF01CC1B155488C50045E09F /* MSWPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC1A155488C50045E09F /* MSWPreferencesViewController.m */; };
+		BF01CC211554CF1C0045E09F /* MSWNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC201554CF1C0045E09F /* MSWNotificationViewController.m */; };
+		BF01CC241554D00B0045E09F /* MSWTXTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC231554D00B0045E09F /* MSWTXTViewController.m */; };
 		BF0E98AC154F9171004E71A8 /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98AB154F9171004E71A8 /* User+Create.m */; };
 		BF0E98AF154F96D1004E71A8 /* Photo+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98AE154F96D1004E71A8 /* Photo+Create.m */; };
 		BF0E98B8154F9EC7004E71A8 /* Ward+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E98B7154F9EC7004E71A8 /* Ward+Create.m */; };
@@ -21,14 +31,7 @@
 		BF6D853B154B8400009052EA /* MSWBishopricRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D853A154B8400009052EA /* MSWBishopricRegistrationViewController.m */; };
 		BF6D853E154B840F009052EA /* MSWRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6D853D154B840F009052EA /* MSWRegistrationViewController.m */; };
 		BF7EEC1F1551D9B600479B2E /* MSWBishopricListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC1E1551D9B600479B2E /* MSWBishopricListViewController.m */; };
-		BF7EEC3B1551DD9B00479B2E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC3A1551DD9B00479B2E /* User.m */; };
-		BF7EEC3E1551DD9B00479B2E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC3D1551DD9B00479B2E /* Photo.m */; };
-		BF7EEC411551DD9B00479B2E /* MemberSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC401551DD9B00479B2E /* MemberSurvey.m */; };
-		BF7EEC441551DD9C00479B2E /* NotificationPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC431551DD9C00479B2E /* NotificationPreference.m */; };
-		BF7EEC471551DD9C00479B2E /* Ward.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC461551DD9C00479B2E /* Ward.m */; };
-		BF7EEC4A1551DD9C00479B2E /* Calling.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC491551DD9C00479B2E /* Calling.m */; };
 		BF7EEC4D1551DDBE00479B2E /* BishopricData+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC4C1551DDBE00479B2E /* BishopricData+Create.m */; };
-		BF7EEC501551DF5E00479B2E /* BishopricData.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC4F1551DF5E00479B2E /* BishopricData.m */; };
 		BF7EEC531551E28000479B2E /* Calling+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC521551E28000479B2E /* Calling+Create.m */; };
 		BFBE1F631550E413001ECDB5 /* MSWMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE1F621550E413001ECDB5 /* MSWMemberViewController.m */; };
 		BFBE1F691550F1DE001ECDB5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBE1F681550F1DE001ECDB5 /* MessageUI.framework */; };
@@ -61,6 +64,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF01CC031554788E0045E09F /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		BF01CC041554788E0045E09F /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		BF01CC071554788E0045E09F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		BF01CC081554788E0045E09F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		BF01CC0A1554788F0045E09F /* BishopricData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BishopricData.h; sourceTree = "<group>"; };
+		BF01CC0B1554788F0045E09F /* BishopricData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BishopricData.m; sourceTree = "<group>"; };
+		BF01CC0D1554788F0045E09F /* MemberSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberSurvey.h; sourceTree = "<group>"; };
+		BF01CC0E1554788F0045E09F /* MemberSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberSurvey.m; sourceTree = "<group>"; };
+		BF01CC101554788F0045E09F /* Calling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calling.h; sourceTree = "<group>"; };
+		BF01CC111554788F0045E09F /* Calling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calling.m; sourceTree = "<group>"; };
+		BF01CC131554788F0045E09F /* NotificationPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationPreference.h; sourceTree = "<group>"; };
+		BF01CC141554788F0045E09F /* NotificationPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationPreference.m; sourceTree = "<group>"; };
+		BF01CC161554788F0045E09F /* Ward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ward.h; sourceTree = "<group>"; };
+		BF01CC171554788F0045E09F /* Ward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ward.m; sourceTree = "<group>"; };
+		BF01CC19155488C50045E09F /* MSWPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWPreferencesViewController.h; sourceTree = "<group>"; };
+		BF01CC1A155488C50045E09F /* MSWPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWPreferencesViewController.m; sourceTree = "<group>"; };
+		BF01CC1F1554CF1C0045E09F /* MSWNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWNotificationViewController.h; sourceTree = "<group>"; };
+		BF01CC201554CF1C0045E09F /* MSWNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWNotificationViewController.m; sourceTree = "<group>"; };
+		BF01CC221554D00B0045E09F /* MSWTXTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWTXTViewController.h; sourceTree = "<group>"; };
+		BF01CC231554D00B0045E09F /* MSWTXTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWTXTViewController.m; sourceTree = "<group>"; };
 		BF0E98AA154F9171004E71A8 /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		BF0E98AB154F9171004E71A8 /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		BF0E98AD154F96D1004E71A8 /* Photo+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Create.h"; sourceTree = "<group>"; };
@@ -88,22 +111,8 @@
 		BF6D853D154B840F009052EA /* MSWRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWRegistrationViewController.m; sourceTree = "<group>"; };
 		BF7EEC1D1551D9B600479B2E /* MSWBishopricListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWBishopricListViewController.h; sourceTree = "<group>"; };
 		BF7EEC1E1551D9B600479B2E /* MSWBishopricListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWBishopricListViewController.m; sourceTree = "<group>"; };
-		BF7EEC391551DD9B00479B2E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		BF7EEC3A1551DD9B00479B2E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		BF7EEC3C1551DD9B00479B2E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		BF7EEC3D1551DD9B00479B2E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		BF7EEC3F1551DD9B00479B2E /* MemberSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberSurvey.h; sourceTree = "<group>"; };
-		BF7EEC401551DD9B00479B2E /* MemberSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberSurvey.m; sourceTree = "<group>"; };
-		BF7EEC421551DD9C00479B2E /* NotificationPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationPreference.h; sourceTree = "<group>"; };
-		BF7EEC431551DD9C00479B2E /* NotificationPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationPreference.m; sourceTree = "<group>"; };
-		BF7EEC451551DD9C00479B2E /* Ward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ward.h; sourceTree = "<group>"; };
-		BF7EEC461551DD9C00479B2E /* Ward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ward.m; sourceTree = "<group>"; };
-		BF7EEC481551DD9C00479B2E /* Calling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calling.h; sourceTree = "<group>"; };
-		BF7EEC491551DD9C00479B2E /* Calling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calling.m; sourceTree = "<group>"; };
 		BF7EEC4B1551DDBE00479B2E /* BishopricData+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BishopricData+Create.h"; sourceTree = "<group>"; };
 		BF7EEC4C1551DDBE00479B2E /* BishopricData+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BishopricData+Create.m"; sourceTree = "<group>"; };
-		BF7EEC4E1551DF5E00479B2E /* BishopricData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BishopricData.h; sourceTree = "<group>"; };
-		BF7EEC4F1551DF5E00479B2E /* BishopricData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BishopricData.m; sourceTree = "<group>"; };
 		BF7EEC511551E28000479B2E /* Calling+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Calling+Create.h"; sourceTree = "<group>"; };
 		BF7EEC521551E28000479B2E /* Calling+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Calling+Create.m"; sourceTree = "<group>"; };
 		BFBE1F611550E413001ECDB5 /* MSWMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWMemberViewController.h; sourceTree = "<group>"; };
@@ -160,23 +169,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF01CC251554D0110045E09F /* PreferencesControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF01CC221554D00B0045E09F /* MSWTXTViewController.h */,
+				BF01CC231554D00B0045E09F /* MSWTXTViewController.m */,
+				BF01CC1F1554CF1C0045E09F /* MSWNotificationViewController.h */,
+				BF01CC201554CF1C0045E09F /* MSWNotificationViewController.m */,
+				BF01CC19155488C50045E09F /* MSWPreferencesViewController.h */,
+				BF01CC1A155488C50045E09F /* MSWPreferencesViewController.m */,
+			);
+			name = PreferencesControllers;
+			sourceTree = "<group>";
+		};
 		BF0E98A9154F8DB9004E71A8 /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
-				BF7EEC4E1551DF5E00479B2E /* BishopricData.h */,
-				BF7EEC4F1551DF5E00479B2E /* BishopricData.m */,
-				BF7EEC481551DD9C00479B2E /* Calling.h */,
-				BF7EEC491551DD9C00479B2E /* Calling.m */,
-				BF7EEC451551DD9C00479B2E /* Ward.h */,
-				BF7EEC461551DD9C00479B2E /* Ward.m */,
-				BF7EEC421551DD9C00479B2E /* NotificationPreference.h */,
-				BF7EEC431551DD9C00479B2E /* NotificationPreference.m */,
-				BF7EEC3F1551DD9B00479B2E /* MemberSurvey.h */,
-				BF7EEC401551DD9B00479B2E /* MemberSurvey.m */,
-				BF7EEC3C1551DD9B00479B2E /* Photo.h */,
-				BF7EEC3D1551DD9B00479B2E /* Photo.m */,
-				BF7EEC391551DD9B00479B2E /* User.h */,
-				BF7EEC3A1551DD9B00479B2E /* User.m */,
+				BF01CC161554788F0045E09F /* Ward.h */,
+				BF01CC171554788F0045E09F /* Ward.m */,
+				BF01CC131554788F0045E09F /* NotificationPreference.h */,
+				BF01CC141554788F0045E09F /* NotificationPreference.m */,
+				BF01CC101554788F0045E09F /* Calling.h */,
+				BF01CC111554788F0045E09F /* Calling.m */,
+				BF01CC0D1554788F0045E09F /* MemberSurvey.h */,
+				BF01CC0E1554788F0045E09F /* MemberSurvey.m */,
+				BF01CC0A1554788F0045E09F /* BishopricData.h */,
+				BF01CC0B1554788F0045E09F /* BishopricData.m */,
+				BF01CC071554788E0045E09F /* User.h */,
+				BF01CC081554788E0045E09F /* User.m */,
+				BF01CC031554788E0045E09F /* Photo.h */,
+				BF01CC041554788E0045E09F /* Photo.m */,
 				BF0E98AA154F9171004E71A8 /* User+Create.h */,
 				BF0E98AB154F9171004E71A8 /* User+Create.m */,
 				BF7EEC511551E28000479B2E /* Calling+Create.h */,
@@ -251,6 +273,7 @@
 		BFEC556615488A1500E3E988 /* MySinglesWard */ = {
 			isa = PBXGroup;
 			children = (
+				BF01CC251554D0110045E09F /* PreferencesControllers */,
 				BFBE1F701550FAC1001ECDB5 /* MBProgressHUD.h */,
 				BFBE1F711550FAC1001ECDB5 /* MBProgressHUD.m */,
 				BF169B4A154F376D00EDA34D /* CoreDataTableViewController.h */,
@@ -401,15 +424,18 @@
 				BFBE1F631550E413001ECDB5 /* MSWMemberViewController.m in Sources */,
 				BFBE1F721550FAC2001ECDB5 /* MBProgressHUD.m in Sources */,
 				BF7EEC1F1551D9B600479B2E /* MSWBishopricListViewController.m in Sources */,
-				BF7EEC3B1551DD9B00479B2E /* User.m in Sources */,
-				BF7EEC3E1551DD9B00479B2E /* Photo.m in Sources */,
-				BF7EEC411551DD9B00479B2E /* MemberSurvey.m in Sources */,
-				BF7EEC441551DD9C00479B2E /* NotificationPreference.m in Sources */,
-				BF7EEC471551DD9C00479B2E /* Ward.m in Sources */,
-				BF7EEC4A1551DD9C00479B2E /* Calling.m in Sources */,
 				BF7EEC4D1551DDBE00479B2E /* BishopricData+Create.m in Sources */,
-				BF7EEC501551DF5E00479B2E /* BishopricData.m in Sources */,
 				BF7EEC531551E28000479B2E /* Calling+Create.m in Sources */,
+				BF01CC051554788E0045E09F /* Photo.m in Sources */,
+				BF01CC091554788F0045E09F /* User.m in Sources */,
+				BF01CC0C1554788F0045E09F /* BishopricData.m in Sources */,
+				BF01CC0F1554788F0045E09F /* MemberSurvey.m in Sources */,
+				BF01CC121554788F0045E09F /* Calling.m in Sources */,
+				BF01CC151554788F0045E09F /* NotificationPreference.m in Sources */,
+				BF01CC181554788F0045E09F /* Ward.m in Sources */,
+				BF01CC1B155488C50045E09F /* MSWPreferencesViewController.m in Sources */,
+				BF01CC211554CF1C0045E09F /* MSWNotificationViewController.m in Sources */,
+				BF01CC241554D00B0045E09F /* MSWTXTViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

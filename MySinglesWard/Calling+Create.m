@@ -35,7 +35,11 @@
         
         cData.memberID = [data objectForKey:@"MemberID"];
         cData.callingID = [data objectForKey:@"CallingID"];
-        cData.title = [data objectForKey:@"Title"];
+        
+        if([[data objectForKey:@"Title"] isKindOfClass:[NSNull class]])
+            cData.title = @"Not Available";
+        else
+            cData.title = [data objectForKey:@"Title"];
         
         cData.member = [User userWithID:cData.memberID inManagedObjectContext:context];
     }

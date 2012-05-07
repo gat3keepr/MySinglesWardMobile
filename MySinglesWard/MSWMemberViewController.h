@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *memberEmail;
 @property (weak, nonatomic) IBOutlet UILabel *memberResidence;
 @property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
+@property (weak, nonatomic) IBOutlet UILabel *memberCalling;
 @property (nonatomic, strong) User *user;
 @end
