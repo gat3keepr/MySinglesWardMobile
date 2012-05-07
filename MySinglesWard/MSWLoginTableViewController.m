@@ -278,22 +278,10 @@
             NSArray* members = [[wardListData objectForKey:@"members"] copy];
             
             //Save members
-            for(NSNumber *memberID in members)
+            for(NSDictionary *member in members)
             {
-                if(![User userWithID:memberID inManagedObjectContext:self.mswDatabase.managedObjectContext])
-                {
-                    /*dispatch_queue_t requestQueue = dispatch_queue_create("requestQueue", NULL);
-                     dispatch_async(requestQueue, ^{ */
-                    //Create the URL for the web request to get all the customers
-                    NSString *memberURL = [[NSString alloc] initWithFormat:@"%@api/member/get/%@", MSWRequestURL,memberID];
-                    NSLog(@"MEMBER DATA URL request: %@", memberURL);
-                    
-                    NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:memberURL withJSONData:nil];
-                    NSLog(@"MEMBER DATA response: %@", memberData);
-                    
-                    //Save User
-                    [User userWithAllMemberData:[memberData copy] inManagedObjectContext:self.backgroundMOC];
-                }
+                //Save User
+                [User userWithAllMemberData:[member copy] inManagedObjectContext:self.backgroundMOC];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.usersCompleted = self.usersCompleted + 1;

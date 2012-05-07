@@ -12,12 +12,21 @@
 
 @interface MSWTXTViewController ()
 
+@property (weak, nonatomic) UITableViewCell *selectedRow;
+
 @end
 
 @implementation MSWTXTViewController
 @synthesize txtSwitch;
 @synthesize currentUser = _currentUser;
 @synthesize delegate = _delegate;
+@synthesize selectedRow = _selectedRow;
+
+#define AT_T @"@txt.att.net"
+#define VERIZON @"@vtext.com"
+#define TMOBILE @"@tmomail.net"
+#define SPRINT @"@messaging.sprintpcs.com"
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -47,6 +56,25 @@
     self.currentUser = [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:[self.delegate getMSWDatabase].managedObjectContext];
     
     self.txtSwitch.on = [self.currentUser.notificationPreference.txt boolValue];
+    
+    if([self.currentUser.notificationPreference.carrier isEqualToString:AT_T])
+    {
+        self.selectedRow = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    }
+    else if([self.currentUser.notificationPreference.carrier isEqualToString:VERIZON])
+    {
+        self.selectedRow = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+    }
+    else if([self.currentUser.notificationPreference.carrier isEqualToString:SPRINT])
+    {
+       self.selectedRow = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]];
+    }
+    else if([self.currentUser.notificationPreference.carrier isEqualToString:TMOBILE])
+    {
+        self.selectedRow = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1]];
+    }
+    
+    self.selectedRow.accessoryType = UITableViewCellAccessoryCheckmark;
 }
 
 - (void)viewDidUnload
@@ -66,13 +94,47 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    //Switch carrier to AT&T
+    if(indexPath.row == 0 && indexPath.section == 1)
+    {
+        self.selectedRow.accessoryType = UITableViewCellAccessoryNone;
+        self.selectedRow = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        self.currentUser.notificationPreference.carrier = AT_T;
+    }
+    
+    //Switch carrier to VERIZON
+    if(indexPath.row == 1 && indexPath.section == 1)
+    {
+        self.selectedRow.accessoryType = UITableViewCellAccessoryNone;
+        self.selectedRow = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        self.currentUser.notificationPreference.carrier = VERIZON;
+    }
+    
+    //Switch carrier to SPRINT
+    if(indexPath.row == 2 && indexPath.section == 1)
+    {
+        self.selectedRow.accessoryType = UITableViewCellAccessoryNone;
+        self.selectedRow = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        self.currentUser.notificationPreference.carrier = SPRINT;
+    }
+    
+    //Switch carrier to TMOBILE
+    if(indexPath.row == 3 && indexPath.section == 1)
+    {
+        self.selectedRow.accessoryType = UITableViewCellAccessoryNone;
+        self.selectedRow = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        self.currentUser.notificationPreference.carrier = TMOBILE;
+    }
+    
+    self.selectedRow.accessoryType = UITableViewCellAccessoryCheckmark;
+}
+
+- (IBAction)TXTchanged:(UISwitch *)sender {
+    self.currentUser.notificationPreference.txt = [NSNumber numberWithBool:sender.on];
 }
 
 @end

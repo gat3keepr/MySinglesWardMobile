@@ -118,7 +118,7 @@
                                                object:self.backgroundContext];
     
     //Create the URL for the web request to get all the customers
-    NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/list", MSWRequestURL];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/listIDs", MSWRequestURL];
     NSLog(@"WARD LIST DATA URL request: %@", url);
     
     //load Ward List
@@ -146,9 +146,7 @@
             NSLog(@"MEMBER DATA response: %@", memberData);
             
             //Save User
-            [self.mswDatabase.managedObjectContext performBlock:^{
-                [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
-            }];
+                [User userWithAllMemberData:memberData inManagedObjectContext:self.backgroundContext];
         }
         
         [currentWard addObject:memberID];
@@ -158,17 +156,18 @@
     request.predicate = [NSPredicate predicateWithFormat:@"(ward = %@) AND (isBishopric = 0)", self.currentUser.ward];
     
     NSError *error = nil;
-    NSArray *members = [self.mswDatabase.managedObjectContext executeFetchRequest:request error:&error];
+    NSArray *members = [self.backgroundContext executeFetchRequest:request error:&error];
     
     for(User *user in members)
     {
         if(![currentWard containsObject:user.memberID])
         {
-            [self.mswDatabase.managedObjectContext performBlock:^{
-                [self.mswDatabase.managedObjectContext deleteObject:user];
-            }];
+            [self.backgroundContext deleteObject:user];
         }                
     }
+    
+    NSError *saveError = nil;
+    [self.backgroundContext save:&saveError];
 }
 
 -(void)loadBishopricListWithSender:(UIView *)sender
@@ -278,46 +277,6 @@
         }
     }
 }
-#pragma mark - Table view data source
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

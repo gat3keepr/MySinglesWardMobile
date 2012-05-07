@@ -8,6 +8,7 @@
 
 #import "User.h"
 #import "MSWProfileTableViewController.h"
+#import "MSWNotificationViewController.h"
 #import <UIKit/UIKit.h>
 
 @interface MSWTXTViewController : UITableViewController

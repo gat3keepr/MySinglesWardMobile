@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D2001" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="BishopricData" representedClassName="BishopricData" syncable="YES">
         <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="sortID" optional="YES" attributeType="String" syncable="YES"/>
@@ -85,7 +85,7 @@
         <relationship name="notificationPreference" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="NotificationPreference" inverseName="member" inverseEntity="NotificationPreference" syncable="YES"/>
         <relationship name="photo" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Photo" inverseName="member" inverseEntity="Photo" syncable="YES"/>
         <relationship name="survey" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MemberSurvey" inverseName="member" inverseEntity="MemberSurvey" syncable="YES"/>
-        <relationship name="ward" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Ward" inverseName="members" inverseEntity="Ward" syncable="YES"/>
+        <relationship name="ward" optional="YES" minCount="1" maxCount="1" deletionRule="No Action" destinationEntity="Ward" inverseName="members" inverseEntity="Ward" syncable="YES"/>
     </entity>
     <entity name="Ward" representedClassName="Ward" syncable="YES">
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
