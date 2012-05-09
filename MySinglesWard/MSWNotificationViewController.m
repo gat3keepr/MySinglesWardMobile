@@ -118,14 +118,7 @@
 }
 
 - (IBAction)saveNotificationPreferences:(id)sender {
-    self.currentUser.notificationPreference.email = [NSNumber numberWithBool:emailSwitch.on];
-    self.currentUser.notificationPreference.stake = [NSNumber numberWithBool:stakeSwitch.on];
-    self.currentUser.notificationPreference.ward = [NSNumber numberWithBool:wardSwitch.on];
-    self.currentUser.notificationPreference.elders = [NSNumber numberWithBool:eldersQuourmSwitch.on];
-    self.currentUser.notificationPreference.reliefsociety = [NSNumber numberWithBool:reliefSocietySwitch.on];
-    self.currentUser.notificationPreference.activities = [NSNumber numberWithBool:activitiesSwitch.on];
-    self.currentUser.notificationPreference.fhe = [NSNumber numberWithBool:fheSwitch.on];
-    
+
     //Create Request to be sent to server
     //Create the URL for the web request to get all the customers
     NSString *url = [[NSString alloc] initWithFormat:@"%@api/member/savenotificationpreferences", MSWRequestURL];
@@ -133,15 +126,15 @@
     
     NSMutableDictionary *preferences = [[NSMutableDictionary alloc] init];
     [preferences setObject:self.currentUser.memberID forKey:@"MemberID"];
-    [preferences setObject:self.currentUser.notificationPreference.email forKey:@"email"];
+    [preferences setObject:[NSNumber numberWithBool:self.emailSwitch.on] forKey:@"email"];
     [preferences setObject:self.currentUser.notificationPreference.txt forKey:@"txt"];
     [preferences setObject:self.currentUser.notificationPreference.carrier forKey:@"carrier"];
-    [preferences setObject:self.currentUser.notificationPreference.stake forKey:@"stake"];
-    [preferences setObject:self.currentUser.notificationPreference.ward forKey:@"ward"];
-    [preferences setObject:self.currentUser.notificationPreference.elders forKey:@"elders"];
-    [preferences setObject:self.currentUser.notificationPreference.reliefsociety forKey:@"reliefsociety"];
-    [preferences setObject:self.currentUser.notificationPreference.activities forKey:@"activities"];
-    [preferences setObject:self.currentUser.notificationPreference.fhe forKey:@"fhe"];
+    [preferences setObject:[NSNumber numberWithBool:self.stakeSwitch.on] forKey:@"stake"];
+    [preferences setObject:[NSNumber numberWithBool:self.wardSwitch.on] forKey:@"ward"];
+    [preferences setObject:[NSNumber numberWithBool:self.eldersQuourmSwitch.on] forKey:@"elders"];
+    [preferences setObject:[NSNumber numberWithBool:self.reliefSocietySwitch.on] forKey:@"reliefsociety"];
+    [preferences setObject:[NSNumber numberWithBool:self.activitiesSwitch.on] forKey:@"activities"];
+    [preferences setObject:[NSNumber numberWithBool:self.fheSwitch.on] forKey:@"fhe"];
 
     //load Ward List
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -157,7 +150,16 @@
             });   
         }
         else 
-        {
+        {   
+            [self.currentUser.managedObjectContext performBlock:^{
+                self.currentUser.notificationPreference.email = [NSNumber numberWithBool:emailSwitch.on];
+                self.currentUser.notificationPreference.stake = [NSNumber numberWithBool:stakeSwitch.on];
+                self.currentUser.notificationPreference.ward = [NSNumber numberWithBool:wardSwitch.on];
+                self.currentUser.notificationPreference.elders = [NSNumber numberWithBool:eldersQuourmSwitch.on];
+                self.currentUser.notificationPreference.reliefsociety = [NSNumber numberWithBool:reliefSocietySwitch.on];
+                self.currentUser.notificationPreference.activities = [NSNumber numberWithBool:activitiesSwitch.on];
+                self.currentUser.notificationPreference.fhe = [NSNumber numberWithBool:fheSwitch.on];
+            }];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.presentingViewController dismissModalViewControllerAnimated:YES];
             });            

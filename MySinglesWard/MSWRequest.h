@@ -6,5 +6,5 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#define MSWRequestURL @"http://192.168.1.130/"
-#define MSWPhotoURL @"http://192.168.1.130/Photo/"
+#define MSWRequestURL @"http://192.168.1.131/"
+#define MSWPhotoURL @"http://192.168.1.131/Photo/"

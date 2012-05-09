@@ -1,0 +1,221 @@
+//
+//  MSWPersonalInformationViewController.m
+//  MySinglesWard
+//
+//  Created by Porter Hoskins on 5/7/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "MSWPersonalInformationViewController.h"
+#import "User+Create.h"
+#import "MemberSurvey+Create.h"
+#import "MSWRequest.h"
+#import "JSONRequest.h"
+#import "MBProgressHUD.h"
+
+@interface MSWPersonalInformationViewController ()
+
+@property (strong, nonatomic) User *currentUser;
+-(void)fillSurveyFields;
+-(NSString *)getPublishLabel;
+@end
+
+@implementation MSWPersonalInformationViewController
+@synthesize currentUser = _currentUser;
+@synthesize delegate = _delegate;
+@synthesize prefNameField = _prefNameField;
+@synthesize genderSelector = _genderSelector;
+@synthesize residenceLabel = _residenceLabel;
+@synthesize publishLabel = _publishLabel;
+@synthesize homeAddressField = _homeAddressField;
+@synthesize cellPhoneField = _cellPhoneField;
+@synthesize birthdayLabel = _birthdayLabel;
+@synthesize homePhoneField = _homePhoneField;
+@synthesize emergencyContactField = _emergencyContactField;
+@synthesize emergencyPhoneField = _emergencyPhoneField;
+@synthesize homeWardField = _homeWardField;
+@synthesize homeBishopField = _homeBishopField;
+@synthesize priesthoodLabel = _priesthoodLabel;
+@synthesize priesthoodCell = _priesthoodCell;
+
+- (IBAction)cancelSurvey:(id)sender {
+    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)continueSurvey:(id)sender {
+    [self performSegueWithIdentifier:@"Church Information" sender:self];
+}
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+-(void)loadSurvey
+{
+    //Set Loading Modal
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        //Get survey information from server
+        //Create the URL for the web request to get all the customers
+        NSString *url = [[NSString alloc] initWithFormat:@"%@api/member/getsurvey/%@", MSWRequestURL,self.currentUser.memberID];
+        NSLog(@"SURVEY DATA URL request: %@", url);
+        
+        //load Ward List
+        NSDictionary *surveyData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
+        NSLog(@"SURVEY DATA response: %@", surveyData);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(surveyData)
+                [MemberSurvey surveyWithJSON:surveyData inManagedObjectContext:[self.delegate getMSWDatabase].managedObjectContext];
+    
+            [self fillSurveyFields];
+            [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+        });
+    });
+}
+
+-(void)fillSurveyFields
+{
+    int MALE = 1;
+    int FEMALE = 0;
+    
+    self.prefNameField.text = self.currentUser.prefname;
+    self.genderSelector.selectedSegmentIndex = [self.currentUser.survey.gender intValue];
+    self.residenceLabel.text = self.currentUser.residence;
+    self.cellPhoneField.text = self.currentUser.cellphone;
+    self.birthdayLabel.text = self.currentUser.survey.birthday;
+    self.homePhoneField.text = self.currentUser.survey.homePhone;
+    self.emergencyContactField.text = self.currentUser.survey.emergContact;
+    self.emergencyPhoneField.text = self.currentUser.survey.emergPhone;
+    self.homeWardField.text = self.currentUser.survey.homeWardStake;
+    self.homeBishopField.text = self.currentUser.survey.homeBishop;
+    self.publishLabel.text = [self getPublishLabel];
+    self.homeAddressField.text = self.currentUser.survey.homeAddress;
+    
+    if([self.currentUser.survey.gender intValue] == MALE)
+    {
+        self.priesthoodCell.hidden = NO;
+        self.priesthoodLabel.text = self.currentUser.survey.priesthood;
+    }
+    else if([self.currentUser.survey.gender intValue] == FEMALE)
+    {
+        self.priesthoodCell.hidden = YES;
+        self.priesthoodLabel.text = self.currentUser.survey.priesthood = @"N/A";
+    }
+}
+
+-(NSString *)getPublishLabel
+{
+    if([self.currentUser.survey.publishCell boolValue] && [self.currentUser.survey.publishEmail boolValue])
+    {
+        return @"Show Email & Cell Phone";
+    }
+    else if([self.currentUser.survey.publishEmail boolValue])
+    {
+        return @"Show Email Only";
+    }
+    else if([self.currentUser.survey.publishCell boolValue])
+    {
+        return @"Show Cell Phone Only";
+    }
+    else 
+    {
+        return @"Show None";
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController respondsToSelector:@selector(setCurrentUser:)])
+    {
+        [segue.destinationViewController setCurrentUser:self.currentUser];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (void)genderSelected:(id)sender{
+    if(self.genderSelector.selectedSegmentIndex == 0)
+    {
+        self.priesthoodCell.hidden = YES;
+        self.priesthoodLabel.text = self.currentUser.survey.priesthood = @"N/A";
+    }
+    else {
+        self.priesthoodCell.hidden = NO;
+        self.priesthoodLabel.text = self.currentUser.survey.priesthood = @"Not Ordained";
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    self.currentUser = [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:[self.delegate getMSWDatabase].managedObjectContext];
+
+    [self loadSurvey];
+    
+    [self.genderSelector addTarget:self 
+                         action:@selector(genderSelected:)  
+               forControlEvents:UIControlEventValueChanged];
+   
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self fillSurveyFields];
+}
+
+- (void)viewDidUnload
+{
+    [self setPrefNameField:nil];
+    [self setGenderSelector:nil];
+    [self setResidenceLabel:nil];
+    [self setCellPhoneField:nil];
+    [self setBirthdayLabel:nil];
+    [self setHomePhoneField:nil];
+    [self setEmergencyContactField:nil];
+    [self setEmergencyPhoneField:nil];
+    [self setHomeWardField:nil];
+    [self setHomeBishopField:nil];
+    [self setPriesthoodLabel:nil];
+    [self setPriesthoodCell:nil];
+    [self setBirthdayLabel:nil];
+    [self setResidenceLabel:nil];
+    [self setPublishLabel:nil];
+    [self setHomeAddressField:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Birthday
+    if(indexPath.row == 5)
+    {
+       
+    }
+}
+
+@end

@@ -2,7 +2,7 @@
 //  MemberSurvey.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/4/12.
+//  Created by Porter Hoskins on 5/8/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,7 +15,7 @@
 @dynamic activities;
 @dynamic birthday;
 @dynamic callingPref;
-@dynamic emergContract;
+@dynamic emergContact;
 @dynamic emergPhone;
 @dynamic employed;
 @dynamic endowed;

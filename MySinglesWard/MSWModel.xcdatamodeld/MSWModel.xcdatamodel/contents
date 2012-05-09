@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D2001" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="BishopricData" representedClassName="BishopricData" syncable="YES">
         <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="sortID" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,7 +17,7 @@
         <attribute name="activities" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="callingPref" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="emergContract" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emergContact" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="emergPhone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="employed" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endowed" optional="YES" attributeType="String" syncable="YES"/>
@@ -85,7 +85,7 @@
         <relationship name="notificationPreference" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="NotificationPreference" inverseName="member" inverseEntity="NotificationPreference" syncable="YES"/>
         <relationship name="photo" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Photo" inverseName="member" inverseEntity="Photo" syncable="YES"/>
         <relationship name="survey" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MemberSurvey" inverseName="member" inverseEntity="MemberSurvey" syncable="YES"/>
-        <relationship name="ward" optional="YES" minCount="1" maxCount="1" deletionRule="No Action" destinationEntity="Ward" inverseName="members" inverseEntity="Ward" syncable="YES"/>
+        <relationship name="ward" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Ward" inverseName="members" inverseEntity="Ward" syncable="YES"/>
     </entity>
     <entity name="Ward" representedClassName="Ward" syncable="YES">
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
@@ -94,7 +94,7 @@
         <attribute name="stakeID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="ward" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wardID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES" isSyncIdentityProperty="YES"/>
-        <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="User" inverseName="ward" inverseEntity="User" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ward" inverseEntity="User" syncable="YES"/>
     </entity>
     <elements>
         <element name="BishopricData" positionX="-398" positionY="273" width="128" height="120"/>

@@ -465,9 +465,22 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (IBAction)Register:(id)sender {
+    UIActionSheet *registationSheet = [[UIActionSheet alloc] initWithTitle:@"Registration Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Member Registration", @"Bishopric Registration", nil];
+    
+    [registationSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)sender clickedButtonAtIndex:(NSInteger)index;
 {
-   
+    NSInteger bishopricIndex = 1;
+    if(index == sender.firstOtherButtonIndex)
+    {
+        [self performSegueWithIdentifier:@"Member Registration" sender:self];
+    }
+    else if(index == bishopricIndex) {
+        [self performSegueWithIdentifier:@"Bishopric Registration" sender:self];
+    }
 }
 
 @end

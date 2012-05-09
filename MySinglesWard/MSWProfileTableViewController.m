@@ -17,6 +17,7 @@
 #import "MSWWardViewController.h"
 #import "MBProgressHUD.h"
 #import "MSWPreferencesViewController.h"
+#import "MSWPersonalInformationViewController.h"
 
 
 @interface MSWProfileTableViewController ()
@@ -274,6 +275,19 @@
         if([segue.destinationViewController respondsToSelector:@selector(setDelegate:)])
         {
             [segue.destinationViewController setDelegate:self];
+        }
+    }
+    
+    //Set delegate on a controller behind a navigation controller
+    if([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+    {
+        UINavigationController *nav = segue.destinationViewController;
+    
+        MSWPersonalInformationViewController *controller = (MSWPersonalInformationViewController *)nav.topViewController;
+        
+        if([controller respondsToSelector:@selector(setDelegate:)])
+        {
+            [controller setDelegate:self];
         }
     }
 }

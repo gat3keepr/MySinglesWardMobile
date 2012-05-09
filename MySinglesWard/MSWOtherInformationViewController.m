@@ -1,18 +1,22 @@
 //
-//  MSWBishopricRegistrationViewController.m
+//  MSWOtherInformationViewController.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 4/27/12.
+//  Created by Porter Hoskins on 5/7/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MSWBishopricRegistrationViewController.h"
+#import "MSWOtherInformationViewController.h"
 
-@interface MSWBishopricRegistrationViewController ()
+@interface MSWOtherInformationViewController ()
 
 @end
 
-@implementation MSWBishopricRegistrationViewController
+@implementation MSWOtherInformationViewController
+
+- (IBAction)finishSurvey:(id)sender {
+    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -43,19 +47,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
-
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.section == 2 && indexPath.row == 0)
-    {
-        [self performSegueWithIdentifier:@"Bishopric Code" sender:self];
-    }
-    
-}
+#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

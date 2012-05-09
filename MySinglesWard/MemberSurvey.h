@@ -2,7 +2,7 @@
 //  MemberSurvey.h
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/4/12.
+//  Created by Porter Hoskins on 5/8/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString * activities;
 @property (nonatomic, retain) NSString * birthday;
 @property (nonatomic, retain) NSString * callingPref;
-@property (nonatomic, retain) NSString * emergContract;
+@property (nonatomic, retain) NSString * emergContact;
 @property (nonatomic, retain) NSString * emergPhone;
 @property (nonatomic, retain) NSString * employed;
 @property (nonatomic, retain) NSString * endowed;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "User.h"
 
-@interface MSWLoginTableViewController : UITableViewController <UITextFieldDelegate>
+@interface MSWLoginTableViewController : UITableViewController <UITextFieldDelegate, UIActionSheetDelegate>
 
 @property(nonatomic, strong) UIManagedDocument *mswDatabase;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSArray *cookies;
 
 -(void)updateDownloadBar:(NSTimer *)timer;
+- (void)actionSheet:(UIActionSheet *)sender clickedButtonAtIndex:(NSInteger)index;
 
 #define LOGGED_IN @"LOGGED_IN"
 
