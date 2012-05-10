@@ -72,6 +72,8 @@
         survey.timeInWard = [data objectForKey:@"timeInWard"];
         
         survey.member = [User userWithID:memberID inManagedObjectContext:context];
+        
+        survey.member.prefname = [data objectForKey:@"prefName"];
     }
     else 
     {
@@ -116,6 +118,7 @@
         survey.timeInWard = [data objectForKey:@"timeInWard"];
         
         survey.member = [User userWithID:memberID inManagedObjectContext:context];
+        survey.member.prefname = [data objectForKey:@"prefName"];
     }
     
     return survey;

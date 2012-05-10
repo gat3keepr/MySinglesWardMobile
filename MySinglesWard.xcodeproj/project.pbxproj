@@ -206,6 +206,23 @@
 			name = Preferences;
 			sourceTree = "<group>";
 		};
+		BF070D4F155ADA0A00515833 /* Personal */ = {
+			isa = PBXGroup;
+			children = (
+				BF1AB2321558D07F005547A2 /* MSWPersonalInformationViewController.h */,
+				BF1AB2331558D07F005547A2 /* MSWPersonalInformationViewController.m */,
+				BF1596941559B11C005DAA50 /* MSWPublishOptionsViewController.h */,
+				BF1596951559B11C005DAA50 /* MSWPublishOptionsViewController.m */,
+				BF070D45155A1AF700515833 /* MSWResidenceSelectViewController.h */,
+				BF070D46155A1AF700515833 /* MSWResidenceSelectViewController.m */,
+				BF070D49155A312300515833 /* MSWBirthdaySelectViewController.h */,
+				BF070D4A155A312300515833 /* MSWBirthdaySelectViewController.m */,
+				BF070D4C155A357A00515833 /* MSWPriesthoodSelectViewController.h */,
+				BF070D4D155A357A00515833 /* MSWPriesthoodSelectViewController.m */,
+			);
+			name = Personal;
+			sourceTree = "<group>";
+		};
 		BF0E98A9154F8DB9004E71A8 /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,22 +261,13 @@
 		BF49F1221558871400DF5C26 /* Survey */ = {
 			isa = PBXGroup;
 			children = (
-				BF49F1241558874A00DF5C26 /* MSWSurveyViewController.h */,
-				BF49F1251558874A00DF5C26 /* MSWSurveyViewController.m */,
-				BF1AB2321558D07F005547A2 /* MSWPersonalInformationViewController.h */,
-				BF1AB2331558D07F005547A2 /* MSWPersonalInformationViewController.m */,
 				BF1AB2361558D092005547A2 /* MSWChurchInformationViewController.h */,
 				BF1AB2371558D092005547A2 /* MSWChurchInformationViewController.m */,
 				BF1AB2391558D09F005547A2 /* MSWOtherInformationViewController.h */,
 				BF1AB23A1558D09F005547A2 /* MSWOtherInformationViewController.m */,
-				BF1596941559B11C005DAA50 /* MSWPublishOptionsViewController.h */,
-				BF1596951559B11C005DAA50 /* MSWPublishOptionsViewController.m */,
-				BF070D45155A1AF700515833 /* MSWResidenceSelectViewController.h */,
-				BF070D46155A1AF700515833 /* MSWResidenceSelectViewController.m */,
-				BF070D49155A312300515833 /* MSWBirthdaySelectViewController.h */,
-				BF070D4A155A312300515833 /* MSWBirthdaySelectViewController.m */,
-				BF070D4C155A357A00515833 /* MSWPriesthoodSelectViewController.h */,
-				BF070D4D155A357A00515833 /* MSWPriesthoodSelectViewController.m */,
+				BF070D4F155ADA0A00515833 /* Personal */,
+				BF49F1241558874A00DF5C26 /* MSWSurveyViewController.h */,
+				BF49F1251558874A00DF5C26 /* MSWSurveyViewController.m */,
 			);
 			name = Survey;
 			sourceTree = "<group>";

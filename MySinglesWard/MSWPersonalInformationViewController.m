@@ -43,6 +43,24 @@
 }
 
 - (IBAction)continueSurvey:(id)sender {
+    //Check all the values to make sure they have been filled out
+    if([self.prefNameField.text isEqualToString:@""] || [self.residenceLabel.text isEqualToString:@""] || [self.prefNameField.text isEqualToString:@""] || [self.cellPhoneField.text isEqualToString:@""] || [self.birthdayLabel.text isEqualToString:@"MM/DD/YYYY"] || [self.homeAddressField.text isEqualToString:@""] || [self.emergencyContactField.text isEqualToString:@""] || [self.emergencyPhoneField.text isEqualToString:@""] || [self.homeWardField.text isEqualToString:@""] || [self.homeBishopField.text isEqualToString:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uncomplete Survey" message:@"Please fill out all the fields on this page." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    //Save all the values in the form to the context
+    self.currentUser.prefname = self.prefNameField.text;
+    self.currentUser.cellphone = self.cellPhoneField.text;
+    self.currentUser.survey.homeAddress = self.homeAddressField.text;
+    self.currentUser.survey.homePhone = self.homePhoneField.text;
+    self.currentUser.survey.emergContact = self.emergencyContactField.text;
+    self.currentUser.survey.emergPhone = self.emergencyPhoneField.text;
+    self.currentUser.survey.homeWardStake = self.homeWardField.text;
+    self.currentUser.survey.homeBishop = self.homeBishopField.text;
+    
     [self performSegueWithIdentifier:@"Church Information" sender:self];
 }
 

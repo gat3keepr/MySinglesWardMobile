@@ -37,7 +37,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"(ward = %@) AND (isBishopric = 1)", self.currentWard];
     request.sortDescriptors = [NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"bishopricData.sortID" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil];
     
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self.databaseDelegate getMSWDatabase].managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self.databaseDelegate getMSWDatabase].managedObjectContext sectionNameKeyPath:@"calling.title" cacheName:nil];
 }
 
 - (IBAction)refreshWardList:(id)sender {
