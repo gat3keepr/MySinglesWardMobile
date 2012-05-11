@@ -44,7 +44,8 @@
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
 	df.dateFormat = @"MM/dd/yyyy";
     
-    [self.datePicker setDate:[df dateFromString:self.currentUser.survey.birthday]];
+    if(self.currentUser.survey.birthday)
+        [self.datePicker setDate:[df dateFromString:self.currentUser.survey.birthday]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

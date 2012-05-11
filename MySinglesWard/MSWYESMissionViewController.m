@@ -1,24 +1,21 @@
 //
-//  MSWOtherInformationViewController.m
+//  MSWYESMissionViewController.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/7/12.
+//  Created by Porter Hoskins on 5/10/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MSWOtherInformationViewController.h"
+#import "MSWYESMissionViewController.h"
 #import "MemberSurvey.h"
 
-@interface MSWOtherInformationViewController ()
+@interface MSWYESMissionViewController ()
 
 @end
 
-@implementation MSWOtherInformationViewController
+@implementation MSWYESMissionViewController
+@synthesize missionLocationField;
 @synthesize currentUser = _currentUser;
-
-- (IBAction)finishSurvey:(id)sender {
-    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
-}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,6 +24,30 @@
         // Custom initialization
     }
     return self;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.missionLocationField.text = self.currentUser.survey.missionLocation;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    if(self.missionLocationField == textField)
+    {
+        self.currentUser.survey.missionLocation = textField.text;
+    }
+    return NO;
+}
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if(self.missionLocationField == textField)
+    {
+        self.currentUser.survey.missionLocation = textField.text;
+    }
+    return YES;
 }
 
 - (void)viewDidLoad
@@ -42,6 +63,7 @@
 
 - (void)viewDidUnload
 {
+    [self setMissionLocationField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -51,14 +73,5 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender 
-{
-    if([segue.destinationViewController respondsToSelector:@selector(setCurrentUser:)])
-    {
-        [segue.destinationViewController setCurrentUser:self.currentUser];
-    }  
-}
-
 
 @end

@@ -1,24 +1,22 @@
 //
-//  MSWOtherInformationViewController.m
+//  MSWTempleExpSelectViewController.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/7/12.
+//  Created by Porter Hoskins on 5/10/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MSWOtherInformationViewController.h"
+#import "MSWTempleExpSelectViewController.h"
+#import "User.h"
 #import "MemberSurvey.h"
 
-@interface MSWOtherInformationViewController ()
+@interface MSWTempleExpSelectViewController ()
 
 @end
 
-@implementation MSWOtherInformationViewController
+@implementation MSWTempleExpSelectViewController
+@synthesize datePicker;
 @synthesize currentUser = _currentUser;
-
-- (IBAction)finishSurvey:(id)sender {
-    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
-}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,19 +27,36 @@
     return self;
 }
 
+- (void)changeDate:(id)sender{
+	//Use NSDateFormatter to write out the date in a friendly format
+	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	df.dateFormat = @"MM/dd/yyyy";
+	self.currentUser.survey.templeExpDate = [NSString stringWithFormat:@"%@",
+                                        [df stringFromDate:self.datePicker.date]];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [self.datePicker addTarget:self
+                        action:@selector(changeDate:)
+              forControlEvents:UIControlEventValueChanged];
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	df.dateFormat = @"MM/dd/yyyy";
+    
+    [self.datePicker setDate:[df dateFromString:self.currentUser.survey.templeExpDate]];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
 {
+    [self setDatePicker:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -51,14 +66,5 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender 
-{
-    if([segue.destinationViewController respondsToSelector:@selector(setCurrentUser:)])
-    {
-        [segue.destinationViewController setCurrentUser:self.currentUser];
-    }  
-}
-
 
 @end

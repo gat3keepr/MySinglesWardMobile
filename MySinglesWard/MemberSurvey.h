@@ -2,7 +2,7 @@
 //  MemberSurvey.h
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/8/12.
+//  Created by Porter Hoskins on 5/11/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -33,7 +33,7 @@
 @property (nonatomic, retain) NSString * musicTalent;
 @property (nonatomic, retain) NSString * occupation;
 @property (nonatomic, retain) NSString * pastCallings;
-@property (nonatomic, retain) NSString * patriarchalBlessings;
+@property (nonatomic, retain) NSString * patriarchalBlessing;
 @property (nonatomic, retain) NSString * prevBishops;
 @property (nonatomic, retain) NSString * priesthood;
 @property (nonatomic, retain) NSNumber * publishCell;
@@ -47,6 +47,12 @@
 @property (nonatomic, retain) NSString * templeRecommend;
 @property (nonatomic, retain) NSString * templeWorker;
 @property (nonatomic, retain) NSString * timeInWard;
+@property (nonatomic, retain) NSNumber * mission;
+@property (nonatomic, retain) NSString * missionLocation;
+@property (nonatomic, retain) NSString * planMission;
+@property (nonatomic, retain) NSString * planMissionTime;
+@property (nonatomic, retain) NSString * school;
+@property (nonatomic, retain) NSNumber * enrolledSchool;
 @property (nonatomic, retain) User *member;
 
 @end

@@ -1,24 +1,23 @@
 //
-//  MSWOtherInformationViewController.m
+//  MSWSelfDescriptionViewController.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/7/12.
+//  Created by Porter Hoskins on 5/11/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MSWOtherInformationViewController.h"
+#import "MSWSelfDescriptionViewController.h"
 #import "MemberSurvey.h"
 
-@interface MSWOtherInformationViewController ()
+@interface MSWSelfDescriptionViewController ()
 
 @end
 
-@implementation MSWOtherInformationViewController
-@synthesize currentUser = _currentUser;
+@implementation MSWSelfDescriptionViewController
 
-- (IBAction)finishSurvey:(id)sender {
-    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
-}
+@synthesize currentUser = _currentUser;
+@synthesize inputView = _inputView;
+@synthesize saveButton = _saveButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -28,20 +27,35 @@
     }
     return self;
 }
+- (IBAction)saveButtonPressed:(id)sender
+{
+    [self.inputView resignFirstResponder];
+    self.currentUser.survey.selfDescription = self.inputView.text;
+    
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.inputView.text = self.currentUser.survey.selfDescription;
+    [super viewWillAppear:animated];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.navigationItem.rightBarButtonItem = nil;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
 {
+    [self setInputView:nil];
+    [self setSaveButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -52,13 +66,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender 
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if([segue.destinationViewController respondsToSelector:@selector(setCurrentUser:)])
-    {
-        [segue.destinationViewController setCurrentUser:self.currentUser];
-    }  
+    self.navigationItem.rightBarButtonItem = self.saveButton;
 }
-
 
 @end

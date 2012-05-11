@@ -23,7 +23,7 @@
 
 -(void)fillSurveyInformation
 {
-    self.patriarchalBlessingSwitch.on = [self.currentUser.survey.patriarchalBlessings isEqualToString:@"Yes"];
+    self.patriarchalBlessingSwitch.on = [self.currentUser.survey.patriarchalBlessing isEqualToString:@"Yes"];
     self.endowedSwitch.on = [self.currentUser.survey.endowed isEqualToString:@"Yes"];
     self.templeRecommendSwitch.on = [self.currentUser.survey.templeRecommend isEqualToString:@"Yes"];
     self.templeExpDateLabel.text = self.currentUser.survey.templeExpDate;
@@ -54,6 +54,24 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self fillSurveyInformation];
+}
+- (IBAction)patriarchalBlessingSwitched:(UISwitch *)sender {
+    self.currentUser.survey.patriarchalBlessing = sender.on ? @"Yes" : @"No";
+}
+- (IBAction)endowedSwitched:(UISwitch *)sender {
+    self.currentUser.survey.endowed = sender.on ? @"Yes" : @"No";
+}
+- (IBAction)templeRecommendSwitched:(UISwitch *)sender {
+    self.currentUser.survey.templeRecommend = sender.on ? @"Yes" : @"No";
+}
+- (IBAction)templeWorkerSwitched:(UISwitch *)sender {
+    self.currentUser.survey.templeWorker = sender.on ? @"Yes" : @"No";
+}
+
 - (void)viewDidUnload
 {
     [self setPatriarchalBlessingSwitch:nil];
@@ -71,15 +89,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender 
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if([segue.destinationViewController respondsToSelector:@selector(setCurrentUser:)])
+    {
+        [segue.destinationViewController setCurrentUser:self.currentUser];
+    }   
 }
 
 @end

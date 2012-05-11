@@ -101,7 +101,17 @@
     else if (self.mswDatabase.documentState == UIDocumentStateClosed) {
         //Open the file
         [self.mswDatabase openWithCompletionHandler:^(BOOL success){
-            
+            if(success)
+            {
+                if([[[NSUserDefaults standardUserDefaults] objectForKey:LOGGED_IN] boolValue])
+                {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [self performSegueWithIdentifier:@"LoggedIn" sender:self];
+                }
+            }
+            else {
+                NSLog(@"Document could not be open (is closed:%@)", self.mswDatabase.documentState == UIDocumentStateClosed);
+            }
         }];
     }
     else if(self.mswDatabase.documentState == UIDocumentStateNormal)
@@ -118,6 +128,7 @@
 - (IBAction)login:(UIButton *)sender {
     
     //Create Login JSON object
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *login = [[NSDictionary alloc] initWithObjectsAndKeys:self.emailAddressField.text, @"email", self.passwordField.text,@"password", nil];    
     
     NSError *error = nil;
@@ -217,13 +228,11 @@
     if([[pref objectForKey:DATA_LOADED] boolValue] && [[pref objectForKey:LOGGED_IN] boolValue])
     {
         self.currentUser = [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:self.mswDatabase.managedObjectContext];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self performSegueWithIdentifier:@"LoggedIn" sender:self];
-        return;
     }
     else 
     {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
         //Start the data loading of the ward list
         NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
         NSLog(@"MEMBER DATA URL request: %@", url);
@@ -393,8 +402,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    
     //Open the database
     if(!self.mswDatabase)
     {
@@ -413,12 +420,22 @@
         self.cookies = [[NSArray alloc] initWithContentsOfFile:cookiesURL.path];
     }
     
+    //If the user is logged in then segue to the profile view and load the cookies
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:LOGGED_IN] boolValue])
+    {
+        NSURL *cookiesURL = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+        cookiesURL = [cookiesURL URLByAppendingPathComponent:@"MSW Cookies"];
+        
+        self.cookies = [[NSArray alloc] initWithContentsOfFile:cookiesURL.path];
+    }
+    
     //Listen For changes to be made to the context after upload
     [self.center addObserver:self
                     selector:@selector(contextChanged:)
                         name:NSManagedObjectContextDidSaveNotification
                       object:self.backgroundMOC];
-
+    
+    [super viewWillAppear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -432,18 +449,11 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    
     //If the user is logged in then segue to the profile view and load the cookies
     if([[[NSUserDefaults standardUserDefaults] objectForKey:LOGGED_IN] boolValue])
     {
-        NSURL *cookiesURL = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
-        cookiesURL = [cookiesURL URLByAppendingPathComponent:@"MSW Cookies"];
-        
-        self.cookies = [[NSArray alloc] initWithContentsOfFile:cookiesURL.path];
-        
-        [self performSegueWithIdentifier:@"LoggedIn" sender:self];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
-    
     [super viewDidAppear:animated];
 }
 

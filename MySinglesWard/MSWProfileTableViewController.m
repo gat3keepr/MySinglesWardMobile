@@ -84,10 +84,11 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
     //Check to see if the member is in the database, if not, go and get it from the server
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    self.currentUser = [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:self.mswDatabase.managedObjectContext];
     [self setMemberProfile];
-    
+    [super viewWillAppear:animated];
 }
 
 -(void)setMemberProfile

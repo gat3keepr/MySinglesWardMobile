@@ -60,6 +60,7 @@
     self.currentUser.survey.emergPhone = self.emergencyPhoneField.text;
     self.currentUser.survey.homeWardStake = self.homeWardField.text;
     self.currentUser.survey.homeBishop = self.homeBishopField.text;
+    self.currentUser.survey.gender = [NSNumber numberWithInt:self.genderSelector.selectedSegmentIndex];
     
     [self performSegueWithIdentifier:@"Church Information" sender:self];
 }
@@ -77,6 +78,7 @@
 {
     //Set Loading Modal
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         //Get survey information from server
         //Create the URL for the web request to get all the customers
@@ -93,6 +95,7 @@
     
             [self fillSurveyFields];
             [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+            self.navigationItem.rightBarButtonItem.enabled = YES;
         });
     });
 }

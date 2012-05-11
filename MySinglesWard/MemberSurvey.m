@@ -2,7 +2,7 @@
 //  MemberSurvey.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/8/12.
+//  Created by Porter Hoskins on 5/11/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -32,7 +32,7 @@
 @dynamic musicTalent;
 @dynamic occupation;
 @dynamic pastCallings;
-@dynamic patriarchalBlessings;
+@dynamic patriarchalBlessing;
 @dynamic prevBishops;
 @dynamic priesthood;
 @dynamic publishCell;
@@ -46,6 +46,12 @@
 @dynamic templeRecommend;
 @dynamic templeWorker;
 @dynamic timeInWard;
+@dynamic mission;
+@dynamic missionLocation;
+@dynamic planMission;
+@dynamic planMissionTime;
+@dynamic school;
+@dynamic enrolledSchool;
 @dynamic member;
 
 @end
