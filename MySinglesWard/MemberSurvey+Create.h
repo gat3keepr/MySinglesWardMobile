@@ -12,5 +12,7 @@
 
 +(MemberSurvey *) surveyWithJSON:(NSDictionary *) data inManagedObjectContext:(NSManagedObjectContext *)context;
 +(MemberSurvey *) surveyWithID:(NSNumber *)memberID inManagedObjectContext:(NSManagedObjectContext *)context;
+-(NSDictionary *) toDictionary;
+-(void) saveSurveyToServer;
 
 @end

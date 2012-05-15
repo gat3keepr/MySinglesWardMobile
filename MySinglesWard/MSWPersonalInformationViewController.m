@@ -50,6 +50,10 @@
         [alert show];
         return;
     }
+    else {
+        if(self.currentUser.survey.status < [NSNumber numberWithInt:1]) 
+            self.currentUser.survey.status = [NSNumber numberWithInt:1];
+    }
     
     //Save all the values in the form to the context
     self.currentUser.prefname = self.prefNameField.text;
@@ -62,7 +66,17 @@
     self.currentUser.survey.homeBishop = self.homeBishopField.text;
     self.currentUser.survey.gender = [NSNumber numberWithInt:self.genderSelector.selectedSegmentIndex];
     
-    [self performSegueWithIdentifier:@"Church Information" sender:self];
+    //Save survey to database
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.currentUser.survey saveSurveyToServer];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self performSegueWithIdentifier:@"Church Information" sender:self];
+        });
+    });
+    
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -77,11 +91,11 @@
 -(void)loadSurvey
 {
     //Set Loading Modal
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         //Get survey information from server
-        //Create the URL for the web request to get all the customers
+        //Create the URL for the web request to get the survey
         NSString *url = [[NSString alloc] initWithFormat:@"%@api/member/getsurvey/%@", MSWRequestURL,self.currentUser.memberID];
         NSLog(@"SURVEY DATA URL request: %@", url);
         
@@ -94,7 +108,7 @@
                 [MemberSurvey surveyWithJSON:surveyData inManagedObjectContext:[self.delegate getMSWDatabase].managedObjectContext];
     
             [self fillSurveyFields];
-            [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             self.navigationItem.rightBarButtonItem.enabled = YES;
         });
     });

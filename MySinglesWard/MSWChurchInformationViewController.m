@@ -7,7 +7,8 @@
 //
 
 #import "MSWChurchInformationViewController.h"
-#import "MemberSurvey.h"
+#import "MemberSurvey+Create.h"
+#import "MBProgressHUD.h"
 
 @interface MSWChurchInformationViewController ()
 
@@ -31,7 +32,24 @@
 }
 
 - (IBAction)continueSurvey:(id)sender {
-    [self performSegueWithIdentifier:@"Other Information" sender:self];
+    if(!self.currentUser.survey.pastCallings)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uncomplete Survey" message:@"Please fill out all the fields on this page." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    //Save survey to database
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.currentUser.survey saveSurveyToServer];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
+            [self performSegueWithIdentifier:@"Other Information" sender:self];
+        });
+    }); 
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

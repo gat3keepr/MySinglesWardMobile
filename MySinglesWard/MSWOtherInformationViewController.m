@@ -7,7 +7,8 @@
 //
 
 #import "MSWOtherInformationViewController.h"
-#import "MemberSurvey.h"
+#import "MemberSurvey+Create.h"
+#import "MBProgressHUD.h"
 
 @interface MSWOtherInformationViewController ()
 
@@ -17,7 +18,18 @@
 @synthesize currentUser = _currentUser;
 
 - (IBAction)finishSurvey:(id)sender {
-    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
+    
+    //Save survey to database
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.currentUser.survey saveSurveyToServer];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
+            [[self presentingViewController] dismissModalViewControllerAnimated:YES];
+        });
+    }); 
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
