@@ -11,7 +11,11 @@
 @interface BishopricData (Create)
 
 #define MEMBERID @"memberID"
+#define BISHOPRIC_DATA @"BishopricData"
 
 +(BishopricData *) dataWithJSON:(NSDictionary *)data inManagedObjectContext:(NSManagedObjectContext *)context;
+
+-(NSDictionary *) toDictionary;
+-(void) saveDataToServer;
 
 @end

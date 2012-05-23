@@ -9,6 +9,8 @@
 #import "MSWOtherInformationViewController.h"
 #import "MemberSurvey+Create.h"
 #import "MBProgressHUD.h"
+#import "MSWLoginTableViewController.h"
+#import "JSONRequest.h"
 
 @interface MSWOtherInformationViewController ()
 
@@ -22,10 +24,21 @@
     //Save survey to database
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        
+        if(self.currentUser.survey.status < [NSNumber numberWithInt:3]) 
+            self.currentUser.survey.status = [NSNumber numberWithInt:3];
+        
         [self.currentUser.survey saveSurveyToServer];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
+            
+            //Handle Registration
+            NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+            if([[pref objectForKey:REGISTRATION] boolValue])
+            {
+                [pref setObject:DONE forKey:REGISTRATION_STEP];
+            }
     
             [[self presentingViewController] dismissModalViewControllerAnimated:YES];
         });
@@ -44,6 +57,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Set background image of table view
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BACKGROUND_IMAGE]];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -71,6 +87,5 @@
         [segue.destinationViewController setCurrentUser:self.currentUser];
     }  
 }
-
 
 @end

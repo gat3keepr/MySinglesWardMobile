@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "User.h"
 
-@interface MSWLoginTableViewController : UITableViewController <UITextFieldDelegate, UIActionSheetDelegate>
+@protocol MSWLoginDelegate <NSObject>
+
+-(void)loginNewUserWithEmail:(NSString *)email withPassword:(NSString *)password;
+
+@end
+
+@interface MSWLoginTableViewController : UITableViewController <UITextFieldDelegate, UIActionSheetDelegate, MSWLoginDelegate>
 
 @property(nonatomic, strong) UIManagedDocument *mswDatabase;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
@@ -20,7 +26,5 @@
 
 -(void)updateDownloadBar:(NSTimer *)timer;
 - (void)actionSheet:(UIActionSheet *)sender clickedButtonAtIndex:(NSInteger)index;
-
-#define LOGGED_IN @"LOGGED_IN"
 
 @end

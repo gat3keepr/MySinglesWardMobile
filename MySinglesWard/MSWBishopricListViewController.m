@@ -14,11 +14,13 @@
 #import "MSWMemberViewController.h"
 
 @interface MSWBishopricListViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 -(void)setupFetchedResultsController;
 -(void)getBishopricList;
 @end
 
 @implementation MSWBishopricListViewController
+@synthesize refreshButton = _refreshButton;
 
 @synthesize currentWard = _currentWard;
 @synthesize databaseDelegate = _databaseDelegate;
@@ -56,7 +58,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
     //Set Loading Modal
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         [self.databaseDelegate loadBishopricListWithSender:self.tableView];
@@ -64,7 +66,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.navigationItem.rightBarButtonItem = orgButton;
             self.title = @"Bishopric";
-            [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+            [self.tableView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
     });
 }
@@ -78,6 +81,13 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.navigationItem.title = @"Bishopric";
+    self.tabBarController.navigationItem.rightBarButtonItem = self.refreshButton;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -88,7 +98,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,4 +128,8 @@
     }
 }
 
+- (void)viewDidUnload {
+    [self setRefreshButton:nil];
+    [super viewDidUnload];
+}
 @end

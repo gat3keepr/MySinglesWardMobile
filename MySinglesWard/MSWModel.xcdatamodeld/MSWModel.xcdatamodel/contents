@@ -42,8 +42,8 @@
         <attribute name="planMissionTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="prevBishops" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="priesthood" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="publishCell" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="publishEmail" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="publishCell" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="publishEmail" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="religionClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="schoolInfo" optional="YES" attributeType="String" syncable="YES"/>
@@ -73,7 +73,9 @@
     <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="memberID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES" isSyncIdentityProperty="YES"/>
+        <attribute name="newPhotoFileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="member" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="photo" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
@@ -101,7 +103,7 @@
         <attribute name="stakeID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="ward" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wardID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES" isSyncIdentityProperty="YES"/>
-        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ward" inverseEntity="User" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="User" inverseName="ward" inverseEntity="User" syncable="YES"/>
     </entity>
     <elements>
         <element name="BishopricData" positionX="-398" positionY="273" width="128" height="120"/>

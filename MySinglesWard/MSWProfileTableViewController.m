@@ -8,19 +8,19 @@
 
 #import "MSWProfileTableViewController.h"
 #import "JSONRequest.h"
-#import "MSWRequest.h"
 #import "Ward.h"
 #import "User+Create.h"
 #import "MemberSurvey.h"
-#import "Photo.h"
+#import "Photo+Create.h"
 #import <QuartzCore/QuartzCore.h>
 #import "MSWWardViewController.h"
 #import "MBProgressHUD.h"
 #import "MSWPreferencesViewController.h"
 #import "MSWPersonalInformationViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "MSWLoginTableViewController.h"
 
-
-@interface MSWProfileTableViewController ()
+@interface MSWProfileTableViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *TitleCell;
 -(void)setMemberProfile;
@@ -48,7 +48,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -74,6 +74,8 @@
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
     self.currentUser = [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:self.mswDatabase.managedObjectContext];
     
+    //Set background image of table view
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BACKGROUND_IMAGE]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -85,10 +87,51 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     //Check to see if the member is in the database, if not, go and get it from the server
+    
+    [super viewWillAppear:animated];
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    
     self.currentUser = [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:self.mswDatabase.managedObjectContext];
     [self setMemberProfile];
-    [super viewWillAppear:animated];
+    
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    if([[pref objectForKey:REGISTRATION] boolValue])
+    {
+        if([[pref objectForKey:REGISTRATION_STEP] isEqualToString:DONE])
+        {
+            [pref setObject:@"NO" forKey:REGISTRATION];
+            [self setMemberProfile];
+            return;
+        }
+        
+        //Check to see if the ward is set
+        if(self.currentUser.wardID != [NSNumber numberWithInt:NO_WARD])
+        {
+            [pref setObject:SURVEY forKey:REGISTRATION_STEP];
+        }
+        
+        //Segue to correct view
+        if([[pref objectForKey:REGISTRATION_STEP] isEqualToString:WARD])
+        {
+            [self performSegueWithIdentifier:@"Select Ward" sender:self];
+        }
+        else if([[pref objectForKey:REGISTRATION_STEP] isEqualToString:SURVEY])
+        {
+            if([self.currentUser.isBishopric boolValue])
+            {
+                [self performSegueWithIdentifier:@"Bishopric Data" sender:self];
+            }
+            else 
+            {
+                [self performSegueWithIdentifier:@"Member Survey" sender:self];
+            }
+        }
+        
+    }
 }
 
 -(void)setMemberProfile
@@ -104,9 +147,24 @@
     self.memberPhoto.layer.cornerRadius = 5.0;
     self.memberPhoto.layer.masksToBounds = YES;
     
-    self.memberPhoto.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.memberPhoto.layer.borderColor = [UIColor darkGrayColor].CGColor;
     self.memberPhoto.layer.borderWidth = 1.0;
     [self.memberPhoto setImage:[UIImage imageWithData:self.currentUser.photo.photoData]];
+}
+
+- (IBAction)refreshMember:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        //load Member
+        NSDictionary *memberData = [JSONRequest requestForMemberData];
+        [User userWithAllMemberData:memberData inManagedObjectContext:self.mswDatabase.managedObjectContext];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setMemberProfile];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+    });
 }
 
 -(void)loadWardListWithSender:(UIView *)sender
@@ -138,7 +196,7 @@
         
     for(NSNumber *memberID in [wardListData objectForKey:@"members"])
     {
-        if(![User userWithID:memberID inManagedObjectContext:self.backgroundContext])
+        if(YES)//![User userWithID:memberID inManagedObjectContext:self.backgroundContext])
         {
             //Create the URL for the web request to get all the customers
             NSString *memberURL = [[NSString alloc] initWithFormat:@"%@api/member/get/%@", MSWRequestURL,memberID];
@@ -232,6 +290,10 @@
 -(void)contextChanged:(NSNotification *)notification
 {
     [self.mswDatabase.managedObjectContext mergeChangesFromContextDidSaveNotification:notification]; 
+    
+    NSError *saveError = nil;
+    [self.mswDatabase.managedObjectContext save:&saveError];
+    if(saveError) NSLog(@"SAVE ERROR - %@", [saveError localizedDescription]);
 }
 
 - (void)viewDidUnload
@@ -262,29 +324,34 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.destinationViewController respondsToSelector:@selector(setDatabaseDelegate:)])
+    if([segue.destinationViewController isKindOfClass:[UITabBarController class]])
     {
-        [segue.destinationViewController setDatabaseDelegate:self];
+        UITabBarController *tabBarController = (UITabBarController *)[segue destinationViewController];
+        
+        for (id vc in tabBarController.viewControllers) {
+            if([vc respondsToSelector:@selector(setDatabaseDelegate:)])
+            {
+                [vc setDatabaseDelegate:self];
+            }
+            
+            if([vc respondsToSelector:@selector(setCurrentWard:)])
+            {
+                [vc setCurrentWard:self.currentUser.ward];
+            }
+        }
     }
     
-    if([segue.destinationViewController respondsToSelector:@selector(setCurrentWard:)])
+    if([segue.destinationViewController respondsToSelector:@selector(setDelegate:)])
     {
-        [segue.destinationViewController setCurrentWard:self.currentUser.ward];
-    }
-    else
-    {
-        if([segue.destinationViewController respondsToSelector:@selector(setDelegate:)])
-        {
-            [segue.destinationViewController setDelegate:self];
-        }
+        [segue.destinationViewController setDelegate:self];
     }
     
     //Set delegate on a controller behind a navigation controller
     if([segue.destinationViewController isKindOfClass:[UINavigationController class]])
     {
         UINavigationController *nav = segue.destinationViewController;
-    
-        MSWPersonalInformationViewController *controller = (MSWPersonalInformationViewController *)nav.topViewController;
+
+        id controller = nav.topViewController;
         
         if([controller respondsToSelector:@selector(setDelegate:)])
         {
@@ -293,17 +360,178 @@
     }
 }
 
+#define MAX_IMAGE_WIDTH 200
+#define MAX_IMAGE_HEIGHT 200
+- (void)addImageWithSource:(UIImagePickerControllerSourceType)source
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+        if ([mediaTypes containsObject:(NSString *)kUTTypeImage]) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.sourceType = source;
+            picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            picker.allowsEditing = YES;
+            
+            [self presentModalViewController:picker animated:YES];
+        }
+    }
+}
+
+- (void)dismissImagePicker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if (image) {
+        //Save image to server
+        [MBProgressHUD showHUDAddedTo:picker.view animated:YES];
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            //Create the URL for the web request to get all the customers
+            NSString *url = [[NSString alloc] initWithFormat:@"%@api/member/uploadphoto", MSWRequestURL];
+            NSLog(@"PHOTO SAVE DATA URL request: %@", url);
+            
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+            
+            request.HTTPMethod = @"POST";
+            
+            /*
+             add some header info now
+             we always need a boundary when we post a file
+             also we need to set the content type
+             
+             You might want to generate a random boundary.. this is just the same
+             
+             */
+            NSString *boundary = [NSString stringWithString:@"---------------------------14737809831466499882746641449"];
+            NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+            [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+            
+            /*
+             now lets create the body of the post
+             */
+            NSMutableData *body = [NSMutableData data];
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"photofile\"; filename=\"ipodfile.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)]];
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            request.HTTPBody = body;
+            
+            NSError *errorReturned = nil;
+            NSURLResponse *response = [[NSURLResponse alloc] init];
+            NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&errorReturned]; 
+            
+            if(errorReturned)
+            {
+                //Check to see if there was an error
+                NSLog(@"PHOTO REQUEST ERROR: %@",[errorReturned localizedDescription]);
+            }
+            
+            NSError *jsonError = nil;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:returnData options:kNilOptions error:&jsonError];
+            
+            if(jsonError)
+            {
+                NSLog(@"PHOTO JSON ERROR: %@", [jsonError localizedDescription]);
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(json)
+                    [Photo photoWithJSON:json inManagedObjectContext:self.mswDatabase.managedObjectContext];
+                [self setMemberProfile];
+                
+                [self dismissImagePicker];
+            });
+        });
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissImagePicker];
+}
+
+#pragma mark - Action Sheet view delegate
+
+- (void)actionSheet:(UIActionSheet *)sender clickedButtonAtIndex:(NSInteger)index;
+{
+    NSInteger bishopricIndex = 1;
+    if(index == sender.firstOtherButtonIndex)
+    {
+        [self addImageWithSource:UIImagePickerControllerSourceTypeCamera];
+    }
+    else if(index == bishopricIndex) {
+        [self addImageWithSource:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    //Set segues to go off of touch so we can control if the user is authorized to view the list
+    
+    //Handle ward list & bishopric
+    if(indexPath.section == 1 && indexPath.row == 0)
+    {
+        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+        
+        if([[pref objectForKey:MEMBER_STATUS] containsObject:UNAUTHORIZED])
+        {
+            //Check if the authorization has changed
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                [JSONRequest requestForMemberStatus];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    if([[pref objectForKey:MEMBER_STATUS] containsObject:UNAUTHORIZED])
+                    {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Waiting For Approval" message:@"Please wait until a member of the bishopric has approved your ward membership." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                        
+                        [alert show];
+                    }
+                    else {
+                        [self performSegueWithIdentifier:@"Ward Information" sender:self];
+                    }
+                });
+            });
+        }
+        else {
+            [self performSegueWithIdentifier:@"Ward Information" sender:self];
+        }
+        
+    }
+    
+    //Handle survey
+    if(indexPath.section == 2 && indexPath.row == 0)
+    {
+        if([self.currentUser.isBishopric boolValue])
+        {
+            [self performSegueWithIdentifier:@"Bishopric Data" sender:self];
+        }
+        else 
+        {
+            [self performSegueWithIdentifier:@"Member Survey" sender:self];
+        }
+        
+    }
+    
+    //Handle photo upload
+    if(indexPath.section == 2 && indexPath.row == 1)
+    {
+        UIActionSheet *registationSheet = [[UIActionSheet alloc] initWithTitle:@"Upload Photo Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+        
+        [registationSheet showInView:self.view];
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

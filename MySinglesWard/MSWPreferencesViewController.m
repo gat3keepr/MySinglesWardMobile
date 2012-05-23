@@ -7,7 +7,7 @@
 //
 
 #import "MSWPreferencesViewController.h"
-#import "MSWLoginTableViewController.h"
+#import "JSONRequest.h"
 #import "MSWNotificationViewController.h"
 
 @interface MSWPreferencesViewController ()
@@ -29,6 +29,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Set background image of table view
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BACKGROUND_IMAGE]];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -75,6 +78,12 @@
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
         
         [pref setObject:@"NO" forKey:LOGGED_IN];
+        [pref setObject:@"NO" forKey:DATA_LOADED];
+        [pref setObject:nil forKey:MEMBERID];
+        [pref setObject:nil forKey:REGISTRATION];
+        [pref setObject:nil forKey:REGISTRATION_STEP];
+        [pref setObject:nil forKey:ISBISHOPRIC];
+        [pref synchronize];
         [self.navigationController.presentingViewController dismissModalViewControllerAnimated:YES];
     }
 }

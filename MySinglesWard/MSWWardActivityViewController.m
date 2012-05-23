@@ -8,6 +8,7 @@
 
 #import "MSWWardActivityViewController.h"
 #import "MemberSurvey.h"
+#import "JSONRequest.h"
 
 @interface MSWWardActivityViewController ()
 
@@ -45,6 +46,10 @@
 {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = nil;
+    
+    //Set background image of table view
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BACKGROUND_IMAGE]];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -59,6 +64,62 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
+    if (sectionTitle == nil) {
+        return nil;
+    }
+    
+    // Create label with section title
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(20, 6, 300, 30);
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor blackColor];
+    label.shadowColor = [UIColor lightTextColor];
+    label.shadowOffset = CGSizeMake(0.0, 1.0);
+    label.font = [UIFont boldSystemFontOfSize:16];
+    label.text = sectionTitle;
+    
+    // Create header view and add label as a subview
+    
+    // you could also just return the label (instead of making a new view and adding the label as subview. With the view you have more flexibility to make a background color or different paddings
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40)];
+    
+    [view addSubview:label];
+    
+    return view;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section 
+{
+    NSString *sectionTitle = [self tableView:tableView titleForFooterInSection:section];
+    if (sectionTitle == nil) {
+        return nil;
+    }
+    
+    // Create label with section title
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(20, -11, 275, 90);
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor blackColor];
+    label.shadowColor = [UIColor lightTextColor];
+    label.shadowOffset = CGSizeMake(0.0, 1.0);
+    label.font = [UIFont systemFontOfSize:15];
+    label.text = sectionTitle;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.numberOfLines = 3;
+    label.textAlignment = UITextAlignmentCenter;
+    
+    // Create header view and add label as a subview
+    
+    // you could also just return the label (instead of making a new view and adding the label as subview. With the view you have more flexibility to make a background color or different paddings
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 90)];
+    
+    [view addSubview:label];
+    
+    return view;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

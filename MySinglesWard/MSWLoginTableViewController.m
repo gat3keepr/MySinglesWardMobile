@@ -7,7 +7,6 @@
 //
 
 #import "MSWLoginTableViewController.h"
-#import "MSWRequest.h"
 #import "JSONRequest.h"
 #import "MSWProfileTableViewController.h"
 #import "Ward+Create.h"
@@ -27,7 +26,6 @@
 @property (nonatomic) int usersCompleted;
 @property (nonatomic) int usersToDownload;
 @property (strong, nonatomic) NSManagedObjectContext *backgroundMOC;
-@property (weak, nonatomic) NSNotificationCenter *center;
 
 -(void)contextChanged:(NSNotification *)notification;
 
@@ -51,24 +49,7 @@
 @synthesize usersToDownload = _usersToDownload;
 @synthesize backgroundMOC = _backgroundMOC;
 @synthesize currentUser = _currentUser;
-@synthesize center = _center;
 @synthesize cookies = _cookies;
-
-#define NEEDS_NOTHING @"NEEDS_NOTHING"
-#define NEEDS_PHOTO @"NEEDS_PHOTO"
-#define NEEDS_SURVEY @"NEEDS_SURVEY"
-#define UNAUTHORIZED @"UNAUTHORIZED"
-#define DATA_LOADED @"DATA_LOADED"
-
--(NSNotificationCenter *)center
-{
-    if(!_center)
-    {
-        _center = [NSNotificationCenter defaultCenter];
-    }
-    
-    return _center;
-}
 
 -(void)setMswDatabase:(UIManagedDocument *)mswDatabase
 {
@@ -125,6 +106,15 @@
     [self.passwordField resignFirstResponder];
 }
 
+-(void)startRegistration
+{
+    //Start the registration process
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    [pref setObject:@"YES" forKey:REGISTRATION];
+    [pref setObject:WARD forKey:REGISTRATION_STEP];
+    [pref synchronize];
+}
+
 - (IBAction)login:(UIButton *)sender {
     
     //Create Login JSON object
@@ -158,53 +148,60 @@
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&errorReturned];   
         
         //Save the cookies from the request
-        self.cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:@"http://temp"]];
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:self.cookies forURL:[NSURL URLWithString:@"http://www.mysinglesward.com"] mainDocumentURL:nil];
-        
-        NSURL *cookiesURL = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
-        cookiesURL = [cookiesURL URLByAppendingPathComponent:@"MSW Cookies"];
-    
-        [self.cookies writeToFile:cookiesURL.path atomically:YES];
+//        self.cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:@"http://temp"]];
+//        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:self.cookies forURL:[NSURL URLWithString:@"http://www.mysinglesward.com"] mainDocumentURL:nil];
+//        
+//        NSURL *cookiesURL = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+//        cookiesURL = [cookiesURL URLByAppendingPathComponent:@"MSW Cookies"];
+//    
+//        [self.cookies writeToFile:cookiesURL.path atomically:YES];
         
         //Read the contents of the response
-        if(error)
+        if(errorReturned)
         {
             NSLog(@"LOG IN ERROR: %@", errorReturned);
         }
-        else 
-        {            
-            NSError *jsonError = nil;
-            @try {
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+        
+        NSError *jsonError = nil;
+        @try {
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+            
+            NSLog(@"LOG IN RESPONSE - %@", json);
+            
+            NSArray *loggedInStatus = [json objectForKey:@"authentication"];
+            
+            NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+            [pref setObject:loggedInStatus forKey:MEMBER_STATUS];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if([loggedInStatus containsObject:NEEDS_SURVEY])
+                {
+                    [self startRegistration];
+                }
+                if([loggedInStatus count] > 0)
+                {
+                    [pref setObject:@"YES" forKey:LOGGED_IN];
+                    [self loadWardInformation];
+                }
+                else
+                {
+                    [pref setObject:@"NO" forKey:LOGGED_IN];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid login" message:@"The username/password was incorrect." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alert show]; 
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                }
+            });
+        }
+        @catch (NSException *exception) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"LOGIN ERROR - %@", [exception description]);
                 
-                NSLog(@"%@", json);
-                
-                NSArray *loggedInStatus = [json objectForKey:@"authentication"];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if([loggedInStatus containsObject:NEEDS_NOTHING])
-                    {
-                        [self loadWardInformation];
-                    }
-                    else if([loggedInStatus containsObject:NEEDS_PHOTO])
-                    {
-                        
-                    }
-                    else if([loggedInStatus containsObject:NEEDS_SURVEY])
-                    {
-                        
-                    }
-                    else
-                    {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid login" message:@"The username/password was incorrect." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                        [alert show];                
-                    }
-                });
-            }
-            @catch (NSException *exception) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please connect to the internet." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show]; 
-            }
+                [alert show];
+                
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            });
+             
         }
         
     });
@@ -221,10 +218,9 @@
 
 -(void)loadWardInformation
 {
-    
     //Check to see if the member is in the database, if not, go and get it from the server
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-    
+
     if([[pref objectForKey:DATA_LOADED] boolValue] && [[pref objectForKey:LOGGED_IN] boolValue])
     {
         self.currentUser = [User userWithID:[pref objectForKey:MEMBERID] inManagedObjectContext:self.mswDatabase.managedObjectContext];
@@ -233,81 +229,71 @@
     }
     else 
     {
-        //Start the data loading of the ward list
-        NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
-        NSLog(@"MEMBER DATA URL request: %@", url);
-        
-        self.downloadProgress.progress = 0.0;
-        [UIView animateWithDuration:.5
-                              delay:0
-                            options:UIViewAnimationOptionBeginFromCurrentState
-                         animations:^{ 
-                             self.downloadLabel.alpha = 1.0;
-                             self.downloadProgress.alpha = 1.0;
-                         }
-                         completion:nil];
-        
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateDownloadBar:) userInfo:nil repeats:YES];
-        
         dispatch_queue_t requestQueue = dispatch_queue_create("requestQueue", NULL);
         dispatch_async(requestQueue, ^{
             self.backgroundMOC = [[NSManagedObjectContext alloc] init];
             [self.backgroundMOC setPersistentStoreCoordinator:[self.mswDatabase.managedObjectContext persistentStoreCoordinator]];
             
             //load Member
-            NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
-            NSLog(@"MEMBER DATA response: %@", memberData);
+            NSDictionary *memberData = [JSONRequest requestForMemberData];
             
             //Save user to coredata and userdefaults
             [Ward wardWithJSON:[memberData objectForKey:@"ward"] inManagedObjectContext:self.backgroundMOC];
             self.currentUser = [User userWithAllMemberData:memberData inManagedObjectContext:self.backgroundMOC];
             
             //Set the user that is logged in
-            [pref setObject:self.currentUser.memberID forKey:@"memberID"];
-            
-            //Create the URL for the web request to get all the ward members
-            NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/list", MSWRequestURL];
-            NSLog(@"WARD LIST DATA URL request: %@", url);
+            [pref setObject:self.currentUser.memberID forKey:MEMBERID];
+            [pref setObject:self.currentUser.isBishopric forKey:ISBISHOPRIC];
             
             //load Ward List
-            NSDictionary *wardListData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
-            NSLog(@"WARD LIST DATA response: %@", wardListData);
-            
-            //load bishopric
-            NSString *bishopricurl = [[NSString alloc] initWithFormat:@"%@api/ward/bishopric", MSWRequestURL];
-            NSLog(@"BISHOPRIC LIST DATA URL request: %@", bishopricurl);
-            
-            //load Ward List
-            NSDictionary *bishopricData = [JSONRequest makeWebRequestWithURL:bishopricurl withJSONData:nil];
-            NSLog(@"BISHOPRIC LIST DATA response: %@", bishopricData);
-            
-            self.usersToDownload = [[wardListData objectForKey:@"members"] count] + [bishopricData count];
-            self.usersCompleted = 0;
-            
-            NSArray* members = [[wardListData objectForKey:@"members"] copy];
-            
-            //Save members
-            for(NSDictionary *member in members)
+            if(self.currentUser.wardID != [NSNumber numberWithInt:NO_WARD])
             {
-                //Save User
-                [User userWithAllMemberData:[member copy] inManagedObjectContext:self.backgroundMOC];
-                
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.usersCompleted = self.usersCompleted + 1;
+                    self.downloadProgress.progress = 0.0;
+                    [UIView animateWithDuration:.5
+                                          delay:0
+                                        options:UIViewAnimationOptionBeginFromCurrentState
+                                     animations:^{ 
+                                         self.downloadLabel.alpha = 1.0;
+                                         self.downloadProgress.alpha = 1.0;
+                                     }
+                                     completion:nil];
+                    
+                    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateDownloadBar:) userInfo:nil repeats:YES];
                 });
                 
-            }
-            
-            //save bishopric
-            for(NSDictionary *bishopricmember in bishopricData)
-            {
-                NSLog(@"BISHOPRIC DATA response: %@", bishopricmember); 
+                NSDictionary *wardListData = [JSONRequest requestForWardListData];
                 
-                [User userWithAllMemberData:bishopricmember inManagedObjectContext:self.backgroundMOC];
+                //load bishopric
+                NSDictionary *bishopricData = [JSONRequest requestForBishopricData];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.usersCompleted = self.usersCompleted + 1;
-                });
+                self.usersToDownload = [[wardListData objectForKey:@"members"] count] + [bishopricData count];
+                self.usersCompleted = 0;
+                
+                NSArray* members = [[wardListData objectForKey:@"members"] copy];
+                
+                //Save members
+                for(NSDictionary *member in members)
+                {
+                    //Save User
+                    [User userWithAllMemberData:[member copy] inManagedObjectContext:self.backgroundMOC];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.usersCompleted = self.usersCompleted + 1;
+                    });
+                }
+                
+                //save bishopric
+                for(NSDictionary *bishopricmember in bishopricData)
+                {
+                    NSLog(@"BISHOPRIC DATA response: %@", bishopricmember); 
+                    
+                    [User userWithAllMemberData:bishopricmember inManagedObjectContext:self.backgroundMOC];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.usersCompleted = self.usersCompleted + 1;
+                    });
+                }
             }
             
             //Save background context
@@ -326,7 +312,6 @@
                                  }
                                  completion:nil];
                 [pref setObject:@"YES" forKey:DATA_LOADED];
-                [pref setObject:@"YES" forKey:LOGGED_IN];
                 [pref synchronize];
                 
                 //reset the progress bar
@@ -351,11 +336,21 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UINavigationController *nav = segue.destinationViewController;
-    MSWProfileTableViewController *controller = (MSWProfileTableViewController *)nav.topViewController;
     
-    if([controller respondsToSelector:@selector(setMswDatabase:)])
-    {
-        [controller setMswDatabase:self.mswDatabase];
+    if ([nav.topViewController isKindOfClass:[MSWProfileTableViewController class]]) {
+         MSWProfileTableViewController *controller = (MSWProfileTableViewController *)nav.topViewController;
+        
+        if([controller respondsToSelector:@selector(setMswDatabase:)])
+        {
+            [controller setMswDatabase:self.mswDatabase];
+        }
+    }
+    else {
+        id controller = nav.topViewController;
+        if([controller respondsToSelector:@selector(setDelegate:)])
+        {
+            [controller setDelegate:self];
+        }
     }
 }
 
@@ -430,7 +425,7 @@
     }
     
     //Listen For changes to be made to the context after upload
-    [self.center addObserver:self
+    [[NSNotificationCenter defaultCenter] addObserver:self
                     selector:@selector(contextChanged:)
                         name:NSManagedObjectContextDidSaveNotification
                       object:self.backgroundMOC];
@@ -440,7 +435,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.center removeObserver:self
+    [[NSNotificationCenter defaultCenter] removeObserver:self
                            name:NSManagedObjectContextDidSaveNotification
                          object:self.backgroundMOC];
     
@@ -449,12 +444,12 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     //If the user is logged in then segue to the profile view and load the cookies
     if([[[NSUserDefaults standardUserDefaults] objectForKey:LOGGED_IN] boolValue])
     {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
-    [super viewDidAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -491,6 +486,16 @@
     else if(index == bishopricIndex) {
         [self performSegueWithIdentifier:@"Bishopric Registration" sender:self];
     }
+}
+
+-(void)loginNewUserWithEmail:(NSString *)email withPassword:(NSString *)password
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.emailAddressField.text = email;
+    self.passwordField.text = password;
+    
+    [self startRegistration];
+    [self login:nil];
 }
 
 @end

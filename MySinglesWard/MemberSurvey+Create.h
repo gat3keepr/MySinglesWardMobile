@@ -15,4 +15,6 @@
 -(NSDictionary *) toDictionary;
 -(void) saveSurveyToServer;
 
+#define MEMBER_SURVEY @"MemberSurvey"
+
 @end

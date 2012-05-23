@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF01CC051554788E0045E09F /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC041554788E0045E09F /* Photo.m */; };
 		BF01CC091554788F0045E09F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC081554788E0045E09F /* User.m */; };
 		BF01CC0C1554788F0045E09F /* BishopricData.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC0B1554788F0045E09F /* BishopricData.m */; };
 		BF01CC121554788F0045E09F /* Calling.m in Sources */ = {isa = PBXBuildFile; fileRef = BF01CC111554788F0045E09F /* Calling.m */; };
@@ -30,6 +29,10 @@
 		BF1AB2341558D07F005547A2 /* MSWPersonalInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1AB2331558D07F005547A2 /* MSWPersonalInformationViewController.m */; };
 		BF1AB2381558D092005547A2 /* MSWChurchInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1AB2371558D092005547A2 /* MSWChurchInformationViewController.m */; };
 		BF1AB23B1558D09F005547A2 /* MSWOtherInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1AB23A1558D09F005547A2 /* MSWOtherInformationViewController.m */; };
+		BF29A26915644B8E008C6DD6 /* MSWLocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF29A26815644B8E008C6DD6 /* MSWLocationSelectViewController.m */; };
+		BF29A26C15644B98008C6DD6 /* MSWStakeSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF29A26B15644B98008C6DD6 /* MSWStakeSelectViewController.m */; };
+		BF29A26F15644BA0008C6DD6 /* MSWWardSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF29A26E15644BA0008C6DD6 /* MSWWardSelectViewController.m */; };
+		BF29A27215644BBC008C6DD6 /* MSWUnitSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF29A27115644BBC008C6DD6 /* MSWUnitSelectionViewController.m */; };
 		BF3E2FD315503A560027293D /* MSWProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3E2FD215503A560027293D /* MSWProfileTableViewController.m */; };
 		BF3E2FE2155054E10027293D /* MSWWardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3E2FE1155054E10027293D /* MSWWardViewController.m */; };
 		BF49F1261558874A00DF5C26 /* MSWSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF49F1251558874A00DF5C26 /* MSWSurveyViewController.m */; };
@@ -40,9 +43,16 @@
 		BF7EEC1F1551D9B600479B2E /* MSWBishopricListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC1E1551D9B600479B2E /* MSWBishopricListViewController.m */; };
 		BF7EEC4D1551DDBE00479B2E /* BishopricData+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC4C1551DDBE00479B2E /* BishopricData+Create.m */; };
 		BF7EEC531551E28000479B2E /* Calling+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EEC521551E28000479B2E /* Calling+Create.m */; };
+		BF8A04E31562F187004CD712 /* MemberSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8A04E21562F187004CD712 /* MemberSurvey.m */; };
 		BFBE1F631550E413001ECDB5 /* MSWMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE1F621550E413001ECDB5 /* MSWMemberViewController.m */; };
 		BFBE1F691550F1DE001ECDB5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBE1F681550F1DE001ECDB5 /* MessageUI.framework */; };
 		BFBE1F721550FAC2001ECDB5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE1F711550FAC1001ECDB5 /* MBProgressHUD.m */; };
+		BFBE6CDA1565AEED00E1776B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBE6CD91565AEED00E1776B /* MobileCoreServices.framework */; };
+		BFBE6CE01565F4FE00E1776B /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE6CDF1565F4FE00E1776B /* Photo.m */; };
+		BFBE6CF31566BB2100E1776B /* bishopricicon.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBE6CF11566BB2100E1776B /* bishopricicon.png */; };
+		BFBE6CF41566BB2100E1776B /* bishopricicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBE6CF21566BB2100E1776B /* bishopricicon@2x.png */; };
+		BFBE6CFF1566D2EC00E1776B /* wardlisticon.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBE6CFD1566D2EC00E1776B /* wardlisticon.png */; };
+		BFBE6D001566D2EC00E1776B /* wardlisticon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBE6CFE1566D2EC00E1776B /* wardlisticon@2x.png */; };
 		BFDDFE181552088F0050C1EA /* iphone-background.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDDFE171552088F0050C1EA /* iphone-background.png */; };
 		BFDDFE1A155209650050C1EA /* mobile-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDDFE19155209640050C1EA /* mobile-Logo.png */; };
 		BFDF9119154F387A004DB930 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDF9118154F387A004DB930 /* CoreData.framework */; };
@@ -68,6 +78,10 @@
 		BFEC55FA1548B91E00E3E988 /* Mobile.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55F91548B91E00E3E988 /* Mobile.png */; };
 		BFEC56001548BA8100E3E988 /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC55FF1548BA8100E3E988 /* Title.png */; };
 		BFEC56041548C68A00E3E988 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC56031548C68A00E3E988 /* button.png */; };
+		BFEE7CF9156AA4110036A90D /* app_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEE7CF8156AA4110036A90D /* app_bg.png */; };
+		BFEE7CFD156AA79B0036A90D /* MSWBishopricDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEE7CFC156AA79B0036A90D /* MSWBishopricDataViewController.m */; };
+		BFEE7D00156AA7E80036A90D /* MSWBishopricCallingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEE7CFF156AA7E80036A90D /* MSWBishopricCallingViewController.m */; };
+		BFEE7D02156AFE880036A90D /* shieldToolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEE7D01156AFE880036A90D /* shieldToolbar.png */; };
 		BFF4F84B155C679E009835AD /* MSWTempleExpSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F84A155C679E009835AD /* MSWTempleExpSelectViewController.m */; };
 		BFF4F854155C7862009835AD /* MSWPreviousWardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F853155C7862009835AD /* MSWPreviousWardViewController.m */; };
 		BFF4F85A155C7F57009835AD /* MSWMissionInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F859155C7F57009835AD /* MSWMissionInformationViewController.m */; };
@@ -75,7 +89,6 @@
 		BFF4F861155C8FB2009835AD /* MSWNOMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F860155C8FB2009835AD /* MSWNOMissionViewController.m */; };
 		BFF4F864155C9BCD009835AD /* MSWPastCallingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F863155C9BCC009835AD /* MSWPastCallingsViewController.m */; };
 		BFF4F86B155D7EC9009835AD /* MSWTimeInWardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F86A155D7EC9009835AD /* MSWTimeInWardViewController.m */; };
-		BFF4F871155D841D009835AD /* MemberSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F870155D841D009835AD /* MemberSurvey.m */; };
 		BFF4F874155D8621009835AD /* MSWSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F873155D8621009835AD /* MSWSchoolViewController.m */; };
 		BFF4F877155D8FC5009835AD /* MSWReligionClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F876155D8FC5009835AD /* MSWReligionClassViewController.m */; };
 		BFF4F87A155D94AA009835AD /* MSWEmploymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF4F879155D94AA009835AD /* MSWEmploymentViewController.m */; };
@@ -88,8 +101,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BF01CC031554788E0045E09F /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		BF01CC041554788E0045E09F /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		BF01CC071554788E0045E09F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		BF01CC081554788E0045E09F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		BF01CC0A1554788F0045E09F /* BishopricData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BishopricData.h; sourceTree = "<group>"; };
@@ -134,6 +145,14 @@
 		BF1AB2371558D092005547A2 /* MSWChurchInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWChurchInformationViewController.m; sourceTree = "<group>"; };
 		BF1AB2391558D09F005547A2 /* MSWOtherInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWOtherInformationViewController.h; sourceTree = "<group>"; };
 		BF1AB23A1558D09F005547A2 /* MSWOtherInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWOtherInformationViewController.m; sourceTree = "<group>"; };
+		BF29A26715644B8E008C6DD6 /* MSWLocationSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWLocationSelectViewController.h; sourceTree = "<group>"; };
+		BF29A26815644B8E008C6DD6 /* MSWLocationSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWLocationSelectViewController.m; sourceTree = "<group>"; };
+		BF29A26A15644B98008C6DD6 /* MSWStakeSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWStakeSelectViewController.h; sourceTree = "<group>"; };
+		BF29A26B15644B98008C6DD6 /* MSWStakeSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWStakeSelectViewController.m; sourceTree = "<group>"; };
+		BF29A26D15644BA0008C6DD6 /* MSWWardSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWWardSelectViewController.h; sourceTree = "<group>"; };
+		BF29A26E15644BA0008C6DD6 /* MSWWardSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWWardSelectViewController.m; sourceTree = "<group>"; };
+		BF29A27015644BBC008C6DD6 /* MSWUnitSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWUnitSelectionViewController.h; sourceTree = "<group>"; };
+		BF29A27115644BBC008C6DD6 /* MSWUnitSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWUnitSelectionViewController.m; sourceTree = "<group>"; };
 		BF3E2FD115503A560027293D /* MSWProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWProfileTableViewController.h; sourceTree = "<group>"; };
 		BF3E2FD215503A560027293D /* MSWProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWProfileTableViewController.m; sourceTree = "<group>"; };
 		BF3E2FE0155054E10027293D /* MSWWardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWWardViewController.h; sourceTree = "<group>"; };
@@ -153,15 +172,24 @@
 		BF7EEC4C1551DDBE00479B2E /* BishopricData+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BishopricData+Create.m"; sourceTree = "<group>"; };
 		BF7EEC511551E28000479B2E /* Calling+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Calling+Create.h"; sourceTree = "<group>"; };
 		BF7EEC521551E28000479B2E /* Calling+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Calling+Create.m"; sourceTree = "<group>"; };
+		BF8A04E11562F187004CD712 /* MemberSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberSurvey.h; sourceTree = "<group>"; };
+		BF8A04E21562F187004CD712 /* MemberSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberSurvey.m; sourceTree = "<group>"; };
 		BFBE1F611550E413001ECDB5 /* MSWMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWMemberViewController.h; sourceTree = "<group>"; };
 		BFBE1F621550E413001ECDB5 /* MSWMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWMemberViewController.m; sourceTree = "<group>"; };
 		BFBE1F681550F1DE001ECDB5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BFBE1F701550FAC1001ECDB5 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BFBE1F711550FAC1001ECDB5 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		BFBE6CD91565AEED00E1776B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		BFBE6CDE1565F4FE00E1776B /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		BFBE6CDF1565F4FE00E1776B /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		BFBE6CF11566BB2100E1776B /* bishopricicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bishopricicon.png; sourceTree = "<group>"; };
+		BFBE6CF21566BB2100E1776B /* bishopricicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bishopricicon@2x.png"; sourceTree = "<group>"; };
+		BFBE6CFD1566D2EC00E1776B /* wardlisticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wardlisticon.png; sourceTree = "<group>"; };
+		BFBE6CFE1566D2EC00E1776B /* wardlisticon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wardlisticon@2x.png"; sourceTree = "<group>"; };
 		BFDDFE171552088F0050C1EA /* iphone-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-background.png"; sourceTree = "<group>"; };
 		BFDDFE19155209640050C1EA /* mobile-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mobile-Logo.png"; sourceTree = "<group>"; };
 		BFDF9118154F387A004DB930 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		BFEC555C15488A1500E3E988 /* MySinglesWard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySinglesWard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFEC555C15488A1500E3E988 /* mysinglesward.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mysinglesward.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFEC556015488A1500E3E988 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFEC556215488A1500E3E988 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFEC556415488A1500E3E988 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -188,7 +216,12 @@
 		BFEC55F91548B91E00E3E988 /* Mobile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mobile.png; sourceTree = "<group>"; };
 		BFEC55FF1548BA8100E3E988 /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Title.png; sourceTree = "<group>"; };
 		BFEC56031548C68A00E3E988 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
-		BFEC560D1549E4A100E3E988 /* MSWRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWRequest.h; sourceTree = "<group>"; };
+		BFEE7CF8156AA4110036A90D /* app_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_bg.png; sourceTree = "<group>"; };
+		BFEE7CFB156AA79B0036A90D /* MSWBishopricDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWBishopricDataViewController.h; sourceTree = "<group>"; };
+		BFEE7CFC156AA79B0036A90D /* MSWBishopricDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWBishopricDataViewController.m; sourceTree = "<group>"; };
+		BFEE7CFE156AA7E80036A90D /* MSWBishopricCallingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWBishopricCallingViewController.h; sourceTree = "<group>"; };
+		BFEE7CFF156AA7E80036A90D /* MSWBishopricCallingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWBishopricCallingViewController.m; sourceTree = "<group>"; };
+		BFEE7D01156AFE880036A90D /* shieldToolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shieldToolbar.png; sourceTree = "<group>"; };
 		BFF4F849155C679E009835AD /* MSWTempleExpSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWTempleExpSelectViewController.h; sourceTree = "<group>"; };
 		BFF4F84A155C679E009835AD /* MSWTempleExpSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWTempleExpSelectViewController.m; sourceTree = "<group>"; };
 		BFF4F852155C7862009835AD /* MSWPreviousWardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWPreviousWardViewController.h; sourceTree = "<group>"; };
@@ -203,8 +236,6 @@
 		BFF4F863155C9BCC009835AD /* MSWPastCallingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWPastCallingsViewController.m; sourceTree = "<group>"; };
 		BFF4F869155D7EC9009835AD /* MSWTimeInWardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWTimeInWardViewController.h; sourceTree = "<group>"; };
 		BFF4F86A155D7EC9009835AD /* MSWTimeInWardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWTimeInWardViewController.m; sourceTree = "<group>"; };
-		BFF4F86F155D841D009835AD /* MemberSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberSurvey.h; sourceTree = "<group>"; };
-		BFF4F870155D841D009835AD /* MemberSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberSurvey.m; sourceTree = "<group>"; };
 		BFF4F872155D8621009835AD /* MSWSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWSchoolViewController.h; sourceTree = "<group>"; };
 		BFF4F873155D8621009835AD /* MSWSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWSchoolViewController.m; sourceTree = "<group>"; };
 		BFF4F875155D8FC5009835AD /* MSWReligionClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWReligionClassViewController.h; sourceTree = "<group>"; };
@@ -223,6 +254,7 @@
 		BFF4F88B155DABB9009835AD /* MSWInterestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWInterestsViewController.m; sourceTree = "<group>"; };
 		BFF4F88D155DABD1009835AD /* MSWSelfDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWSelfDescriptionViewController.h; sourceTree = "<group>"; };
 		BFF4F88E155DABD2009835AD /* MSWSelfDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWSelfDescriptionViewController.m; sourceTree = "<group>"; };
+		BFF6E861156CC77A002550FF /* MySinglesWard copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MySinglesWard copy-Info.plist"; path = "/Volumes/Macintosh HD/Users/gatekeeper/Developer/mysinglesward/MySinglesWard copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +262,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFBE6CDA1565AEED00E1776B /* MobileCoreServices.framework in Frameworks */,
 				BFBE1F691550F1DE001ECDB5 /* MessageUI.framework in Frameworks */,
 				BFDF9119154F387A004DB930 /* CoreData.framework in Frameworks */,
 				BFEC556115488A1500E3E988 /* UIKit.framework in Frameworks */,
@@ -274,8 +307,10 @@
 		BF0E98A9154F8DB9004E71A8 /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
-				BFF4F86F155D841D009835AD /* MemberSurvey.h */,
-				BFF4F870155D841D009835AD /* MemberSurvey.m */,
+				BFBE6CDE1565F4FE00E1776B /* Photo.h */,
+				BFBE6CDF1565F4FE00E1776B /* Photo.m */,
+				BF8A04E11562F187004CD712 /* MemberSurvey.h */,
+				BF8A04E21562F187004CD712 /* MemberSurvey.m */,
 				BF01CC161554788F0045E09F /* Ward.h */,
 				BF01CC171554788F0045E09F /* Ward.m */,
 				BF01CC131554788F0045E09F /* NotificationPreference.h */,
@@ -286,8 +321,6 @@
 				BF01CC0B1554788F0045E09F /* BishopricData.m */,
 				BF01CC071554788E0045E09F /* User.h */,
 				BF01CC081554788E0045E09F /* User.m */,
-				BF01CC031554788E0045E09F /* Photo.h */,
-				BF01CC041554788E0045E09F /* Photo.m */,
 				BF0E98AA154F9171004E71A8 /* User+Create.h */,
 				BF0E98AB154F9171004E71A8 /* User+Create.m */,
 				BF7EEC511551E28000479B2E /* Calling+Create.h */,
@@ -306,9 +339,25 @@
 			name = "Managed Objects";
 			sourceTree = "<group>";
 		};
+		BF29A26215644AD8008C6DD6 /* Ward Selection */ = {
+			isa = PBXGroup;
+			children = (
+				BF29A26715644B8E008C6DD6 /* MSWLocationSelectViewController.h */,
+				BF29A26815644B8E008C6DD6 /* MSWLocationSelectViewController.m */,
+				BF29A26A15644B98008C6DD6 /* MSWStakeSelectViewController.h */,
+				BF29A26B15644B98008C6DD6 /* MSWStakeSelectViewController.m */,
+				BF29A26D15644BA0008C6DD6 /* MSWWardSelectViewController.h */,
+				BF29A26E15644BA0008C6DD6 /* MSWWardSelectViewController.m */,
+				BF29A27015644BBC008C6DD6 /* MSWUnitSelectionViewController.h */,
+				BF29A27115644BBC008C6DD6 /* MSWUnitSelectionViewController.m */,
+			);
+			name = "Ward Selection";
+			sourceTree = "<group>";
+		};
 		BF49F1221558871400DF5C26 /* Survey */ = {
 			isa = PBXGroup;
 			children = (
+				BFEE7CFA156AA76A0036A90D /* Bishopric */,
 				BFF4F868155D7E9B009835AD /* Other */,
 				BFF4F847155C6784009835AD /* Church */,
 				BF070D4F155ADA0A00515833 /* Personal */,
@@ -334,6 +383,7 @@
 		BFEC555115488A1500E3E988 = {
 			isa = PBXGroup;
 			children = (
+				BFBE6CD91565AEED00E1776B /* MobileCoreServices.framework */,
 				BFBE1F681550F1DE001ECDB5 /* MessageUI.framework */,
 				BFDF9118154F387A004DB930 /* CoreData.framework */,
 				BFEC55B215489EC500E3E988 /* Default-Landscape@2x~ipad.png */,
@@ -350,13 +400,14 @@
 				BFEC556615488A1500E3E988 /* MySinglesWard */,
 				BFEC555D15488A1500E3E988 /* Products */,
 				BFEC558B154896FF00E3E988 /* Resources */,
+				BFF6E861156CC77A002550FF /* MySinglesWard copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
 		BFEC555D15488A1500E3E988 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BFEC555C15488A1500E3E988 /* MySinglesWard.app */,
+				BFEC555C15488A1500E3E988 /* mysinglesward.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -374,6 +425,7 @@
 		BFEC556615488A1500E3E988 /* MySinglesWard */ = {
 			isa = PBXGroup;
 			children = (
+				BF29A26215644AD8008C6DD6 /* Ward Selection */,
 				BF49F1221558871400DF5C26 /* Survey */,
 				BF169B4A154F376D00EDA34D /* CoreDataTableViewController.h */,
 				BF169B4B154F376D00EDA34D /* CoreDataTableViewController.m */,
@@ -395,7 +447,6 @@
 				BF4EE580154F3A3E00EC5F1C /* MSWModel.xcdatamodeld */,
 				BF3E2FD115503A560027293D /* MSWProfileTableViewController.h */,
 				BF3E2FD215503A560027293D /* MSWProfileTableViewController.m */,
-				BFEC560D1549E4A100E3E988 /* MSWRequest.h */,
 				BF3E2FE0155054E10027293D /* MSWWardViewController.h */,
 				BF3E2FE1155054E10027293D /* MSWWardViewController.m */,
 				BF01CC251554D0110045E09F /* Preferences */,
@@ -419,6 +470,12 @@
 		BFEC558B154896FF00E3E988 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BFEE7D01156AFE880036A90D /* shieldToolbar.png */,
+				BFEE7CF8156AA4110036A90D /* app_bg.png */,
+				BFBE6CFD1566D2EC00E1776B /* wardlisticon.png */,
+				BFBE6CFE1566D2EC00E1776B /* wardlisticon@2x.png */,
+				BFBE6CF11566BB2100E1776B /* bishopricicon.png */,
+				BFBE6CF21566BB2100E1776B /* bishopricicon@2x.png */,
 				BFDDFE19155209640050C1EA /* mobile-Logo.png */,
 				BFDDFE171552088F0050C1EA /* iphone-background.png */,
 				BFEC56031548C68A00E3E988 /* button.png */,
@@ -426,6 +483,17 @@
 				BFEC55F91548B91E00E3E988 /* Mobile.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		BFEE7CFA156AA76A0036A90D /* Bishopric */ = {
+			isa = PBXGroup;
+			children = (
+				BFEE7CFB156AA79B0036A90D /* MSWBishopricDataViewController.h */,
+				BFEE7CFC156AA79B0036A90D /* MSWBishopricDataViewController.m */,
+				BFEE7CFE156AA7E80036A90D /* MSWBishopricCallingViewController.h */,
+				BFEE7CFF156AA7E80036A90D /* MSWBishopricCallingViewController.m */,
+			);
+			name = Bishopric;
 			sourceTree = "<group>";
 		};
 		BFF4F847155C6784009835AD /* Church */ = {
@@ -489,9 +557,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BFEC555B15488A1500E3E988 /* MySinglesWard */ = {
+		BFEC555B15488A1500E3E988 /* mysinglesward */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BFEC558815488A1600E3E988 /* Build configuration list for PBXNativeTarget "MySinglesWard" */;
+			buildConfigurationList = BFEC558815488A1600E3E988 /* Build configuration list for PBXNativeTarget "mysinglesward" */;
 			buildPhases = (
 				BFEC555815488A1500E3E988 /* Sources */,
 				BFEC555915488A1500E3E988 /* Frameworks */,
@@ -501,9 +569,9 @@
 			);
 			dependencies = (
 			);
-			name = MySinglesWard;
+			name = mysinglesward;
 			productName = MySinglesWard;
-			productReference = BFEC555C15488A1500E3E988 /* MySinglesWard.app */;
+			productReference = BFEC555C15488A1500E3E988 /* mysinglesward.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -527,7 +595,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BFEC555B15488A1500E3E988 /* MySinglesWard */,
+				BFEC555B15488A1500E3E988 /* mysinglesward */,
 			);
 		};
 /* End PBXProject section */
@@ -555,6 +623,12 @@
 				BFEC56041548C68A00E3E988 /* button.png in Resources */,
 				BFDDFE181552088F0050C1EA /* iphone-background.png in Resources */,
 				BFDDFE1A155209650050C1EA /* mobile-Logo.png in Resources */,
+				BFBE6CF31566BB2100E1776B /* bishopricicon.png in Resources */,
+				BFBE6CF41566BB2100E1776B /* bishopricicon@2x.png in Resources */,
+				BFBE6CFF1566D2EC00E1776B /* wardlisticon.png in Resources */,
+				BFBE6D001566D2EC00E1776B /* wardlisticon@2x.png in Resources */,
+				BFEE7CF9156AA4110036A90D /* app_bg.png in Resources */,
+				BFEE7D02156AFE880036A90D /* shieldToolbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +660,6 @@
 				BF7EEC1F1551D9B600479B2E /* MSWBishopricListViewController.m in Sources */,
 				BF7EEC4D1551DDBE00479B2E /* BishopricData+Create.m in Sources */,
 				BF7EEC531551E28000479B2E /* Calling+Create.m in Sources */,
-				BF01CC051554788E0045E09F /* Photo.m in Sources */,
 				BF01CC091554788F0045E09F /* User.m in Sources */,
 				BF01CC0C1554788F0045E09F /* BishopricData.m in Sources */,
 				BF01CC121554788F0045E09F /* Calling.m in Sources */,
@@ -610,7 +683,6 @@
 				BFF4F861155C8FB2009835AD /* MSWNOMissionViewController.m in Sources */,
 				BFF4F864155C9BCD009835AD /* MSWPastCallingsViewController.m in Sources */,
 				BFF4F86B155D7EC9009835AD /* MSWTimeInWardViewController.m in Sources */,
-				BFF4F871155D841D009835AD /* MemberSurvey.m in Sources */,
 				BFF4F874155D8621009835AD /* MSWSchoolViewController.m in Sources */,
 				BFF4F877155D8FC5009835AD /* MSWReligionClassViewController.m in Sources */,
 				BFF4F87A155D94AA009835AD /* MSWEmploymentViewController.m in Sources */,
@@ -620,6 +692,14 @@
 				BFF4F889155DABA9009835AD /* MSWWardActivityViewController.m in Sources */,
 				BFF4F88C155DABBA009835AD /* MSWInterestsViewController.m in Sources */,
 				BFF4F88F155DABD2009835AD /* MSWSelfDescriptionViewController.m in Sources */,
+				BF8A04E31562F187004CD712 /* MemberSurvey.m in Sources */,
+				BF29A26915644B8E008C6DD6 /* MSWLocationSelectViewController.m in Sources */,
+				BF29A26C15644B98008C6DD6 /* MSWStakeSelectViewController.m in Sources */,
+				BF29A26F15644BA0008C6DD6 /* MSWWardSelectViewController.m in Sources */,
+				BF29A27215644BBC008C6DD6 /* MSWUnitSelectionViewController.m in Sources */,
+				BFBE6CE01565F4FE00E1776B /* Photo.m in Sources */,
+				BFEE7CFD156AA79B0036A90D /* MSWBishopricDataViewController.m in Sources */,
+				BFEE7D00156AA7E80036A90D /* MSWBishopricCallingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,7 +818,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BFEC558815488A1600E3E988 /* Build configuration list for PBXNativeTarget "MySinglesWard" */ = {
+		BFEC558815488A1600E3E988 /* Build configuration list for PBXNativeTarget "mysinglesward" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BFEC558915488A1600E3E988 /* Debug */,

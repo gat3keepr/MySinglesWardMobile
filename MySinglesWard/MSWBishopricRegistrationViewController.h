@@ -10,5 +10,12 @@
 #import "MSWRegistrationViewController.h"
 
 @interface MSWBishopricRegistrationViewController : MSWRegistrationViewController
+@property (weak, nonatomic) IBOutlet UITextField *firstNameField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextField *emailConfirmField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField *bishopricCreationCodeField;
+@property (weak, nonatomic) IBOutlet UISwitch *agreeToTermsSwitch;
 
 @end

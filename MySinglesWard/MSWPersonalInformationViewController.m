@@ -9,15 +9,17 @@
 #import "MSWPersonalInformationViewController.h"
 #import "User+Create.h"
 #import "MemberSurvey+Create.h"
-#import "MSWRequest.h"
 #import "JSONRequest.h"
 #import "MBProgressHUD.h"
+#import "MSWLoginTableViewController.h"
 
-@interface MSWPersonalInformationViewController ()
+@interface MSWPersonalInformationViewController () <UITextFieldDelegate>
 
 @property (strong, nonatomic) User *currentUser;
 -(void)fillSurveyFields;
 -(NSString *)getPublishLabel;
+
+@property (nonatomic) BOOL registrationHandled;
 @end
 
 @implementation MSWPersonalInformationViewController
@@ -37,6 +39,7 @@
 @synthesize homeBishopField = _homeBishopField;
 @synthesize priesthoodLabel = _priesthoodLabel;
 @synthesize priesthoodCell = _priesthoodCell;
+@synthesize registrationHandled = _registrationHandled;
 
 - (IBAction)cancelSurvey:(id)sender {
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
@@ -44,13 +47,14 @@
 
 - (IBAction)continueSurvey:(id)sender {
     //Check all the values to make sure they have been filled out
-    if([self.prefNameField.text isEqualToString:@""] || [self.residenceLabel.text isEqualToString:@""] || [self.prefNameField.text isEqualToString:@""] || [self.cellPhoneField.text isEqualToString:@""] || [self.birthdayLabel.text isEqualToString:@"MM/DD/YYYY"] || [self.homeAddressField.text isEqualToString:@""] || [self.emergencyContactField.text isEqualToString:@""] || [self.emergencyPhoneField.text isEqualToString:@""] || [self.homeWardField.text isEqualToString:@""] || [self.homeBishopField.text isEqualToString:@""])
+    if([self.prefNameField.text isEqualToString:@""] || [self.residenceLabel.text isEqualToString:@""] || [self.homePhoneField.text isEqualToString:@""] || [self.cellPhoneField.text isEqualToString:@""] || [self.birthdayLabel.text isEqualToString:@"MM/DD/YYYY"] || [self.homeAddressField.text isEqualToString:@""] || [self.emergencyContactField.text isEqualToString:@""] || [self.emergencyPhoneField.text isEqualToString:@""] || [self.homeWardField.text isEqualToString:@""] || [self.homeBishopField.text isEqualToString:@""])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uncomplete Survey" message:@"Please fill out all the fields on this page." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }
     else {
+        NSLog(@"SURVEY STATUS: %@", self.currentUser.survey.status);
         if(self.currentUser.survey.status < [NSNumber numberWithInt:1]) 
             self.currentUser.survey.status = [NSNumber numberWithInt:1];
     }
@@ -88,6 +92,44 @@
     return self;
 }
 
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if(textField == self.prefNameField)
+    {
+        self.currentUser.prefname = textField.text;
+    }
+    else if(textField == self.cellPhoneField)
+    {
+        self.currentUser.cellphone = textField.text;
+    }
+    else if(textField == self.homeAddressField)
+    {
+        self.currentUser.survey.homeAddress = textField.text;
+    }
+    else if(textField == self.homePhoneField)
+    {
+        self.currentUser.survey.homePhone = textField.text;
+    }
+    else if(textField == self.emergencyContactField)
+    {
+        self.currentUser.survey.emergContact = textField.text;
+    }
+    else if(textField == self.emergencyPhoneField)
+    {
+        self.currentUser.survey.emergPhone = textField.text;
+    }
+    else if(textField == self.homeWardField)
+    {
+        self.currentUser.survey.homeWardStake = textField.text;
+    }
+    else if(textField == self.homeBishopField)
+    {
+        self.currentUser.survey.homeBishop = textField.text;
+    }
+    
+    return YES;
+}
+
 -(void)loadSurvey
 {
     //Set Loading Modal
@@ -116,6 +158,36 @@
 
 -(void)fillSurveyFields
 {
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    
+    //Handle registration
+    if([[pref objectForKey:REGISTRATION] boolValue] && !self.registrationHandled)
+    {
+        //Initialize Survey
+        self.currentUser.survey = [NSEntityDescription insertNewObjectForEntityForName:MEMBER_SURVEY inManagedObjectContext:self.currentUser.managedObjectContext];
+        self.currentUser.survey.member = self.currentUser;
+        self.currentUser.survey.memberID = self.currentUser.memberID;
+        self.currentUser.survey.status = [NSNumber numberWithInt:1];
+         
+        self.currentUser.prefname = @"";
+        self.currentUser.residence = @"";
+        self.currentUser.cellphone = @"";
+        self.currentUser.survey.birthday = @"MM/DD/YYYY";
+        self.currentUser.survey.publishCell = [NSNumber numberWithInt:1];
+        self.currentUser.survey.publishEmail = [NSNumber numberWithInt:1];
+        self.currentUser.survey.homeAddress = @""; 
+        self.currentUser.survey.homePhone = @"";
+        self.currentUser.survey.emergContact = @"";
+        self.currentUser.survey.emergPhone = @"";
+        self.currentUser.survey.homeWardStake = @"";
+        self.currentUser.survey.homeBishop = @"";
+        
+        self.priesthoodCell.hidden = YES;
+        self.priesthoodLabel.text = self.currentUser.survey.priesthood = @"N/A";
+        
+        self.registrationHandled = YES;
+    }
+        
     int MALE = 1;
     int FEMALE = 0;
     
@@ -142,6 +214,9 @@
         self.priesthoodCell.hidden = YES;
         self.priesthoodLabel.text = self.currentUser.survey.priesthood = @"N/A";
     }
+    
+    
+    [self.tableView reloadData];
 }
 
 -(NSString *)getPublishLabel
@@ -187,6 +262,8 @@
         self.priesthoodCell.hidden = NO;
         self.priesthoodLabel.text = self.currentUser.survey.priesthood = @"Not Ordained";
     }
+    
+    self.currentUser.survey.gender = [NSNumber numberWithInt:self.genderSelector.selectedSegmentIndex];
 }
 
 - (void)viewDidLoad
@@ -200,6 +277,9 @@
     [self.genderSelector addTarget:self 
                          action:@selector(genderSelected:)  
                forControlEvents:UIControlEventValueChanged];
+    
+    //Set background image of table view
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BACKGROUND_IMAGE]];
    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -212,6 +292,13 @@
 {
     [super viewWillAppear:animated];
     [self fillSurveyFields];
+    
+    //Handle registration response
+    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+    if([[pref objectForKey:REGISTRATION] boolValue])
+    {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
 }
 
 - (void)viewDidUnload

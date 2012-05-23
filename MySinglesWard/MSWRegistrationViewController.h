@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MSWLoginTableViewController.h"
 
 @interface MSWRegistrationViewController : UITableViewController
+
+@property (weak, nonatomic) id<MSWLoginDelegate> delegate;
+
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString;
 
 @end

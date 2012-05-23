@@ -2,7 +2,7 @@
 //  Photo.m
 //  MySinglesWard
 //
-//  Created by Porter Hoskins on 5/4/12.
+//  Created by Porter Hoskins on 5/17/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,6 +15,8 @@
 @dynamic filename;
 @dynamic memberID;
 @dynamic photoData;
+@dynamic status;
+@dynamic newPhotoFileName;
 @dynamic member;
 
 @end

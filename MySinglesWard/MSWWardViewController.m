@@ -9,18 +9,19 @@
 #import "MSWWardViewController.h"
 #import "User+Create.h"
 #import "MemberSurvey.h"
-#import "MSWRequest.h"
 #import "Photo.h"
 #import "JSONRequest.h"
 #import "MSWMemberViewController.h"
 #import "MBProgressHUD.h"
 
 @interface MSWWardViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 -(void)setupFetchedResultsController;
 -(void)getWardList;
 @end
 
 @implementation MSWWardViewController
+@synthesize refreshButton = _refreshButton;
 @synthesize currentWard = _currentWard;
 @synthesize databaseDelegate = _databaseDelegate;
 
@@ -57,7 +58,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
     //Set Loading Modal
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         [self.databaseDelegate loadWardListWithSender:self.tableView];
@@ -65,7 +66,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.navigationItem.rightBarButtonItem = orgButton;
             self.title = @"Ward List";
-            [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+            [self.tableView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
     });
 }
@@ -88,6 +90,7 @@
 
 - (void)viewDidUnload
 {
+    [self setRefreshButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -96,11 +99,13 @@
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+    self.tabBarController.navigationItem.title = @"Ward List";
+    self.tabBarController.navigationItem.rightBarButtonItem = self.refreshButton;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

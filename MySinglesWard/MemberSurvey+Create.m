@@ -8,12 +8,9 @@
 
 #import "MemberSurvey+Create.h"
 #import "User+Create.h"
-#import "MSWRequest.h"
 #import "JSONRequest.h"
 
 @implementation MemberSurvey (Create)
-
-#define MEMBER_SURVEY @"MemberSurvey"
 
 +(MemberSurvey *) surveyWithJSON:(NSDictionary *) data
           inManagedObjectContext:(NSManagedObjectContext *)context

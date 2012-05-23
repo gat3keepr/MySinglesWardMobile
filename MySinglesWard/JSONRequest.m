@@ -46,9 +46,57 @@
         return json;
     }
     @catch (NSException *exception) {
-        return nil;
+        NSLog(@"REQUEST ERROR: %@", [exception description]);
     }
     
+}
+
++(NSDictionary *)requestForBishopricData
+{
+    NSString *bishopricurl = [[NSString alloc] initWithFormat:@"%@api/ward/bishopric", MSWRequestURL];
+    NSLog(@"BISHOPRIC LIST DATA URL request: %@", bishopricurl);
+
+    NSDictionary *bishopricData = [JSONRequest makeWebRequestWithURL:bishopricurl withJSONData:nil];
+    NSLog(@"BISHOPRIC LIST DATA response: %@", bishopricData);
+    
+    return bishopricData;
+}
+
++(NSDictionary *)requestForWardListData
+{
+    //Create the URL for the web request to get all the ward members
+    NSString *url = [[NSString alloc] initWithFormat:@"%@api/ward/list", MSWRequestURL];
+    NSLog(@"WARD LIST DATA URL request: %@", url);
+    
+    NSDictionary *wardListData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
+    NSLog(@"WARD LIST DATA response: %@", wardListData);
+    
+    return wardListData;
+}
+
++(NSDictionary *)requestForMemberData
+{
+    //Start the data loading of the ward list
+    NSString *url = [[NSString alloc] initWithFormat:@"%@api/member", MSWRequestURL];
+    NSLog(@"MEMBER DATA URL request: %@", url);
+    
+    NSDictionary *memberData = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
+    NSLog(@"MEMBER DATA response: %@", memberData);
+    
+    return memberData;
+}
+
++(void)requestForMemberStatus
+{
+    //Start the data loading of the ward list
+    NSString *url = [[NSString alloc] initWithFormat:@"%@api/member/checkstatus", MSWRequestURL];
+    NSLog(@"MEMBER DATA URL request: %@", url);
+    
+    NSDictionary *memberStatus = [JSONRequest makeWebRequestWithURL:url withJSONData:nil];
+    NSLog(@"MEMBER DATA response: %@", memberStatus);
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[memberStatus objectForKey:@"status"] forKey:MEMBER_STATUS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

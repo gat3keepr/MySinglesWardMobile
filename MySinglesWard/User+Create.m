@@ -37,23 +37,23 @@
     else if(![member count])
     {
         user = [NSEntityDescription insertNewObjectForEntityForName:USER inManagedObjectContext:context];
-        
-        user.firstname = [data objectForKey:@"FirstName"];
-        user.email = [data objectForKey:@"Email"];
-        user.lastname = [data objectForKey:@"LastName"];
-        user.memberID = [data objectForKey:@"MemberID"];
-        user.username = [data objectForKey:@"UserName"];
-        user.wardID = [data objectForKey:@"WardStakeID"];
-        user.isBishopric = [data objectForKey:@"IsBishopric"];        
-        user.prefname = [data objectForKey:@"PrefName"];        
-        user.cellphone = [data objectForKey:@"CellPhone"];        
-        user.residence = [data objectForKey:@"Residence"];
-        
-        user.ward = [Ward wardWithID:user.wardID inManagedObjectContext:context];
     }
     else {
         user = [member lastObject];
     }
+    
+    user.firstname = [data objectForKey:@"FirstName"];
+    user.email = [data objectForKey:@"Email"];
+    user.lastname = [data objectForKey:@"LastName"];
+    user.memberID = [data objectForKey:@"MemberID"];
+    user.username = [data objectForKey:@"UserName"];
+    user.wardID = [data objectForKey:@"WardStakeID"];
+    user.isBishopric = [data objectForKey:@"IsBishopric"];        
+    user.prefname = [data objectForKey:@"PrefName"];        
+    user.cellphone = [data objectForKey:@"CellPhone"];        
+    user.residence = [data objectForKey:@"Residence"];
+    
+    user.ward = [Ward wardWithID:user.wardID inManagedObjectContext:context];
     
     return user;
 }
@@ -113,7 +113,7 @@
 }
 
 - (NSString *) userLastNameInitial {
-    NSString * initial = [[self lastname] substringToIndex:1];
+    NSString * initial = [[[self lastname] substringToIndex:1] uppercaseString];
     return initial;
 }
 

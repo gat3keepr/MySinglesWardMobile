@@ -10,5 +10,11 @@
 #import "MSWRegistrationViewController.h"
 
 @interface MSWMemberRegistrationViewController : MSWRegistrationViewController
+@property (weak, nonatomic) IBOutlet UISwitch *agreeToTermsSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *firstNameField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextField *emailConfirmField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @end

@@ -9,6 +9,7 @@
 #import "MSWChurchInformationViewController.h"
 #import "MemberSurvey+Create.h"
 #import "MBProgressHUD.h"
+#import "JSONRequest.h"
 
 @interface MSWChurchInformationViewController ()
 
@@ -42,6 +43,9 @@
     //Save survey to database
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        if(self.currentUser.survey.status < [NSNumber numberWithInt:2]) 
+            self.currentUser.survey.status = [NSNumber numberWithInt:2];
+        
         [self.currentUser.survey saveSurveyToServer];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -65,6 +69,9 @@
 {
     [super viewDidLoad];
     [self fillSurveyInformation];
+    
+    //Set background image of table view
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:BACKGROUND_IMAGE]];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
