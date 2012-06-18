@@ -65,7 +65,7 @@
         if(![[surveyData objectForKey:@"missionInformation"] isKindOfClass:[NSNull class]])
             survey.missionInformation = [surveyData objectForKey:@"missionInformation"];
         if(![[surveyData objectForKey:@"planMission"] isKindOfClass:[NSNull class]])
-            survey.planMission = [surveyData objectForKey:@"planMission"];
+            survey.planMission = [NSString stringWithFormat:@"%@", [surveyData objectForKey:@"planMission"]];
         if(![[surveyData objectForKey:@"planMissionTime"] isKindOfClass:[NSNull class]])
             survey.planMissionTime = [surveyData objectForKey:@"planMissionTime"];
         if(![[surveyData objectForKey:@"mission"] isKindOfClass:[NSNull class]])

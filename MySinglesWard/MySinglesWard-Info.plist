@@ -16,14 +16,8 @@
 			<array>
 				<string>iPhone-icon-lowres.png</string>
 				<string>iphone-icon-highres.png</string>
-				<string>ipad-icon-lowres.png</string>
-				<string>ipad-icon-highres.png</string>
 				<string>Default@2x.png</string>
 				<string>Default.png</string>
-				<string>Default-Landscape~ipad.png</string>
-				<string>Default-Landscape@2x~ipad.png</string>
-				<string>Default-Portrait@2x~ipad.png</string>
-				<string>Default-Portrait~ipad.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
@@ -38,17 +32,15 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard_iPhone</string>
-	<key>UIMainStoryboardFile~ipad</key>
-	<string>MainStoryboard_iPad</string>
 	<key>UIPrerenderedIcon</key>
 	<false/>
 	<key>UIRequiredDeviceCapabilities</key>
